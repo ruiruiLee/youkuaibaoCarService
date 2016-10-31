@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="InsuranceBottomCustomOpreationView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-Xp-tDg">
+                    <rect key="frame" x="10" y="10" width="187" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="C2I-a6-E0q"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="修改保项">
+                        <color key="titleColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didCustomOpreationEditButtonTouch" destination="iN0-l3-epB" eventType="touchUpInside" id="sTR-Vs-Vzo"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nO-d2-t9w">
+                    <rect key="frame" x="207" y="11" width="186" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="电话咨询">
+                        <color key="titleColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didCustomOpreationPhoneButtonTouch" destination="iN0-l3-epB" eventType="touchUpInside" id="yXG-wu-Jbe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCS-x2-f3Y">
+                    <rect key="frame" x="403" y="11" width="187" height="40"/>
+                    <color key="backgroundColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="购买">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didCustomOpreationPayButtonTouch" destination="iN0-l3-epB" eventType="touchUpInside" id="deK-eB-ls4"/>
+                    </connections>
+                </button>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aw4-gu-V0J">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32D-1E-92Z">
+                            <rect key="frame" x="10" y="10" width="218" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Mnl-M8-juE"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="电话咨询">
+                                <color key="titleColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didCustomOpreationPhoneButtonTouch" destination="iN0-l3-epB" eventType="touchUpInside" id="dVw-y4-gyv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYa-l1-LGS">
+                            <rect key="frame" x="238" y="10" width="352" height="40"/>
+                            <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="已下单">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didCustomOpreationPayButtonTouch" destination="iN0-l3-epB" eventType="touchUpInside" id="XeY-ER-Plb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="fYa-l1-LGS" firstAttribute="height" secondItem="32D-1E-92Z" secondAttribute="height" id="1oO-sG-Yza"/>
+                        <constraint firstItem="32D-1E-92Z" firstAttribute="leading" secondItem="aw4-gu-V0J" secondAttribute="leading" constant="10" id="IUL-m7-jen"/>
+                        <constraint firstItem="fYa-l1-LGS" firstAttribute="width" secondItem="32D-1E-92Z" secondAttribute="width" multiplier="0.382" id="Qj0-y2-tkR"/>
+                        <constraint firstAttribute="trailing" secondItem="fYa-l1-LGS" secondAttribute="trailing" constant="10" id="RcA-cv-fwG"/>
+                        <constraint firstItem="32D-1E-92Z" firstAttribute="centerY" secondItem="aw4-gu-V0J" secondAttribute="centerY" id="gCh-mh-u6P"/>
+                        <constraint firstItem="32D-1E-92Z" firstAttribute="width" secondItem="fYa-l1-LGS" secondAttribute="width" multiplier="0.618" id="mSB-wH-UNL"/>
+                        <constraint firstItem="fYa-l1-LGS" firstAttribute="leading" secondItem="32D-1E-92Z" secondAttribute="trailing" constant="10" id="uGu-vL-SA9"/>
+                        <constraint firstItem="fYa-l1-LGS" firstAttribute="centerY" secondItem="aw4-gu-V0J" secondAttribute="centerY" id="whE-ao-6WQ"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Qj0-y2-tkR"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="8nO-d2-t9w" secondAttribute="centerY" constant="-0.5" id="2FM-0h-51v"/>
+                <constraint firstItem="aw4-gu-V0J" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2IC-vf-TfK"/>
+                <constraint firstAttribute="trailing" secondItem="QCS-x2-f3Y" secondAttribute="trailing" constant="10" id="4Bb-yU-rn7"/>
+                <constraint firstItem="8nO-d2-t9w" firstAttribute="leading" secondItem="Cjb-Xp-tDg" secondAttribute="trailing" constant="10" id="5xV-8w-InG"/>
+                <constraint firstItem="aw4-gu-V0J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BkI-K7-2Xu"/>
+                <constraint firstItem="8nO-d2-t9w" firstAttribute="height" secondItem="QCS-x2-f3Y" secondAttribute="height" id="C1U-z4-imU"/>
+                <constraint firstAttribute="trailing" secondItem="aw4-gu-V0J" secondAttribute="trailing" id="EZI-73-uVI"/>
+                <constraint firstItem="8nO-d2-t9w" firstAttribute="width" secondItem="QCS-x2-f3Y" secondAttribute="width" id="IEb-4u-gS4"/>
+                <constraint firstItem="8nO-d2-t9w" firstAttribute="width" secondItem="Cjb-Xp-tDg" secondAttribute="width" id="M7I-Dg-jxn"/>
+                <constraint firstItem="8nO-d2-t9w" firstAttribute="height" secondItem="Cjb-Xp-tDg" secondAttribute="height" id="Ptw-vN-7AW"/>
+                <constraint firstAttribute="centerY" secondItem="Cjb-Xp-tDg" secondAttribute="centerY" id="RN8-Vk-l4B"/>
+                <constraint firstItem="Cjb-Xp-tDg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Zga-lh-68R"/>
+                <constraint firstItem="QCS-x2-f3Y" firstAttribute="leading" secondItem="8nO-d2-t9w" secondAttribute="trailing" constant="10" id="aXl-71-6YC"/>
+                <constraint firstAttribute="centerY" secondItem="QCS-x2-f3Y" secondAttribute="centerY" constant="-0.5" id="epv-IS-e5f"/>
+                <constraint firstAttribute="bottom" secondItem="aw4-gu-V0J" secondAttribute="bottom" id="s7u-X0-IpK"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="_customEditButton" destination="Cjb-Xp-tDg" id="yec-Zg-Ilm"/>
+                <outlet property="_customPayButton" destination="QCS-x2-f3Y" id="Pk1-fE-whi"/>
+                <outlet property="_customPhoneButton" destination="8nO-d2-t9w" id="lBs-lb-vOP"/>
+                <outlet property="_orderFinishView" destination="aw4-gu-V0J" id="x29-je-T3b"/>
+                <outlet property="_orderPhoneButton" destination="32D-1E-92Z" id="f6l-9F-1y7"/>
+            </connections>
+        </view>
+    </objects>
+</document>

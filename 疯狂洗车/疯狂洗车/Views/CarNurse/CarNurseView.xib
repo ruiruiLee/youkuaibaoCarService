@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CarNurseView">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="390"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ToS-Kd-FBR">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="390"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="irH-Zo-hNa"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="XwI-Im-xbr"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wte-KH-EL9">
+                    <rect key="frame" x="0.0" y="330" width="280" height="60"/>
+                    <subviews>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6A-Jd-paf">
+                            <rect key="frame" x="10" y="8" width="260" height="45"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="ocC-B9-nhQ"/>
+                                <constraint firstAttribute="width" constant="103" id="uwG-Gs-hfe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="立即下单">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="uwG-Gs-hfe"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="didBookOrderButtonTouch:" destination="iN0-l3-epB" eventType="touchUpInside" id="nSv-tD-g9o"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgb-jt-KHW">
+                            <rect key="frame" x="100" y="10" width="80" height="40"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="103" id="m4T-5v-qru"/>
+                                <constraint firstAttribute="height" constant="40" id="tAn-Xu-3Wh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="到店服务">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="m4T-5v-qru"/>
+                                    <exclude reference="tAn-Xu-3Wh"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="didPayOrderButtonTouch:" destination="iN0-l3-epB" eventType="touchUpInside" id="U7f-2R-ltM"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iU9-Vw-ISE">
+                            <rect key="frame" x="190" y="10" width="80" height="40"/>
+                            <animations/>
+                            <color key="backgroundColor" red="0.15294117647058825" green="0.72549019607843135" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="103" id="kte-m9-jrP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" title="上门取送">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="kte-m9-jrP"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="didBookOrderButtonTouch:" destination="iN0-l3-epB" eventType="touchUpInside" id="hSS-fi-fsb"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认下单：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLV-0J-qcx">
+                            <rect key="frame" x="10" y="20" width="80" height="20"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="B6A-Jd-paf" firstAttribute="leading" secondItem="Wte-KH-EL9" secondAttribute="leading" constant="10" id="2dr-7C-jqM"/>
+                        <constraint firstAttribute="bottom" secondItem="Mgb-jt-KHW" secondAttribute="bottom" id="6k3-DH-hI6"/>
+                        <constraint firstItem="Mgb-jt-KHW" firstAttribute="height" secondItem="iU9-Vw-ISE" secondAttribute="height" id="8TG-zW-XmI"/>
+                        <constraint firstAttribute="bottom" secondItem="iU9-Vw-ISE" secondAttribute="bottom" constant="5" id="9tg-hD-OAZ"/>
+                        <constraint firstAttribute="centerY" secondItem="kLV-0J-qcx" secondAttribute="centerY" id="BQ7-T4-C07"/>
+                        <constraint firstItem="B6A-Jd-paf" firstAttribute="centerY" secondItem="iU9-Vw-ISE" secondAttribute="centerY" constant="0.5" id="DCn-Dv-wVQ"/>
+                        <constraint firstItem="iU9-Vw-ISE" firstAttribute="leading" secondItem="Mgb-jt-KHW" secondAttribute="trailing" constant="10" id="KEc-qb-Ps6"/>
+                        <constraint firstItem="iU9-Vw-ISE" firstAttribute="leading" secondItem="Mgb-jt-KHW" secondAttribute="trailing" constant="10" id="NcL-XI-cML"/>
+                        <constraint firstAttribute="trailing" secondItem="iU9-Vw-ISE" secondAttribute="trailing" constant="10" id="O2v-ZQ-oM8"/>
+                        <constraint firstItem="iU9-Vw-ISE" firstAttribute="top" secondItem="Wte-KH-EL9" secondAttribute="top" constant="5" id="PsU-b7-puM"/>
+                        <constraint firstAttribute="trailing" secondItem="B6A-Jd-paf" secondAttribute="trailing" constant="10" id="SoF-Ij-ANM"/>
+                        <constraint firstAttribute="centerX" secondItem="B6A-Jd-paf" secondAttribute="centerX" id="Su5-XB-89K"/>
+                        <constraint firstAttribute="centerX" secondItem="Mgb-jt-KHW" secondAttribute="centerX" id="TLJ-KS-1ZU"/>
+                        <constraint firstAttribute="centerY" secondItem="B6A-Jd-paf" secondAttribute="centerY" id="Ugi-h3-oaN"/>
+                        <constraint firstItem="kLV-0J-qcx" firstAttribute="leading" secondItem="Wte-KH-EL9" secondAttribute="leading" constant="10" id="WeB-4g-Hch"/>
+                        <constraint firstItem="Mgb-jt-KHW" firstAttribute="top" secondItem="Wte-KH-EL9" secondAttribute="top" constant="10" id="YhH-yd-G5u"/>
+                        <constraint firstAttribute="trailing" secondItem="Mgb-jt-KHW" secondAttribute="trailing" id="cJ9-yz-RGz"/>
+                        <constraint firstItem="Mgb-jt-KHW" firstAttribute="centerY" secondItem="iU9-Vw-ISE" secondAttribute="centerY" constant="0.5" id="cc8-34-rvs"/>
+                        <constraint firstAttribute="bottom" secondItem="Mgb-jt-KHW" secondAttribute="bottom" constant="5" id="cis-BJ-VAm"/>
+                        <constraint firstItem="Mgb-jt-KHW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kLV-0J-qcx" secondAttribute="trailing" constant="10" id="dpL-K9-Ofe"/>
+                        <constraint firstItem="Mgb-jt-KHW" firstAttribute="width" secondItem="iU9-Vw-ISE" secondAttribute="width" id="hwE-7b-bZ3"/>
+                        <constraint firstItem="Mgb-jt-KHW" firstAttribute="top" secondItem="Wte-KH-EL9" secondAttribute="top" id="kgn-Pk-U4K"/>
+                        <constraint firstAttribute="height" constant="60" id="nu9-h1-OSC"/>
+                        <constraint firstItem="Mgb-jt-KHW" firstAttribute="leading" secondItem="Wte-KH-EL9" secondAttribute="leading" constant="10" id="pco-e0-tbS"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iU9-Vw-ISE" secondAttribute="trailing" constant="10" id="ph4-Wr-U6H"/>
+                        <constraint firstItem="Mgb-jt-KHW" firstAttribute="top" secondItem="Wte-KH-EL9" secondAttribute="top" constant="5" id="rt7-5U-DIe"/>
+                        <constraint firstAttribute="centerY" secondItem="Mgb-jt-KHW" secondAttribute="centerY" id="sVC-8q-eG9"/>
+                        <constraint firstAttribute="bottom" secondItem="Mgb-jt-KHW" secondAttribute="bottom" constant="10" id="vhb-hr-58r"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Su5-XB-89K"/>
+                            <exclude reference="6k3-DH-hI6"/>
+                            <exclude reference="cJ9-yz-RGz"/>
+                            <exclude reference="cc8-34-rvs"/>
+                            <exclude reference="cis-BJ-VAm"/>
+                            <exclude reference="kgn-Pk-U4K"/>
+                            <exclude reference="pco-e0-tbS"/>
+                            <exclude reference="rt7-5U-DIe"/>
+                            <exclude reference="9tg-hD-OAZ"/>
+                            <exclude reference="NcL-XI-cML"/>
+                            <exclude reference="PsU-b7-puM"/>
+                            <exclude reference="ph4-Wr-U6H"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ToS-Kd-FBR" secondAttribute="bottom" id="EcE-Qh-oYO"/>
+                <constraint firstItem="Wte-KH-EL9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Hgo-Dg-Nyk"/>
+                <constraint firstItem="Wte-KH-EL9" firstAttribute="top" secondItem="ToS-Kd-FBR" secondAttribute="bottom" id="YJp-Kq-t0s"/>
+                <constraint firstAttribute="trailing" secondItem="Wte-KH-EL9" secondAttribute="trailing" id="ZqL-Iq-NAb"/>
+                <constraint firstAttribute="trailing" secondItem="ToS-Kd-FBR" secondAttribute="trailing" id="efT-1o-bvl"/>
+                <constraint firstAttribute="bottom" secondItem="Wte-KH-EL9" secondAttribute="bottom" id="nGJ-mc-jyZ"/>
+                <constraint firstItem="ToS-Kd-FBR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rGL-je-Yqv"/>
+                <constraint firstItem="ToS-Kd-FBR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vKe-8k-x1w"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="YJp-Kq-t0s"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="_bookOrderButton" destination="iU9-Vw-ISE" id="ZOR-Dj-gsR"/>
+                <outlet property="_contextTableView" destination="ToS-Kd-FBR" id="OoE-Lh-z5R"/>
+                <outlet property="_payOrderButton" destination="Mgb-jt-KHW" id="BqQ-Nt-iFC"/>
+                <outlet property="_rescueButton" destination="B6A-Jd-paf" id="Fxa-Cu-qzc"/>
+                <outlet property="_submitView" destination="Wte-KH-EL9" id="7mc-qM-Va5"/>
+            </connections>
+            <point key="canvasLocation" x="255" y="506"/>
+        </view>
+    </objects>
+</document>

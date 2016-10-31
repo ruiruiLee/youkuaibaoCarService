@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MineTicketNumberCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Fhh-y5-pDU">
+                        <rect key="frame" x="20" y="7" width="30" height="30"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="JhZ-Pw-xC4"/>
+                            <constraint firstAttribute="width" constant="30" id="qay-Uv-9xl"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDB-pz-JlI">
+                        <rect key="frame" x="61" y="22" width="0.0" height="0.0"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.37647058823529411" green="0.37647058823529411" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0张" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbZ-e4-cLI">
+                        <rect key="frame" x="258" y="13" width="24" height="18"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.92156862745098034" green="0.32941176470588235" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view alpha="0.49999999999999961" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OYP-7m-oNN">
+                        <rect key="frame" x="0.0" y="42" width="320" height="1"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="df1-md-gB7"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="MbZ-e4-cLI" firstAttribute="centerY" secondItem="Fhh-y5-pDU" secondAttribute="centerY" id="4KV-V1-Wgi"/>
+                    <constraint firstItem="Fhh-y5-pDU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="CcU-7U-cMx"/>
+                    <constraint firstAttribute="trailing" secondItem="OYP-7m-oNN" secondAttribute="trailing" id="S0v-sF-Im0"/>
+                    <constraint firstItem="XDB-pz-JlI" firstAttribute="leading" secondItem="Fhh-y5-pDU" secondAttribute="trailing" constant="11" id="W3R-No-ts0"/>
+                    <constraint firstAttribute="bottom" secondItem="OYP-7m-oNN" secondAttribute="bottom" id="gri-O9-Jia"/>
+                    <constraint firstAttribute="trailing" secondItem="MbZ-e4-cLI" secondAttribute="trailing" constant="38" id="ioa-S8-Sqr"/>
+                    <constraint firstItem="Fhh-y5-pDU" firstAttribute="centerY" secondItem="XDB-pz-JlI" secondAttribute="centerY" id="qKY-wY-kIK"/>
+                    <constraint firstItem="OYP-7m-oNN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qxK-Hu-9e1"/>
+                    <constraint firstAttribute="centerY" secondItem="Fhh-y5-pDU" secondAttribute="centerY" id="rod-SW-8bh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <color key="backgroundColor" red="0.89411764705882357" green="0.89411764705882357" blue="0.89411764705882357" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="_ticketImageView" destination="Fhh-y5-pDU" id="961-TM-dMJ"/>
+                <outlet property="_ticketNameLabel" destination="XDB-pz-JlI" id="QGf-EQ-xx5"/>
+                <outlet property="_ticketNumberLabel" destination="MbZ-e4-cLI" id="NB8-jy-9ZF"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="login_icon" width="72" height="72"/>
+    </resources>
+</document>

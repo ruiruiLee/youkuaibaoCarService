@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="AddCarsCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Bg-ou-yCN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="bDv-SY-ZCN"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更多车辆" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yur-H8-pXf">
+                        <rect key="frame" x="250" y="13" width="60" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.15294117647058825" green="0.72549019607843135" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LF4-Wy-Rdm">
+                        <rect key="frame" x="10" y="5" width="300" height="33"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didAddButtonTouch:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mam-d1-nSp"/>
+                        </connections>
+                    </button>
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Rs-JK-Rgh">
+                        <rect key="frame" x="0.0" y="42" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ppn-ka-vmj"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="Yur-H8-pXf" secondAttribute="centerY" id="2TZ-bg-PJQ"/>
+                    <constraint firstAttribute="centerX" secondItem="Yur-H8-pXf" secondAttribute="centerX" id="77M-Tr-QyG"/>
+                    <constraint firstAttribute="trailing" secondItem="7Bg-ou-yCN" secondAttribute="trailing" id="CKA-RV-Md3"/>
+                    <constraint firstItem="7Bg-ou-yCN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Df4-DK-r8V"/>
+                    <constraint firstItem="LF4-Wy-Rdm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="NHz-re-jE2"/>
+                    <constraint firstAttribute="bottom" secondItem="1Rs-JK-Rgh" secondAttribute="bottom" id="RPn-sh-FmB"/>
+                    <constraint firstAttribute="bottom" secondItem="LF4-Wy-Rdm" secondAttribute="bottom" constant="5" id="euz-df-OXq"/>
+                    <constraint firstAttribute="trailing" secondItem="LF4-Wy-Rdm" secondAttribute="trailing" constant="10" id="fMK-3P-ZKd"/>
+                    <constraint firstAttribute="trailing" secondItem="1Rs-JK-Rgh" secondAttribute="trailing" id="iea-RG-xwj"/>
+                    <constraint firstItem="1Rs-JK-Rgh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kcw-Vs-4x2"/>
+                    <constraint firstItem="LF4-Wy-Rdm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="m8i-dt-0dX"/>
+                    <constraint firstAttribute="trailing" secondItem="Yur-H8-pXf" secondAttribute="trailing" constant="10" id="qHj-Du-d7y"/>
+                    <constraint firstItem="7Bg-ou-yCN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sJy-NY-pqe"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="77M-Tr-QyG"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="opreationTitle" destination="Yur-H8-pXf" id="F9I-X1-38K"/>
+            </connections>
+            <point key="canvasLocation" x="703" y="549"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MyCarDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cr5-Zn-ZVZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="n3k-BZ-rd4"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_Account_default" highlightedImage="ic_Account_success" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zwj-cL-MUf">
+                        <rect key="frame" x="10" y="10" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="IKu-L8-IUd"/>
+                            <constraint firstAttribute="width" constant="20" id="IqY-q6-BXr"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="轿车" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gni-7Y-hjg">
+                        <rect key="frame" x="40" y="11" width="175" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无品牌信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jls-a8-Iyc">
+                        <rect key="frame" x="220" y="11" width="90" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaB-Fk-rbv">
+                        <rect key="frame" x="10" y="5" width="300" height="29"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didMyCarSelectButtonTouch:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bTO-pp-UlK"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jls-a8-Iyc" firstAttribute="centerY" secondItem="Zwj-cL-MUf" secondAttribute="centerY" id="0DB-oC-yXz"/>
+                    <constraint firstItem="PaB-Fk-rbv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2BT-ao-cji"/>
+                    <constraint firstAttribute="bottom" secondItem="PaB-Fk-rbv" secondAttribute="bottom" constant="5" id="2zF-LL-msB"/>
+                    <constraint firstItem="PaB-Fk-rbv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="3FK-Ph-avp"/>
+                    <constraint firstAttribute="trailing" secondItem="Zwj-cL-MUf" secondAttribute="trailing" constant="26" id="F2e-O8-hfG"/>
+                    <constraint firstItem="PaB-Fk-rbv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="JgL-h6-ZMV"/>
+                    <constraint firstItem="Gni-7Y-hjg" firstAttribute="leading" secondItem="PaB-Fk-rbv" secondAttribute="trailing" constant="10" id="Kyv-vm-bbS"/>
+                    <constraint firstItem="Zwj-cL-MUf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Vkk-0i-iCo"/>
+                    <constraint firstItem="Gni-7Y-hjg" firstAttribute="leading" secondItem="Zwj-cL-MUf" secondAttribute="trailing" constant="10" id="etV-Yl-15p"/>
+                    <constraint firstItem="Cr5-Zn-ZVZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gw7-Ae-ZxL"/>
+                    <constraint firstAttribute="centerY" secondItem="Zwj-cL-MUf" secondAttribute="centerY" constant="-0.5" id="hLb-lT-53f"/>
+                    <constraint firstItem="Cr5-Zn-ZVZ" firstAttribute="top" secondItem="PaB-Fk-rbv" secondAttribute="bottom" constant="5" id="hLy-hc-4iX"/>
+                    <constraint firstAttribute="trailing" secondItem="Cr5-Zn-ZVZ" secondAttribute="trailing" id="jDl-cE-ZnI"/>
+                    <constraint firstAttribute="trailing" secondItem="jls-a8-Iyc" secondAttribute="trailing" constant="10" id="otk-hf-wk6"/>
+                    <constraint firstAttribute="bottom" secondItem="Cr5-Zn-ZVZ" secondAttribute="bottom" id="pDk-eA-ghI"/>
+                    <constraint firstItem="Zwj-cL-MUf" firstAttribute="centerY" secondItem="Gni-7Y-hjg" secondAttribute="centerY" id="qTR-0X-CNq"/>
+                    <constraint firstAttribute="trailing" secondItem="Gni-7Y-hjg" secondAttribute="trailing" constant="10" id="sqW-gh-BZY"/>
+                    <constraint firstItem="Cr5-Zn-ZVZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ufY-ij-359"/>
+                    <constraint firstItem="jls-a8-Iyc" firstAttribute="leading" secondItem="Gni-7Y-hjg" secondAttribute="trailing" constant="5" id="yO5-r7-3c4"/>
+                    <constraint firstAttribute="trailing" secondItem="PaB-Fk-rbv" secondAttribute="trailing" constant="10" id="ztE-A0-ZG3"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="hLy-hc-4iX"/>
+                        <exclude reference="pDk-eA-ghI"/>
+                        <exclude reference="3FK-Ph-avp"/>
+                        <exclude reference="F2e-O8-hfG"/>
+                        <exclude reference="Kyv-vm-bbS"/>
+                        <exclude reference="sqW-gh-BZY"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="_carBrandLabel" destination="jls-a8-Iyc" id="kyG-dF-yqn"/>
+                <outlet property="_carDetailLabel" destination="Gni-7Y-hjg" id="rbj-9Z-uQ6"/>
+                <outlet property="selectIcon" destination="Zwj-cL-MUf" id="d77-Ka-2fh"/>
+            </connections>
+            <point key="canvasLocation" x="272" y="549"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_Account_default" width="22" height="22"/>
+        <image name="ic_Account_success" width="22" height="22"/>
+    </resources>
+</document>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="InsuranceDetailBasePriceCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEF-Bt-7Ao">
+                        <rect key="frame" x="0.0" y="12" width="5" height="16"/>
+                        <color key="backgroundColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="DND-uV-osA"/>
+                            <constraint firstAttribute="width" constant="5" id="maA-Ym-3sc"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交强险+车船税" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fd-wc-yZB">
+                        <rect key="frame" x="10" y="10" width="120" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="HrU-3g-DB5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥100.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="306-aD-X3k">
+                        <rect key="frame" x="140" y="10" width="170" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.12156862745098039" green="0.56470588235294117" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fo5-GS-kth">
+                        <rect key="frame" x="0.0" y="50" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="axi-t9-BTX"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="UEF-Bt-7Ao" secondAttribute="centerY" id="1WT-ey-fxQ"/>
+                    <constraint firstItem="UEF-Bt-7Ao" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8el-WQ-1VE"/>
+                    <constraint firstItem="306-aD-X3k" firstAttribute="leading" secondItem="7fd-wc-yZB" secondAttribute="trailing" constant="10" id="9jf-RP-J4d"/>
+                    <constraint firstAttribute="bottom" secondItem="Fo5-GS-kth" secondAttribute="bottom" id="9w4-yr-urQ"/>
+                    <constraint firstAttribute="centerY" secondItem="306-aD-X3k" secondAttribute="centerY" id="Cxj-XX-tsM"/>
+                    <constraint firstAttribute="centerY" secondItem="7fd-wc-yZB" secondAttribute="centerY" id="Gye-IA-pV3"/>
+                    <constraint firstItem="7fd-wc-yZB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="LKt-E5-jQD"/>
+                    <constraint firstAttribute="trailing" secondItem="306-aD-X3k" secondAttribute="trailing" constant="10" id="SFi-1R-uyN"/>
+                    <constraint firstItem="Fo5-GS-kth" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="TSF-Pj-hkf"/>
+                    <constraint firstAttribute="trailing" secondItem="Fo5-GS-kth" secondAttribute="trailing" id="kBc-hp-cQI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="_infoNameLabel" destination="7fd-wc-yZB" id="706-Nx-AXD"/>
+                <outlet property="_priceLabel" destination="306-aD-X3k" id="uS6-Fs-t2x"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CarServiceSelectHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0W-qP-ClC">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft2-3F-GqF">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_serviceselect" translatesAutoresizingMaskIntoConstraints="NO" id="jYs-AZ-c6r">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="3" id="b0F-A7-IGH"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kM7-rr-94L">
+                                    <rect key="frame" x="0.0" y="0.0" width="107" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal">
+                                        <color key="titleColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didServiceSegmentCHnage:" destination="iN0-l3-epB" eventType="touchUpInside" id="VkV-sc-WLp"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNJ-ev-daR">
+                                    <rect key="frame" x="107" y="0.0" width="106" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal">
+                                        <color key="titleColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didServiceSegmentCHnage:" destination="iN0-l3-epB" eventType="touchUpInside" id="SuM-dZ-G6C"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edc-LO-v0B">
+                                    <rect key="frame" x="213" y="0.0" width="107" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal">
+                                        <color key="titleColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didServiceSegmentCHnage:" destination="iN0-l3-epB" eventType="touchUpInside" id="kUo-eN-Mwh"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T8P-oa-wCK">
+                                    <rect key="frame" x="0.0" y="39" width="75" height="1"/>
+                                    <color key="backgroundColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="6JU-Gb-tnm"/>
+                                        <constraint firstAttribute="width" constant="75" id="qIJ-S5-46c"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="jYs-AZ-c6r" firstAttribute="leading" secondItem="ft2-3F-GqF" secondAttribute="leading" id="29o-zc-BWQ"/>
+                                <constraint firstItem="kM7-rr-94L" firstAttribute="leading" secondItem="ft2-3F-GqF" secondAttribute="leading" id="2RU-PA-DpP"/>
+                                <constraint firstItem="edc-LO-v0B" firstAttribute="centerY" secondItem="yNJ-ev-daR" secondAttribute="centerY" id="9IL-2h-hzB"/>
+                                <constraint firstItem="edc-LO-v0B" firstAttribute="leading" secondItem="yNJ-ev-daR" secondAttribute="trailing" id="B7T-MJ-MtZ"/>
+                                <constraint firstAttribute="trailing" secondItem="edc-LO-v0B" secondAttribute="trailing" id="EEK-uX-TSh"/>
+                                <constraint firstItem="T8P-oa-wCK" firstAttribute="leading" secondItem="ft2-3F-GqF" secondAttribute="leading" id="IHI-4Q-3Yn"/>
+                                <constraint firstAttribute="height" constant="40" id="K0G-o0-mzL"/>
+                                <constraint firstAttribute="trailing" secondItem="jYs-AZ-c6r" secondAttribute="trailing" id="LI6-KQ-aZd"/>
+                                <constraint firstItem="yNJ-ev-daR" firstAttribute="height" secondItem="kM7-rr-94L" secondAttribute="height" id="NE9-dS-aoz"/>
+                                <constraint firstItem="yNJ-ev-daR" firstAttribute="leading" secondItem="kM7-rr-94L" secondAttribute="trailing" id="Q1V-Gq-wPB"/>
+                                <constraint firstItem="kM7-rr-94L" firstAttribute="top" secondItem="ft2-3F-GqF" secondAttribute="top" id="Q4H-Qp-rQI"/>
+                                <constraint firstItem="yNJ-ev-daR" firstAttribute="centerY" secondItem="kM7-rr-94L" secondAttribute="centerY" id="SCn-TF-P5p"/>
+                                <constraint firstItem="jYs-AZ-c6r" firstAttribute="top" secondItem="ft2-3F-GqF" secondAttribute="top" id="kUd-Z5-jsq"/>
+                                <constraint firstItem="edc-LO-v0B" firstAttribute="width" secondItem="yNJ-ev-daR" secondAttribute="width" id="lNe-fh-3VI"/>
+                                <constraint firstAttribute="bottom" secondItem="T8P-oa-wCK" secondAttribute="bottom" id="leW-mI-TsQ"/>
+                                <constraint firstItem="yNJ-ev-daR" firstAttribute="width" secondItem="kM7-rr-94L" secondAttribute="width" id="loy-n8-rmU"/>
+                                <constraint firstItem="T8P-oa-wCK" firstAttribute="width" secondItem="kM7-rr-94L" secondAttribute="width" id="wXj-x0-5cx"/>
+                                <constraint firstAttribute="bottom" secondItem="kM7-rr-94L" secondAttribute="bottom" id="wdv-qP-NCM"/>
+                                <constraint firstItem="edc-LO-v0B" firstAttribute="height" secondItem="yNJ-ev-daR" secondAttribute="height" id="y9f-d5-gKW"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="wXj-x0-5cx"/>
+                                </mask>
+                            </variation>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="ft2-3F-GqF" secondAttribute="bottom" id="Ikr-kX-Vrl"/>
+                        <constraint firstItem="ft2-3F-GqF" firstAttribute="leading" secondItem="I0W-qP-ClC" secondAttribute="leading" id="b4d-d8-GMQ"/>
+                        <constraint firstAttribute="trailing" secondItem="ft2-3F-GqF" secondAttribute="trailing" id="bfq-jI-PmE"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="I0W-qP-ClC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4SU-Bm-shN"/>
+                <constraint firstAttribute="trailing" secondItem="I0W-qP-ClC" secondAttribute="trailing" id="UWW-kR-FXr"/>
+                <constraint firstAttribute="bottom" secondItem="I0W-qP-ClC" secondAttribute="bottom" id="aRc-ez-umu"/>
+                <constraint firstItem="I0W-qP-ClC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="srF-aj-AeG"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="_firstButton" destination="kM7-rr-94L" id="czq-eQ-YFm"/>
+                <outlet property="_secondButton" destination="yNJ-ev-daR" id="06O-CJ-jil"/>
+                <outlet property="_selectedViewLeadingConstraint" destination="IHI-4Q-3Yn" id="r2J-4q-AxB"/>
+                <outlet property="_thirdButton" destination="edc-LO-v0B" id="UCd-XG-I1V"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_serviceselect" width="360" height="3"/>
+    </resources>
+</document>

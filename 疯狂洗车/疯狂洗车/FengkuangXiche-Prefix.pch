@@ -1,0 +1,53 @@
+//
+//  FengkuangXiche-Prefix.pch
+//  优快保
+//
+//  Created by 朱伟铭 on 15/1/19.
+//  Copyright (c) 2015年 朱伟铭. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "Constants.h"
+
+#define MAS_SHORTHAND
+
+//define this constant if you want to enable auto-boxing for default syntax
+#define MAS_SHORTHAND_GLOBALS
+
+#import "Masonry.h"
+#endif
+
+
+
+
+// AutoLoginKey
+#define AutoLoginKey                            @"AutoLogin"
+
+// 系统版本判断
+#define bIsiOS7                                 ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0)
+
+
+// Release注销NSLog（）
+#ifndef __OPTIMIZE__
+#    define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#    define NSLog(...) {}
+#endif
+
+#define ALLOC_WITH_CLASSNAME(className)[UINib nibWithNibName:className bundle:[NSBundle mainBundle]] ? [[NSClassFromString(className) alloc] initWithNibName:className bundle:[NSBundle mainBundle]] : [[NSClassFromString(className) alloc] init]
+
+#define SCREEN_WIDTH                            ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT                           ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_SCALE                             ([[UIScreen mainScreen] bounds].size.width/375)
+
+
+
+#define ViewBackGroundColor [UIColor colorWithRed:237/255.0 green:249/255.0 blue:241/255.0 alpha:1.0]

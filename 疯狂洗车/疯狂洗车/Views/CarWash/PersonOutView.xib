@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PersonOutView">
+            <connections>
+                <outlet property="_nameLabel" destination="2C8-kM-Buc" id="8VS-0C-X0C"/>
+                <outlet property="_personImageView" destination="aCU-hh-UWx" id="cxD-av-IiR"/>
+                <outlet property="_starRatingView" destination="vxd-Xu-UtR" id="hyb-d6-bW4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PersonOutView">
+            <rect key="frame" x="0.0" y="0.0" width="140" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aCU-hh-UWx">
+                    <rect key="frame" x="5" y="5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="GTJ-TH-QgS"/>
+                        <constraint firstAttribute="width" constant="40" id="exQ-4V-cUZ"/>
+                    </constraints>
+                </imageView>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vxd-Xu-UtR" customClass="TQStarRatingView">
+                    <rect key="frame" x="65" y="34" width="70" height="14"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="Lii-Vx-ZJM"/>
+                        <constraint firstAttribute="height" constant="14" id="gaA-DC-GbH"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2C8-kM-Buc">
+                    <rect key="frame" x="50" y="5" width="85" height="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="2C8-kM-Buc" secondAttribute="trailing" constant="5" id="7HT-1o-vyN"/>
+                <constraint firstAttribute="trailing" secondItem="vxd-Xu-UtR" secondAttribute="trailing" constant="5" id="9Tf-p2-t1p"/>
+                <constraint firstItem="aCU-hh-UWx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="T3X-AX-ZNa"/>
+                <constraint firstItem="aCU-hh-UWx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="UF1-yc-e6B"/>
+                <constraint firstAttribute="bottom" secondItem="aCU-hh-UWx" secondAttribute="bottom" constant="5" id="ZDl-jV-K1F"/>
+                <constraint firstAttribute="bottom" secondItem="vxd-Xu-UtR" secondAttribute="bottom" constant="2" id="j7p-QQ-m9S"/>
+                <constraint firstItem="2C8-kM-Buc" firstAttribute="leading" secondItem="aCU-hh-UWx" secondAttribute="trailing" constant="5" id="ngd-wn-H6t"/>
+                <constraint firstItem="2C8-kM-Buc" firstAttribute="top" secondItem="aCU-hh-UWx" secondAttribute="top" id="pbZ-Y2-OD9"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>

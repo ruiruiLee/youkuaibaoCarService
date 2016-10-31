@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="ButlerServiceCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_Account_default" highlightedImage="ic_Account_success" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PY3-hf-Vq3">
+                        <rect key="frame" x="58" y="9" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="cXf-WW-hmL"/>
+                            <constraint firstAttribute="height" constant="26" id="eHO-41-AFr"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cXf-WW-hmL"/>
+                                <exclude reference="eHO-41-AFr"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="车保姆上门服务" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haE-KJ-K9E">
+                        <rect key="frame" x="90" y="11" width="105" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lge-pp-3bG">
+                        <rect key="frame" x="0.0" y="38" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="CEA-gq-Xea"/>
+                            <constraint firstAttribute="height" constant="1" id="RV5-nY-ScB"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CEA-gq-Xea"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="PY3-hf-Vq3" secondAttribute="centerY" constant="-0.5" id="1f2-jg-Jls"/>
+                    <constraint firstItem="haE-KJ-K9E" firstAttribute="leading" secondItem="PY3-hf-Vq3" secondAttribute="trailing" constant="10" id="2H9-IG-Oqj"/>
+                    <constraint firstAttribute="trailing" secondItem="lge-pp-3bG" secondAttribute="trailing" id="Bxu-8Q-Dqt"/>
+                    <constraint firstItem="lge-pp-3bG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="G8o-vY-uMT"/>
+                    <constraint firstItem="PY3-hf-Vq3" firstAttribute="centerY" secondItem="haE-KJ-K9E" secondAttribute="centerY" id="XDp-jR-mjr"/>
+                    <constraint firstAttribute="bottom" secondItem="lge-pp-3bG" secondAttribute="bottom" id="qfC-tb-RkW"/>
+                    <constraint firstItem="PY3-hf-Vq3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="58" id="xFk-6i-zhx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="selectIconImageView" destination="PY3-hf-Vq3" id="QAK-zd-o2l"/>
+                <outlet property="serviceTypeNameLabel" destination="haE-KJ-K9E" id="enW-pp-Ouy"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_Account_default" width="22" height="22"/>
+        <image name="ic_Account_success" width="22" height="22"/>
+    </resources>
+</document>

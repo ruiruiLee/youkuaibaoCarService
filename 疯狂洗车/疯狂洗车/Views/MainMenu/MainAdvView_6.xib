@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MainAdvView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0he-Fo-YiV">
+                    <rect key="frame" x="20" y="60" width="335" height="607"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_butler_ dashline" translatesAutoresizingMaskIntoConstraints="NO" id="Bhv-z1-EqI">
+                            <rect key="frame" x="324" y="0.0" width="2" height="126"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="2" id="5fg-M8-h4n"/>
+                                <constraint firstAttribute="height" constant="55" id="A8r-Ss-3IB"/>
+                                <constraint firstAttribute="height" constant="55" id="BBG-eI-le4"/>
+                                <constraint firstAttribute="height" constant="55" id="Tvz-iK-4DD"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="A8r-Ss-3IB"/>
+                                    <exclude reference="BBG-eI-le4"/>
+                                    <exclude reference="Tvz-iK-4DD"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQ6-yV-Ivw">
+                            <rect key="frame" x="0.0" y="126" width="335" height="335"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="aQ6-yV-Ivw" secondAttribute="height" multiplier="1:1" id="4n3-cM-UUj"/>
+                            </constraints>
+                        </scrollView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="aQ6-yV-Ivw" firstAttribute="centerY" secondItem="0he-Fo-YiV" secondAttribute="centerY" constant="-10" id="1Ki-hf-5Q2"/>
+                        <constraint firstAttribute="trailing" secondItem="aQ6-yV-Ivw" secondAttribute="trailing" id="HuW-3m-sTA"/>
+                        <constraint firstAttribute="width" secondItem="0he-Fo-YiV" secondAttribute="height" multiplier="690:628" id="WnW-HP-hCI"/>
+                        <constraint firstAttribute="trailing" secondItem="Bhv-z1-EqI" secondAttribute="trailing" constant="9" id="gCb-Ib-sMF"/>
+                        <constraint firstItem="aQ6-yV-Ivw" firstAttribute="top" secondItem="Bhv-z1-EqI" secondAttribute="bottom" id="s3l-zi-XeU"/>
+                        <constraint firstItem="Bhv-z1-EqI" firstAttribute="top" secondItem="0he-Fo-YiV" secondAttribute="top" id="stQ-SF-NHh"/>
+                        <constraint firstItem="aQ6-yV-Ivw" firstAttribute="leading" secondItem="0he-Fo-YiV" secondAttribute="leading" id="uf8-QA-XMs"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="WnW-HP-hCI"/>
+                        </mask>
+                    </variation>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUF-r2-YR6">
+                    <rect key="frame" x="330" y="30" width="30" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="BF6-Ep-RSf"/>
+                        <constraint firstAttribute="height" constant="30" id="Vez-Zh-ach"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" image="btn_homePage_close">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didSkipeButtonTouch:" destination="iN0-l3-epB" eventType="touchUpInside" id="6L4-mD-IJQ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.70000000000000007" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="0he-Fo-YiV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="3po-re-8vQ"/>
+                <constraint firstAttribute="trailing" secondItem="jUF-r2-YR6" secondAttribute="trailing" constant="10" id="4Ui-xo-hbM"/>
+                <constraint firstAttribute="trailing" secondItem="jUF-r2-YR6" secondAttribute="trailing" constant="20" id="E8I-Eo-DMy"/>
+                <constraint firstAttribute="trailing" secondItem="jUF-r2-YR6" secondAttribute="trailing" constant="15" id="GJk-tE-pGS"/>
+                <constraint firstItem="0he-Fo-YiV" firstAttribute="top" secondItem="jUF-r2-YR6" secondAttribute="bottom" id="SAL-aG-8IP"/>
+                <constraint firstItem="jUF-r2-YR6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="TTp-da-Aek"/>
+                <constraint firstAttribute="bottom" secondItem="0he-Fo-YiV" secondAttribute="bottom" id="ZJb-dY-KUU"/>
+                <constraint firstAttribute="trailing" secondItem="0he-Fo-YiV" secondAttribute="trailing" constant="20" id="xUc-a7-HWi"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="4Ui-xo-hbM"/>
+                    <exclude reference="E8I-Eo-DMy"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="_displayScrollView" destination="aQ6-yV-Ivw" id="g7e-gE-Zfp"/>
+                <outlet property="_displayView" destination="0he-Fo-YiV" id="eI9-Xw-jE0"/>
+                <outlet property="_skipeButton" destination="jUF-r2-YR6" id="Jky-Qn-5ps"/>
+            </connections>
+            <point key="canvasLocation" x="543" y="282"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_homePage_close" width="30" height="30"/>
+        <image name="img_butler_ dashline" width="2" height="55"/>
+    </resources>
+</document>

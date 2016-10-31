@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="InsuranceCustomItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjn-st-zPr" userLabel="车损险">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车损险" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ba-gy-RDR">
+                                <rect key="frame" x="10" y="13" width="42" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="购买率95%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PTN-NM-qkj">
+                                <rect key="frame" x="92" y="13" width="66" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_carNurse_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="WoU-DK-z0p">
+                                <rect key="frame" x="302" y="15" width="8" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="f0B-1h-78P"/>
+                                    <constraint firstAttribute="width" constant="8" id="gbs-k0-p4g"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投保" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sax-s5-wyJ">
+                                <rect key="frame" x="266" y="14" width="26" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obx-83-Bdd">
+                                <rect key="frame" x="0.0" y="42" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.49638407940000001" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="CVO-sR-66g"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PTN-NM-qkj" firstAttribute="leading" secondItem="0Ba-gy-RDR" secondAttribute="trailing" constant="40" id="BRR-Hx-y8N"/>
+                            <constraint firstAttribute="centerY" secondItem="PTN-NM-qkj" secondAttribute="centerY" constant="0.5" id="EN4-b3-rQg"/>
+                            <constraint firstAttribute="centerY" secondItem="0Ba-gy-RDR" secondAttribute="centerY" id="Fn1-Od-sAg"/>
+                            <constraint firstItem="obx-83-Bdd" firstAttribute="leading" secondItem="gjn-st-zPr" secondAttribute="leading" id="MwH-yy-ezv"/>
+                            <constraint firstAttribute="bottom" secondItem="obx-83-Bdd" secondAttribute="bottom" id="Pu9-x7-fGh"/>
+                            <constraint firstAttribute="trailing" secondItem="WoU-DK-z0p" secondAttribute="trailing" constant="10" id="Qfb-vR-Ba6"/>
+                            <constraint firstAttribute="centerY" secondItem="sax-s5-wyJ" secondAttribute="centerY" id="RYS-qm-u5y"/>
+                            <constraint firstItem="WoU-DK-z0p" firstAttribute="leading" secondItem="sax-s5-wyJ" secondAttribute="trailing" constant="10" id="XPJ-K5-PDb"/>
+                            <constraint firstAttribute="trailing" secondItem="obx-83-Bdd" secondAttribute="trailing" id="XsL-jd-Q90"/>
+                            <constraint firstItem="0Ba-gy-RDR" firstAttribute="leading" secondItem="gjn-st-zPr" secondAttribute="leading" constant="10" id="aO5-u4-bQb"/>
+                            <constraint firstAttribute="centerY" secondItem="WoU-DK-z0p" secondAttribute="centerY" id="fAc-vy-Nzg"/>
+                            <constraint firstItem="PTN-NM-qkj" firstAttribute="centerY" secondItem="0Ba-gy-RDR" secondAttribute="centerY" constant="-0.5" id="o6b-MX-dDd"/>
+                            <constraint firstAttribute="height" constant="45" id="tIf-yh-pjn"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="tIf-yh-pjn"/>
+                                <exclude reference="o6b-MX-dDd"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="gjn-st-zPr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="C8J-hh-61R"/>
+                    <constraint firstAttribute="trailing" secondItem="gjn-st-zPr" secondAttribute="trailing" id="cPk-gE-q1S"/>
+                    <constraint firstItem="gjn-st-zPr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="t7g-l1-8YI"/>
+                    <constraint firstAttribute="bottom" secondItem="gjn-st-zPr" secondAttribute="bottom" id="y1w-ZL-tEj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="_insuranceBuyProbabilityLabel" destination="PTN-NM-qkj" id="Fs0-OL-m4a"/>
+                <outlet property="_insuranceNameLabel" destination="0Ba-gy-RDR" id="aEk-TH-y3d"/>
+                <outlet property="_insuranceSelectValueLabel" destination="sax-s5-wyJ" id="nCN-TC-jSd"/>
+                <outlet property="_rightArrowImageView" destination="WoU-DK-z0p" id="Vv2-ED-ZZo"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="img_carNurse_arrow_right" width="8" height="13"/>
+    </resources>
+</document>

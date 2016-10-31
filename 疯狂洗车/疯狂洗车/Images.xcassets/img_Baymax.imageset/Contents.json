@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "filename" : "保养、维修、美容、快修、救援、改装、换轮胎、保险咨询、-保险销售、新车购置咨询、送油、搭电、二手车、违章处理...@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "保养、维修、美容、快修、救援、改装、换轮胎、保险咨询、-保险销售、新车购置咨询、送油、搭电、二手车、违章处理...@3x.png"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

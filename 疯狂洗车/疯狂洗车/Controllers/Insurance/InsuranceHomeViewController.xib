@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InsuranceHomeViewController">
+            <connections>
+                <outlet property="_callButton" destination="ers-FZ-Osc" id="6h6-WH-x88"/>
+                <outlet property="_insuranceButton" destination="ct5-sw-rvf" id="pzf-WI-fd3"/>
+                <outlet property="_webView" destination="gUp-On-u9G" id="3GL-Ev-tDO"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUp-On-u9G">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="430"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="yFX-TW-3q3"/>
+                    </connections>
+                </webView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Arl-XQ-l8X">
+                    <rect key="frame" x="0.0" y="430" width="320" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hez-M7-bhN">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="U7Z-kh-fQN"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ers-FZ-Osc">
+                            <rect key="frame" x="10" y="5" width="145" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="-5" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="5" maxY="0.0"/>
+                            <state key="normal" title="电话咨询" image="img_insurance_phoneCall">
+                                <color key="titleColor" red="0.37647058823529411" green="0.37647058823529411" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didCallButtonTouch:" destination="-1" eventType="touchUpInside" id="Fbd-Gk-dfs"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ct5-sw-rvf">
+                            <rect key="frame" x="165" y="5" width="145" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="-5" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="5" maxY="0.0"/>
+                            <state key="normal" title="查看报价" image="img_insurance_checkInsurance">
+                                <color key="titleColor" red="0.37647058823529411" green="0.37647058823529411" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" title="购买车险" image="img_insurance_addInsurance"/>
+                            <connections>
+                                <action selector="didCheckInsuranceButtonTouch:" destination="-1" eventType="touchUpInside" id="voq-RE-flE"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-hn-Uyc">
+                            <rect key="frame" x="160" y="10" width="1" height="30"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="0Wx-yl-iKr"/>
+                                <constraint firstAttribute="width" constant="1" id="YG1-qY-1v9"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="ers-FZ-Osc" secondAttribute="bottom" constant="5" id="005-88-alM"/>
+                        <constraint firstItem="ct5-sw-rvf" firstAttribute="leading" secondItem="ers-FZ-Osc" secondAttribute="trailing" constant="10" id="CJW-kl-23Y"/>
+                        <constraint firstAttribute="height" constant="50" id="FWv-8p-TMf"/>
+                        <constraint firstItem="ers-FZ-Osc" firstAttribute="leading" secondItem="Arl-XQ-l8X" secondAttribute="leading" constant="10" id="GOu-PI-qZR"/>
+                        <constraint firstAttribute="centerY" secondItem="2Qb-hn-Uyc" secondAttribute="centerY" id="Gbn-j3-aBN"/>
+                        <constraint firstItem="ers-FZ-Osc" firstAttribute="top" secondItem="Arl-XQ-l8X" secondAttribute="top" constant="5" id="Hra-em-bWf"/>
+                        <constraint firstItem="Hez-M7-bhN" firstAttribute="top" secondItem="Arl-XQ-l8X" secondAttribute="top" id="L6W-S6-kew"/>
+                        <constraint firstItem="Hez-M7-bhN" firstAttribute="leading" secondItem="Arl-XQ-l8X" secondAttribute="leading" id="Lr3-at-nAP"/>
+                        <constraint firstItem="ct5-sw-rvf" firstAttribute="width" secondItem="ers-FZ-Osc" secondAttribute="width" id="QI7-DD-lQl"/>
+                        <constraint firstAttribute="centerX" secondItem="2Qb-hn-Uyc" secondAttribute="centerX" id="WSX-S6-BQG"/>
+                        <constraint firstAttribute="bottom" secondItem="ct5-sw-rvf" secondAttribute="bottom" constant="5" id="Xmh-LD-3X3"/>
+                        <constraint firstAttribute="trailing" secondItem="ct5-sw-rvf" secondAttribute="trailing" constant="10" id="ZUF-bO-unp"/>
+                        <constraint firstAttribute="trailing" secondItem="Hez-M7-bhN" secondAttribute="trailing" id="fkG-IV-90U"/>
+                        <constraint firstItem="ct5-sw-rvf" firstAttribute="top" secondItem="Arl-XQ-l8X" secondAttribute="top" constant="5" id="vdZ-At-wMs"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gUp-On-u9G" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6T8-xn-2kE"/>
+                <constraint firstAttribute="trailing" secondItem="gUp-On-u9G" secondAttribute="trailing" id="aUI-w8-PUE"/>
+                <constraint firstItem="Arl-XQ-l8X" firstAttribute="top" secondItem="gUp-On-u9G" secondAttribute="bottom" id="bGX-Ti-evj"/>
+                <constraint firstItem="gUp-On-u9G" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dBy-i0-kH2"/>
+                <constraint firstAttribute="bottom" secondItem="gUp-On-u9G" secondAttribute="bottom" id="f1b-2r-1JR"/>
+                <constraint firstItem="Arl-XQ-l8X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lqe-Vx-XLz"/>
+                <constraint firstAttribute="bottom" secondItem="Arl-XQ-l8X" secondAttribute="bottom" id="ruW-yN-Hy8"/>
+                <constraint firstAttribute="trailing" secondItem="Arl-XQ-l8X" secondAttribute="trailing" id="sOv-B2-Qcb"/>
+                <constraint firstItem="Arl-XQ-l8X" firstAttribute="top" secondItem="gUp-On-u9G" secondAttribute="bottom" id="ukV-vd-IfD"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="f1b-2r-1JR"/>
+                    <exclude reference="bGX-Ti-evj"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_insurance_addInsurance" width="22" height="22"/>
+        <image name="img_insurance_checkInsurance" width="22" height="22"/>
+        <image name="img_insurance_phoneCall" width="22" height="22"/>
+    </resources>
+</document>
