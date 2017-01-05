@@ -47,10 +47,18 @@
 #import "InsuranceRepaierOrderViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 
+#import "PopView.h"
+#import "define.h"
+#import "RescueAppointVC.h"
+
+#import "CheXiaoBaoViewController.h"
+#import "BaseAppointVC.h"
+
+
 //#import <AVFoundation/AVFoundation.h>
 
 
-@interface MainViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,MainAdvViewDelegate,HomeBulterMenuViewDelegate,AMapSearchDelegate>
+@interface MainViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,MainAdvViewDelegate,HomeBulterMenuViewDelegate,AMapSearchDelegate, PopViewDelegate>
 {
     UIButton                    *_leftButton;//城市选择按钮
     
@@ -230,8 +238,15 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
      andShowExtraFunctionView:NO
      andShouldShowColorCenter:NO];
     
+    [_contextScrollView addHeaderWithTarget:self action:@selector(obtainAppInfo)];
 }
 
+
+- (void)obtainAppInfo
+{
+    [self didReceviceCityAndCongifChangeNotification:nil];
+    [_contextScrollView headerEndRefreshing];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -273,7 +288,7 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     }
 }
 
-
+//首页大礼包
 - (void)updateMainAdvData:(void(^)(void))successRespone
               failRespone:(void(^)(void))failRescpone
 {
@@ -333,10 +348,10 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     [super viewDidAppear:animated];
     [_headerScrollView resetContentOffset];
    
-    if (_userInfo.member_id && !_activityModel && _userInfo.city_id)
-    {
-        [self updateActivityConfigWithCityID:_userInfo.city_id];
-    }
+//    if (_userInfo.member_id && !_activityModel && _userInfo.city_id)
+//    {
+//        [self updateActivityConfigWithCityID:_userInfo.city_id];
+//    }
     if (self.shouldGoToMine)
     {
         self.shouldGoToMine = NO;
@@ -460,10 +475,16 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     }
     else
     {
-        CarServiceDetailViewController *viewController = ALLOC_WITH_CLASSNAME(@"CarServiceDetailViewController");
-        viewController.selectedCarNurse = model;
-        viewController.service_type = [NSString stringWithFormat:@"%@",model.service_type];
-        [self.navigationController pushViewController:viewController animated:YES];
+        if(![model.car_wash_id isEqualToString:Owner_CarWah_ID]){
+            CarServiceDetailViewController *viewController = ALLOC_WITH_CLASSNAME(@"CarServiceDetailViewController");
+            viewController.selectedCarNurse = model;
+            viewController.service_type = [NSString stringWithFormat:@"%@",model.service_type];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }else{
+            BaseAppointVC *vc = [[BaseAppointVC alloc] initWithNibName:nil bundle:nil];
+            vc.service_type = model.service_type;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
@@ -493,6 +514,7 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
                                                      animationDuration:3.0];
             _headerScrollView.advCityID = _userCityModel.CITY_ID;
             NSDictionary *submitDic = @{@"city_id":_userCityModel.CITY_ID};
+            NSLog(@"%@", @"告部分的代码");
             [WebService requestJsonArrayOperationWithParam:submitDic
                                                     action:@"system/service/getAdv"
                                                 modelClass:[ADVModel class]
@@ -569,6 +591,27 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
 #pragma mark - 打电话
 #pragma mark
 
+- (IBAction) makeCheXiaoBao:(UIButton *) sender
+{
+    if (!_userInfo.member_id)
+    {
+        id viewController = [QuickLoginViewController sharedLoginByCheckCodeViewControllerWithProtocolEnable:nil];
+        
+        [self presentViewController:viewController animated:YES completion:^
+         {
+             [[[UIApplication sharedApplication] keyWindow] makeToast:@"请先登录"];
+         }];
+        
+        return;
+    }
+    
+    CheXiaoBaoViewController *vc = [[CheXiaoBaoViewController alloc] initWithNibName:@"CheXiaoBaoViewController" bundle:nil];
+    [vc setTitle:@"车小保"];
+    NSString *url = [NSString stringWithFormat:CHE_XIAO_BAP_URL, BASE_Uri_FOR_WEB, _userInfo.member_id];
+    vc.webUrl = url;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)makePhoneCall
 {
         if ([Constants canMakePhoneCall])
@@ -599,6 +642,10 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     if (alertView.tag == 611 && buttonIndex == 1)
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",_agentModel.agent_phone]]];
+    }
+    if(alertView.tag == 531 && buttonIndex == 1)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",SERVICE_PHONE]]];
     }
 }
 
@@ -641,12 +688,29 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
 
 - (IBAction)didPageButtonTouch:(UIButton *)sender
 {
-    if (_cityServiceArray == nil || _cityServiceArray.count == 0)
-    {
-        [Constants showMessage:@"获取不到城市服务信息，请确认您已打开并允许使用定位功能"];
+//    if (_cityServiceArray == nil || _cityServiceArray.count == 0)
+//    {
+//        [Constants showMessage:@"获取不到城市服务信息，请确认您已打开并允许使用定位功能"];
+//        return;
+//
+//    }
+    if (_cityServiceArray == nil || _cityServiceArray.count == 0){
+        [Constants showMessage:@"获取信息失败,清检查你的网络刷新页面！"];
         return;
-
     }
+    
+    if (!_userInfo.member_id)
+    {
+        id viewController = [QuickLoginViewController sharedLoginByCheckCodeViewControllerWithProtocolEnable:nil];
+        
+        [self presentViewController:viewController animated:YES completion:^
+         {
+             [[[UIApplication sharedApplication] keyWindow] makeToast:@"请先登录"];
+         }];
+        
+        return;
+    }
+    
     switch (sender.tag)
     {
         case 0:
@@ -675,10 +739,15 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
             NSLog(@"保养");
             if ([_appDelegate.gpsLocationManager getTheServiceStatus:1])
             {
-                CrazyCarWashMapViewController *viewController = [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-                                                                                                                bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
+//                CrazyCarWashMapViewController *viewController = [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
+//                                                                                                                bundle:nil];
+//                viewController.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
+//                [self.navigationController pushViewController:viewController animated:YES];
+                
+                BaseAppointVC *vc = [[BaseAppointVC alloc] initWithNibName:nil bundle:nil];
+                vc.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
+                [self.navigationController pushViewController:vc animated:YES];
+                
             }
             else
             {
@@ -695,10 +764,14 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
             NSLog(@"美容");
             if ([_appDelegate.gpsLocationManager getTheServiceStatus:3])
             {
-                CrazyCarWashMapViewController *viewController = [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-                                                                                                                bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
+//                CrazyCarWashMapViewController *viewController = [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
+//                                                                                                                bundle:nil];
+//                viewController.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
+//                [self.navigationController pushViewController:viewController animated:YES];
+                
+                BaseAppointVC *vc = [[BaseAppointVC alloc] initWithNibName:nil bundle:nil];
+                vc.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
+                [self.navigationController pushViewController:vc animated:YES];
             }
             else
             {
@@ -733,211 +806,35 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
         case 4:
         {
             NSLog(@"救援");
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:4])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"4";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-            else
-            {
-                NSDictionary *submitDic = @{@"longitude":[NSNumber numberWithDouble:_publicUserCoordinate.longitude],
-                                            @"latitude": [NSNumber numberWithDouble:_publicUserCoordinate.latitude],
-                                            @"target_longitude":@"",
-                                            @"target_latitude":@"",
-                                            @"round":@"100",
-                                            @"service":@"1",
-                                            @"page_index":[NSNumber numberWithInteger:1],
-                                            @"page_size":[NSNumber numberWithInteger:20],
-                                            @"city_id":[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey],
-                                            @"service_type":@4};
-                
-                [MBProgressHUD showHUDAddedTo:self.view
-                                     animated:YES];
-                self.view.userInteractionEnabled = NO;
-                [WebService requestJsonArrayOperationWithParam:submitDic
-                                                        action:@"carWash/service/list"
-                                                    modelClass:[CarNurseModel class]
-                                                normalResponse:^(NSString *status, id data, NSMutableArray *array)
-                 {
-                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                     self.view.userInteractionEnabled = YES;
-                     if (array.count > 0)
-                     {
-                         AccidentRescueViewController *viewController = [[AccidentRescueViewController alloc] initWithNibName:@"AccidentRescueViewController"
-                                                                                                                       bundle:nil];
-                         viewController.service_type = @"4";
-                         viewController.carNurse = array[0];
-                         [self.navigationController pushViewController:viewController animated:YES];
-                     }
-                     else
-                     {
-                         CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                                     bundle:nil];
-                         viewController.service_type = @"4";
-                         [self.navigationController pushViewController:viewController animated:YES];
-                         return;
-                     }
-                 }
-                                             exceptionResponse:^(NSError *error)
-                 {
-                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                     self.view.userInteractionEnabled = YES;
-                     CrazyCarWashMapViewController *viewController= [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-                                                                                                                    bundle:nil];
-                     viewController.service_type = @"4";
-                     [self.navigationController pushViewController:viewController
-                                                          animated:YES];
-                 }];
-
-            }
-
+            
+            PopView *popview = [[PopView alloc] initWithImageArray:@[@"img_home_rescue_ring", @"img_home_rescue_Add"] nameArray:@[@"电话救援", @"选择位置"]];
+            [self.view.window addSubview:popview];
+            popview.delegate = self;
+            [popview show];
         }
             break;
         case 6:
-        {
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:6])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"6";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-            else
-            {
-                NSDictionary *submitDic = @{@"longitude":[NSNumber numberWithDouble:_publicUserCoordinate.longitude],
-                                            @"latitude": [NSNumber numberWithDouble:_publicUserCoordinate.latitude],
-                                            @"target_longitude":@"",
-                                            @"target_latitude":@"",
-                                            @"round":@"100",
-                                            @"service":@"1",
-                                            @"page_index":[NSNumber numberWithInteger:1],
-                                            @"page_size":[NSNumber numberWithInteger:20],
-                                            @"city_id":[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey],
-                                            @"service_type":@6};
-                
-                [MBProgressHUD showHUDAddedTo:self.view
-                                     animated:YES];
-                self.view.userInteractionEnabled = NO;
-                [WebService requestJsonArrayOperationWithParam:submitDic
-                                                        action:@"carWash/service/getRescue"
-                                                    modelClass:[CarNurseModel class]
-                                                normalResponse:^(NSString *status, id data, NSMutableArray *array)
-                 {
-                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                     self.view.userInteractionEnabled = YES;
-                     if (array.count == 1 && [array[0] isKindOfClass:[CarNurseModel class]])
-                     {
-                         CarServiceDetailViewController  *viewController = ALLOC_WITH_CLASSNAME(@"CarServiceDetailViewController");
-                         viewController.selectedCarNurse = array[0];
-                         viewController.service_type = @"6";
-                         [self.navigationController pushViewController:viewController animated:YES];
-                     }
-                     else
-                     {
-                         CrazyCarWashMapViewController *viewController= [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-                                                                                                                        bundle:nil];
-                         viewController.service_type = @"6";
-                         [self.navigationController pushViewController:viewController
-                                                              animated:YES];
-                     }
-                 }
-                                             exceptionResponse:^(NSError *error)
-                 {
-                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                     self.view.userInteractionEnabled = YES;
-                     CrazyCarWashMapViewController *viewController= [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-                                                                                                                    bundle:nil];
-                     viewController.service_type = @"6";
-                     [self.navigationController pushViewController:viewController
-                                                          animated:YES];
-                 }];
-
-            }
-        }
-            break;
-        case 21:
-        {
-            NSLog(@"VIP");
-            if ([_appDelegate.gpsLocationManager getTheServiceStatus:21])
-            {
-                [UIApplication sharedApplication].keyWindow.userInteractionEnabled = NO;
-                [HomeBulterMenuView homeBulterMenuViewShowWithTarget:self];
-            }
-            else
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%ld",(long)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-
-        }
-            break;
-        case 7:
-        {
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:7])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"7";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-            else
-            {
-                InsuranceRepaierOrderViewController *viewController = [[InsuranceRepaierOrderViewController alloc] initWithNibName:@"InsuranceRepaierOrderViewController"
-                                                                                                                            bundle:nil];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-            
-        }
-            break;
-        case 8:
-        {
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:8])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"8";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-            else
-            {
-                
-                InsuranceAVOrderViewController *viewController = [[InsuranceAVOrderViewController alloc] initWithNibName:@"InsuranceAVOrderViewController" bundle:nil];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
+        {//车小宝
 
         }
             break;
         case 11:
         {
-            [self checkInsuranceHomeConfig];
+            CheXiaoBaoViewController *vc = [[CheXiaoBaoViewController alloc] initWithNibName:@"CheXiaoBaoViewController" bundle:nil];
+            NSString *url = [NSString stringWithFormat:ER_SHOU_CHE_GU_JIA, BASE_Uri_FOR_WEB, _userInfo.member_id];
+            vc.webUrl = url;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            [vc setTitle:@"二手车估价"];
         }
             break;
         case 20:
         {
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:20])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"20";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-            else
-            {
-                FourSMapViewController *viewController = [[FourSMapViewController alloc] initWithNibName:@"FourSMapViewController"
-                                                                                                  bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%ld",(long)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-
+            CheXiaoBaoViewController *vc = [[CheXiaoBaoViewController alloc] initWithNibName:@"CheXiaoBaoViewController" bundle:nil];
+            NSString *url = [NSString stringWithFormat:WEI_ZHANG_CHA_XUN, BASE_Uri_FOR_WEB, _userInfo.member_id];
+            vc.webUrl = url;
+            [self.navigationController pushViewController:vc animated:YES];
+            [vc setTitle:@"违章查询"];
         }
             break;
         default:
@@ -945,9 +842,37 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     }
 }
 
+
+#pragma PopViewDelegate
+- (void) HandleItemSelect:(PopView *) view selectImageName:(NSString *) imageName
+{
+    if([imageName isEqualToString:@"img_home_rescue_ring"]){//电话
+        if ([Constants canMakePhoneCall])
+        {
+            [Constants showMessage:@"拨打客服电话呼叫救援？"
+                          delegate:self
+                               tag:531
+                      buttonTitles:@"取消",@"确定", nil];
+        }
+        else
+        {
+            [Constants showMessage:@"您的设备无法拨打"];
+        }
+    }
+    else{
+        RescueAppointVC *mapVc = [[RescueAppointVC alloc] initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:mapVc animated:YES];
+    }
+}
+
 - (void)checkInsuranceHomeConfig
 {
     self.rdv_tabBarController.selectedIndex = 1;
+}
+
+- (void)checkMineHomeConfig
+{
+    self.rdv_tabBarController.selectedIndex = 2;
 }
 
 - (void)showTargetInsuranceController
@@ -990,17 +915,17 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
         _agentMessageButton.hidden = YES;
         _agentMessageLine.hidden = YES;
     }
-    if (extraShow)
-    {
-        [_jiuyuanButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_jiuyuan_free"] forState:UIControlStateNormal];
-        [_nianjianButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_nianjian_free"] forState:UIControlStateNormal];
-
-    }
-    else
-    {
-        [_jiuyuanButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_jiuyuan"] forState:UIControlStateNormal];
-        [_nianjianButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_nianjian"] forState:UIControlStateNormal];
-    }
+//    if (extraShow)
+//    {
+//        [_jiuyuanButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_jiuyuan_free"] forState:UIControlStateNormal];
+//        [_nianjianButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_nianjian_free"] forState:UIControlStateNormal];
+//
+//    }
+//    else
+//    {
+//        [_jiuyuanButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_jiuyuan"] forState:UIControlStateNormal];
+//        [_nianjianButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_nianjian"] forState:UIControlStateNormal];
+//    }
 }
 
 
@@ -1193,7 +1118,7 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     
     NSDictionary *submitDic = @{@"city_id":cityID,
                                 @"member_id":_userInfo.member_id};
-    
+    NSLog(@"%@", @"获取活动信息");
     [WebService requestJsonOperationWithParam:submitDic
                                        action:@"system/service/activity/config"
                                normalResponse:^(NSString *status, id data)
@@ -1337,7 +1262,8 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
                                 @"page_index":[NSNumber numberWithInteger:_pageIndex],
                                 @"page_size":[NSNumber numberWithInt:5],
                                 @"city_id"   :[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey]};
-    
+//推荐服务
+    NSLog(@"%@", @"推荐服务");
     [WebService requestJsonArrayOperationWithParam:submitDic
                                             action:@"carWash/service/recommend"
                                         modelClass:[CarNurseModel class]
@@ -1737,6 +1663,9 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
 
 - (void)didReceviceCityAndCongifChangeNotification:(NSNotification*)notification
 {
+    [MBProgressHUD showMessag:@"刷新首页数据" toView:self.view];
+    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     _pageIndex = 1;
     [_leftButton setTitle:_userCityModel.CITY_NAME forState:UIControlStateNormal];
     [self startRefreshRecommend];

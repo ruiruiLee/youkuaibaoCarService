@@ -199,6 +199,101 @@ NSString *const NOTELocationChange = @"LocationChangeNotifaction";
 }
 
 //实现逆地理编码的回调函数
+- (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
+{
+//    int j = 0;
+    NSString *placemakCityName = [[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityNameKey];
+    NSDictionary *resultDic = nil;
+    if ([placemakCityName rangeOfString:@"北京市"].location != NSNotFound)
+    {
+        resultDic = [DBManager queryCityByCityName:@"北京市"];
+    }
+    else if ([placemakCityName rangeOfString:@"上海市"].location != NSNotFound)
+    {
+        resultDic = [DBManager queryCityByCityName:@"上海市"];
+    }
+    else if ([placemakCityName rangeOfString:@"天津市"].location != NSNotFound)
+    {
+        resultDic = [DBManager queryCityByCityName:@"天津市"];
+    }
+    else if ([placemakCityName rangeOfString:@"重庆市"].location != NSNotFound)
+    {
+        resultDic = [DBManager queryCityByCityName:@"重庆市"];
+    }
+    else if ([placemakCityName isEqualToString:@""] || placemakCityName == nil)
+    {
+        [self setCurrentToChengduWithCurrentLocation:nil];
+        return;
+    }
+    else
+    {
+        resultDic  = [DBManager queryCityByCityName:placemakCityName];
+    }
+    
+    if (resultDic)
+    {
+        CityModel *userCity = [[CityModel alloc] initWithDictionary:resultDic];
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey])
+        {
+            AMapReGeocodeSearchRequest *regeo = (AMapReGeocodeSearchRequest*) request;
+            [[NSUserDefaults standardUserDefaults] setObject:userCity.CITY_ID forKey:kLocationCityIDKey];
+            [[NSUserDefaults standardUserDefaults] setObject:userCity.CITY_NAME forKey:kLocationCityNameKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            _publicUserCoordinate = CLLocationCoordinate2DMake(regeo.location.latitude, regeo.location.longitude);
+            _currentSettingCityCoordinate = CLLocationCoordinate2DMake(userCity.LATITUDE.doubleValue, userCity.LONGITUDE.doubleValue);
+        }
+        if (_userCityModel == nil)
+        {
+            _userCityModel = userCity;
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[_userCityModel convertToDictionary]
+                                                      forKey:kLastUserCity];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            CityModel *pushUserCity = [[CityModel alloc] initWithDictionary:resultDic];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLastUserCitySetted
+                                                                object:pushUserCity];
+            
+        }
+        else if (![_userCityModel.CITY_ID isEqualToString:userCity.CITY_ID])
+        {
+            if (_shouldAskWhenChangeCity)
+            {
+                _currentCityModel = userCity;
+                _shouldAskWhenChangeCity = NO;
+                
+                NSString *alertString = [NSString stringWithFormat:@"您当前位置为%@，是否切换城市",userCity.CITY_NAME];
+                [Constants showMessage:alertString
+                              delegate:self
+                                   tag:531
+                          buttonTitles:@"取消",@"切换", nil];
+            }
+        }
+        
+        
+        if (_userInfo.member_id && [_userInfo.city_id isEqualToString:@""])
+        {
+            [self setUpUserCity:userCity];
+        }
+        if (_userCityModel && _appconfig == nil)
+        {
+            [self setUpOrderShareParameterWithNormalResponse:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTELocationLaunchSuccess
+                                                                    object:nil];
+            } exceptionResponse:^{
+                
+            }];
+        }
+        
+    }
+    else
+    {
+        [self setCurrentToChengduWithCurrentLocation:nil];
+        
+    }
+
+    
+}
 - (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request
                      response:(AMapReGeocodeSearchResponse *)response
 {
@@ -637,6 +732,11 @@ NSString *const NOTELocationChange = @"LocationChangeNotifaction";
     
     
     return result;
+}
+
+- (CLLocation *) getUserCurrentLocation
+{
+    return _userCurrentLocation;
 }
 
 @end

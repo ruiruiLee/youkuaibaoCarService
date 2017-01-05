@@ -21,6 +21,11 @@
 #import "MyOrdersController.h"
 #import "CarNannyMessageViewController.h"
 #import "MineFundationCell.h"
+#import "MyAppointVC.h"
+#import "CheXianOrderListVC.h"
+#import "CheXiaoBaoViewController.h"
+
+#import "define.h"
 
 @interface MineViewController ()<UserInfoCellDelegate,UIAlertViewDelegate>
 {
@@ -29,8 +34,6 @@
     NSArray         *_menuListTitleArray;
     
     UILabel         *_versionLabel;
-    
-    BOOL             _showTickets;
     
     
     int              _totalTickets;
@@ -102,7 +105,7 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
     _mainFrameClassesArray = [@[@"ShareFrendController",
                                 @"CodeConvertViewController"] mutableCopy];
     
-    _menuListTitleArray = @[@"推荐有礼",@"礼品兑换",@"联系客服"];
+    _menuListTitleArray = @[@"推荐有礼",@"礼包领取",@"联系客服"];
 
 
     
@@ -155,13 +158,7 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
         [self updateUserTickets];
 
     }
-    else
-    {
-        if (_showTickets)
-        {
-            _showTickets = NO;
-        }
-    }
+
     [_mineTableView reloadData];
 }
 
@@ -190,14 +187,7 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
     }
     else if (section == 1)
     {
-        if (_showTickets)
-        {
-            return _userTicketArray.count + 1;
-        }
-        else
-        {
-            return 1;
-        }
+        return 3;
     }
     else if (section == 2)
     {
@@ -275,15 +265,15 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setDisplayUserInfo:_userInfo
-                withUnreadNumber:_unReadMessageCount];
+                withUnreadNumber:0];
         cell.delegate = self;
         
         return cell;
     }
     else if (indexPath.section == 1)//section 1 显示用户优惠券信息
     {
-        if (indexPath.row == 0)//row 0 显示用户各类型优惠券信息
-        {
+//        if (indexPath.row == 0)//row 0 显示用户各类型优惠券信息
+//        {
             MineTicketCell *cell = [tableView dequeueReusableCellWithIdentifier:mineTicketCellIndentifier];
             
             if (cell == nil)
@@ -302,7 +292,6 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
                 cell.redIconView.hidden = YES;
                 cell.arrowImageView.hidden = NO;
                 cell.ticketNumberLabel.hidden = NO;
-                [cell.ticketNumberLabel setText:[NSString stringWithFormat:@"%d 张",_totalTickets]];
             }
             else
             {
@@ -310,31 +299,47 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
                 cell.arrowImageView.hidden = YES;
                 cell.ticketNumberLabel.hidden = YES;
             }
-            if (_showTickets)
-            {
-                cell.arrowImageView.highlighted = YES;
-            }
-            else
-            {
-                cell.arrowImageView.highlighted = NO;
-            }
-            return cell;
+        
+        if(indexPath.row == 0){
+            cell.lbTitle.text = @"优惠券";
+            [cell.ticketNumberLabel setText:[NSString stringWithFormat:@"%d 张",_totalTickets]];
+            cell.logo.image = [UIImage imageNamed:@"img_mine_list_ticket"];
         }
-        else//row 1 显示用户优惠券总数信息
-        {
-            MineTicketNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:mineTicketNumberCellIndentifier forIndexPath:indexPath];
-            
-            if (cell == nil)
-            {
-                cell = [[MineTicketNumberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mineTicketNumberCellIndentifier];
-            }
-            
-            UserTicketModel *model = _userTicketArray[indexPath.row - 1];
-            
-            [cell setDisplayInfoWithTicketType:model.service_type.intValue
-                               andTicketNumber:model.code_count.intValue];
-            return cell;
+        else if (indexPath.row == 1){
+            cell.lbTitle.text = @"我的爱车";
+            cell.logo.image = [UIImage imageNamed:@"img_mine_loveCar"];
+            [cell.ticketNumberLabel setText:@""];
         }
+        else{
+            cell.lbTitle.text = @"我的消息";
+            [cell.ticketNumberLabel setText:[NSString stringWithFormat:@"%d",_unReadMessageCount]];
+            cell.logo.image = [UIImage imageNamed:@"img_mine_messageCenter"];
+        }
+//            if (_showTickets)
+//            {
+//                cell.arrowImageView.highlighted = YES;
+//            }
+//            else
+//            {
+//                cell.arrowImageView.highlighted = NO;
+//            }
+            return cell;
+//        }
+//        else//row 1 显示用户优惠券总数信息
+//        {
+//            MineTicketNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:mineTicketNumberCellIndentifier forIndexPath:indexPath];
+//            
+//            if (cell == nil)
+//            {
+//                cell = [[MineTicketNumberCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mineTicketNumberCellIndentifier];
+//            }
+//            
+//            UserTicketModel *model = _userTicketArray[indexPath.row - 1];
+//            
+//            [cell setDisplayInfoWithTicketType:model.service_type.intValue
+//                               andTicketNumber:model.code_count.intValue];
+//            return cell;
+//        }
     }
     else if (indexPath.section == 2)//其他数据显示
     {
@@ -443,48 +448,37 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
         }
         if (indexPath.row == 0)//展开或关闭优惠券
         {
-            if (_showTickets)
-            {
-                _showTickets = NO;
-                NSMutableArray *array = [NSMutableArray array];
-                for (int x = 0; x<_userTicketArray.count; x++)
-                {
-                    NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:x+1 inSection:1];
-                    [array addObject:addIndexPath];
-                }
-                [_mineTableView reloadData];
-            }
-            else
-            {
-                if (_userTicketArray.count > 0)
-                {
-                    _showTickets = YES;
-                    NSMutableArray *array = [NSMutableArray array];
-                    for (int x = 0; x<_userTicketArray.count; x++)
-                    {
-                        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:x+1 inSection:1];
-                        [array addObject:addIndexPath];
-                    }
-                    [_mineTableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                    [_mineTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]]
-                                          withRowAnimation:UITableViewRowAnimationNone];
-                }
-                else
-                {
-                    [Constants showMessage:@"您还没有优惠券"];
-                }
-
-            }
-        }
-        else//跳转该类型优惠券列表
-        {
-            TicketModel *model = _userTicketArray[indexPath.row - 1];
             MyTicketViewController *viewController = [[MyTicketViewController alloc] initWithNibName:@"MyTicketViewController"
                                                                                               bundle:nil];
             
-            viewController.serviceType = model.service_type;
+            viewController.serviceType = @"";
             
             [self.navigationController pushViewController:viewController animated:YES];
+        }
+        else if(indexPath.row == 1)//跳转我的爱车列表
+        {
+            if (!_userInfo.member_id)
+            {
+                [self needToLogin];
+                
+                return;
+            }
+            
+            id controller = ALLOC_WITH_CLASSNAME(@"MyCarsController");
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else{//跳消息中心
+            if (!_userInfo.member_id)
+            {
+                [self needToLogin];
+                
+                return;
+            }
+            MessageCenterViewController *viewController = [[MessageCenterViewController alloc] initWithNibName:@"MessageCenterViewController"
+                                                                                                        bundle:nil];
+            
+            [self.navigationController pushViewController:viewController
+                                                 animated:YES];
         }
 
     }
@@ -516,8 +510,14 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
                 [self needToLogin];
                 return;
             }
-            id controller = ALLOC_WITH_CLASSNAME(_mainFrameClassesArray[indexPath.row]);
-            [self.navigationController pushViewController:controller animated:YES];
+//            id controller = ALLOC_WITH_CLASSNAME(_mainFrameClassesArray[indexPath.row]);
+//            [self.navigationController pushViewController:controller animated:YES];
+            CheXiaoBaoViewController *vc = [[CheXiaoBaoViewController alloc] initWithNibName:@"CheXiaoBaoViewController" bundle:nil];
+            NSString *url = [NSString stringWithFormat:LI_BAO_LING_QU, BASE_Uri_FOR_WEB, _userInfo.member_id, _userInfo.login_name, _userInfo.member_phone];
+            vc.webUrl = url;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            [vc setTitle:@"礼包领取"];
         }
         else
         {
@@ -545,7 +545,33 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
 
 #pragma mark - UserInfoCellDelegate Method
 
-- (void)didOrderButtonTouched//跳转至“我的订单”
+- (void)didOrderButtonTouched//跳转至“我的预约”
+{
+    if (!_userInfo.member_id)
+    {
+        [self needToLogin];
+        
+        return;
+    }
+    
+    MyAppointVC *vc = [[MyAppointVC alloc] initWithNibName:@"MyAppointVC" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)didMessageButtonTouched//跳转至“车险保单”
+{
+    if (!_userInfo.member_id)
+    {
+        [self needToLogin];
+        
+        return;
+    }
+    
+    CheXianOrderListVC *vc = [[CheXianOrderListVC alloc] initWithNibName:@"CheXianOrderListVC" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)didUserCarButtonTouched//跳转至“我的订单”
 {
     if (!_userInfo.member_id)
     {
@@ -556,35 +582,6 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
     MyOrdersController *viewController = [[MyOrdersController alloc] initWithNibName:@"MyOrdersController"
                                                                               bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
-    
-}
-
-- (void)didMessageButtonTouched//跳转至“消息中心”
-{
-    if (!_userInfo.member_id)
-    {
-        [self needToLogin];
-        
-        return;
-    }
-    MessageCenterViewController *viewController = [[MessageCenterViewController alloc] initWithNibName:@"MessageCenterViewController"
-                                                                                                bundle:nil];
-    
-    [self.navigationController pushViewController:viewController
-                                         animated:YES];
-}
-
-- (void)didUserCarButtonTouched//跳转至“我的车辆”
-{
-    if (!_userInfo.member_id)
-    {
-        [self needToLogin];
-        
-        return;
-    }
-    
-    id controller = ALLOC_WITH_CLASSNAME(@"MyCarsController");
-    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - 更新并显示用户优惠券数量 Method

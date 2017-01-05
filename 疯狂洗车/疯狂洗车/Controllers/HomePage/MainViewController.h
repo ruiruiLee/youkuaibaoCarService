@@ -10,6 +10,8 @@
 #import <MapKit/MapKit.h>
 #import <MAMapKit/MAMapKit.h>
 
+#import "UIScrollView+MJRefresh.h"
+
 //首页
 @interface MainViewController : BaseViewController
 {
@@ -21,11 +23,7 @@
     
     IBOutlet UIView *_centerView;
     
-    IBOutlet UIView *_carServiceView;
-    
-    IBOutlet UIButton *_jiuyuanButton;
-    
-    IBOutlet UIButton *_nianjianButton;
+    IBOutlet UIButton *_carService;
     
     IBOutlet UIView *_agentView;
     
@@ -44,5 +42,6 @@
 
 @property (assign, nonatomic) BOOL shouldGoToMine;
 
+- (void)checkMineHomeConfig;
 
 @end

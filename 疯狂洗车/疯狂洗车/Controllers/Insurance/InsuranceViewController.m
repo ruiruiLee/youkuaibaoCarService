@@ -68,6 +68,8 @@
                                                                                26)];
     [_insuranceCompanyImageView setImage:[UIImage imageNamed:@"img_insurance_supportCompany"]];
     
+    _insuranceCompanyImageView.hidden = YES;
+    
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, _insuranceImageView.frame.size.height, SCREEN_WIDTH, 1)];
     lineView.backgroundColor = [UIColor colorWithRed:204/255.0
                                                green:204/255.0

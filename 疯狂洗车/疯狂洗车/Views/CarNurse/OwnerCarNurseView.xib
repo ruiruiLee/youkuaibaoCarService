@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="OwnerCarNurseView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FeD-xv-zLh">
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypf-zp-4sK">
+                            <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="BB4-zO-s5z"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVU-PO-NP7">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="Dog-dk-txC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="电话预约">
+                                <color key="titleColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="btnAppointByPhone:" destination="iN0-l3-epB" eventType="touchUpInside" id="eXp-Yw-Ui0"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Or5-PC-ylw">
+                            <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="在线预约">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnAppointOnline:" destination="iN0-l3-epB" eventType="touchUpInside" id="pV7-80-uCc"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="ypf-zp-4sK" firstAttribute="leading" secondItem="FeD-xv-zLh" secondAttribute="leading" id="6rQ-DB-ACs"/>
+                        <constraint firstItem="Or5-PC-ylw" firstAttribute="centerY" secondItem="FeD-xv-zLh" secondAttribute="centerY" id="Bh5-5c-mDA"/>
+                        <constraint firstAttribute="trailing" secondItem="ypf-zp-4sK" secondAttribute="trailing" id="IO1-CB-bVF"/>
+                        <constraint firstItem="Or5-PC-ylw" firstAttribute="width" secondItem="IVU-PO-NP7" secondAttribute="width" id="LpU-eL-S3W"/>
+                        <constraint firstAttribute="trailing" secondItem="Or5-PC-ylw" secondAttribute="trailing" constant="20" id="Msz-mf-Eaz"/>
+                        <constraint firstAttribute="height" constant="60" id="S7M-Qz-eXC"/>
+                        <constraint firstItem="ypf-zp-4sK" firstAttribute="top" secondItem="FeD-xv-zLh" secondAttribute="top" id="Syo-9f-5hx"/>
+                        <constraint firstItem="Or5-PC-ylw" firstAttribute="height" secondItem="IVU-PO-NP7" secondAttribute="height" id="eTF-Kp-the"/>
+                        <constraint firstItem="Or5-PC-ylw" firstAttribute="leading" secondItem="IVU-PO-NP7" secondAttribute="trailing" constant="20" id="jl7-BI-qCM"/>
+                        <constraint firstItem="IVU-PO-NP7" firstAttribute="centerY" secondItem="FeD-xv-zLh" secondAttribute="centerY" id="pMw-aS-yZA"/>
+                        <constraint firstItem="IVU-PO-NP7" firstAttribute="leading" secondItem="FeD-xv-zLh" secondAttribute="leading" constant="20" id="rNf-b4-leA"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="DiE-Zg-wKL">
+                    <frame key="frameInset" width="359" height="599"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="j6m-Z5-KS8"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="XZ3-K2-NN6"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="DiE-Zg-wKL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4CV-2z-kEu"/>
+                <constraint firstAttribute="trailing" secondItem="FeD-xv-zLh" secondAttribute="trailing" id="5lk-L0-DkU"/>
+                <constraint firstItem="FeD-xv-zLh" firstAttribute="top" secondItem="DiE-Zg-wKL" secondAttribute="bottom" id="8cd-JV-Yyu"/>
+                <constraint firstItem="DiE-Zg-wKL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DCT-TV-FVj"/>
+                <constraint firstAttribute="trailing" secondItem="DiE-Zg-wKL" secondAttribute="trailing" id="Kd4-8g-dCB"/>
+                <constraint firstAttribute="bottom" secondItem="FeD-xv-zLh" secondAttribute="bottom" id="axK-TN-UkT"/>
+                <constraint firstItem="FeD-xv-zLh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jos-H4-Xk2"/>
+            </constraints>
+            <connections>
+                <outlet property="_appointOnline" destination="Or5-PC-ylw" id="7TO-8U-qK6"/>
+                <outlet property="_appointPhone" destination="IVU-PO-NP7" id="RMF-YZ-9KQ"/>
+                <outlet property="_contextTableView" destination="DiE-Zg-wKL" id="JI9-25-dSd"/>
+                <outlet property="_submitView" destination="FeD-xv-zLh" id="T1z-h0-TLe"/>
+            </connections>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+    </objects>
+</document>

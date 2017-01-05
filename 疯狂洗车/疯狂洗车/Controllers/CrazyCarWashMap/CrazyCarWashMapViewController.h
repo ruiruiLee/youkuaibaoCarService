@@ -67,6 +67,8 @@
     
     CLLocationCoordinate2D       _centerCoordinate;
     
+    CLLocationCoordinate2D       _youkuaibaoCoordinate;
+    
     NSInteger                    _selectIndex;
 }
 

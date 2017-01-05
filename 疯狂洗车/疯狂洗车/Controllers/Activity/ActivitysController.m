@@ -16,14 +16,14 @@
 #import "CarServiceDetailViewController.h"
 #import "CallMethodModel.h"
 #import "PayHelper.h"
-#import "UnionPayResopne.h"
-#import "UPPayPlugin.h"
-#import "UPPayPluginDelegate.h"
+//#import "UnionPayResopne.h"
+//#import "UPPayPlugin.h"
+//#import "UPPayPluginDelegate.h"
 #import "OrderSuccessViewController.h"
 #import "MyOrdersController.h"
 
 
-@interface ActivitysController ()<NJKWebViewProgressDelegate,UPPayPluginDelegate>
+@interface ActivitysController ()<NJKWebViewProgressDelegate>//,UPPayPluginDelegate>
 {
     NJKWebViewProgressView    *_progressView;
     
@@ -328,10 +328,10 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
         {
             UnionPayResopne *payRespone = [[UnionPayResopne alloc] initWithDictionary:model.params];
             [PayHelper setUnionPayOutTradeNo:payRespone.out_trade_no];
-            [UPPayPlugin startPay:payRespone.trade_no
-                             mode:payRespone.mode
-                   viewController:self
-                         delegate:self];
+//            [UPPayPlugin startPay:payRespone.trade_no
+//                             mode:payRespone.mode
+//                   viewController:self
+//                         delegate:self];
         }
 
     }

@@ -10,10 +10,11 @@
 #import <CoreData/CoreData.h>
 #import "WXApi.h"
 #import "GPSLocationManager.h"
+#import "BaiduMapAPI_Map/BMKMapView.h"//只引入所需的单个头文件
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, WXApiDelegate>
 {
-    
+    BMKMapManager* _mapManager;
 }
 
 @property (strong, nonatomic) UIWindow *window;

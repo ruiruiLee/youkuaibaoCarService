@@ -8,14 +8,10 @@
 
 #import "WebServiceHelper.h"
 #import "AFNetworking.h"
+#import "define.h"
 
-
-
-//#define MAIN_SERVECE_BASE_STR @"http://118.123.249.69:8080/" //正服
 
 //#define MAIN_SERVECE_BASE_STR @"http://118.123.249.69:8081/" //正服2
-
-#define MAIN_SERVECE_BASE_STR @"http://118.123.249.87:8080/"  //测服
 
 //#define MAIN_SERVECE_BASE_STR @"http://192.168.1.9/WashCar/" //骚服
 
@@ -24,7 +20,6 @@
 //#define MAIN_SERVECE_BASE_STR @"http://foxfxb.gicp.net/WashCar/" //外网骚服
 
 #define SERVICE_WEATHER_STR @"http://v.juhe.cn/weather/"
-
 
 @implementation WebServiceHelper
 
@@ -130,6 +125,7 @@
         _availableUrlString = MAIN_SERVECE_BASE_STR;
     }
     
+    
     NSString *requestStr = [NSString stringWithFormat:@"%@%@?", _availableUrlString, action];
     
     NSMutableDictionary *infoWithLoginToken = [NSMutableDictionary dictionaryWithDictionary:info];
@@ -161,6 +157,91 @@
                                               NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ndata
                                                                                                        options:NSJSONReadingMutableContainers
                                                                                                          error:&jsonError];
+                                              
+                                              NSLog(@"%@", jsonDict);
+                                              
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if ([jsonDict valueForKey:@"state"])
+                                                  {
+                                                      if ([[jsonDict valueForKey:@"state"] intValue] == 1)
+                                                      {
+                                                          normalResponse([jsonDict valueForKey:@"state"], [jsonDict valueForKey:@"data"]);
+                                                          return ;
+                                                      }
+                                                      else if ([[jsonDict valueForKey:@"state"] intValue] == -1)
+                                                      {
+                                                          [Constants showMessage:@"账号异常，请重新登录"];
+                                                          _userInfo = nil;
+                                                          _agentModel = nil;
+                                                          [[NSUserDefaults standardUserDefaults] removeObjectForKey:kAutoLogin];
+                                                          [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserInfoKey];
+                                                          [[NSUserDefaults standardUserDefaults] removeObjectForKey:kLoginToken];
+                                                          _appconfig = nil;
+                                                          [[NSUserDefaults standardUserDefaults] synchronize];
+                                                          [[NSNotificationCenter defaultCenter]postNotificationName:kLogoutSuccessNotifaction
+                                                                                                             object:nil];
+                                                          
+                                                          NSError *logoutError = [[NSError alloc] initWithDomain:@"账号异常，请重新登录" code:0 userInfo:jsonDict];
+                                                          exceptionResponse(logoutError);
+                                                          return;
+                                                      }
+                                                      else
+                                                      {
+                                                          NSError *exceptionError  = [[NSError alloc] initWithDomain:[jsonDict valueForKey:@"msg"] code:0 userInfo:jsonDict];
+                                                          exceptionResponse(exceptionError);
+                                                          return ;
+                                                      }
+                                                  }
+                                              });
+                                          }
+                                          else
+                                          {
+                                              dispatch_async(dispatch_get_main_queue(), ^{NSLog(@"%@----", requestStr);
+                                                  NSError *error = [[NSError alloc] initWithDomain:@"服务器无法连接，请稍后再试"
+                                                                                              code:0
+                                                                                          userInfo:nil];
+                                                  exceptionResponse(error);
+                                                  return;
+                                              });
+                                              
+                                          }
+                                      }];
+    // 使用resume方法启动任务
+    [dataTask resume];
+ }
+
+- (void)requestJsonWXOperationWithInfo:(NSDictionary *)info
+                         serviceType:(NSString *)serviceType
+                              action:(NSString *)action
+                      normalResponse:(void(^)(NSString *status, id data))normalResponse
+                   exceptionResponse:(void(^)(NSError *error))exceptionResponse
+{
+    
+    NSString *requestStr = [NSString stringWithFormat:@"%@%@?", Service_WX_STR, action];
+    
+    
+    NSMutableURLRequest *request = nil;
+    request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
+                                                            URLString:requestStr
+                                                           parameters:info
+                                                                error:nil];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:
+                                      ^(NSData *data, NSURLResponse *response, NSError *error)
+                                      {
+                                          if (error == nil)
+                                          {
+                                              
+                                              NSError *jsonError = nil;
+                                              NSString *receiveStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                              NSData * ndata = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
+                                              NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ndata
+                                                                                                       options:NSJSONReadingMutableContainers
+                                                                                                         error:&jsonError];
+                                              
+                                              NSLog(@"%@---%@-----%@", requestStr, info, jsonDict);
+                                              
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   if ([jsonDict valueForKey:@"state"])
                                                   {
@@ -209,7 +290,8 @@
                                       }];
     // 使用resume方法启动任务
     [dataTask resume];
- }
+}
+
 
 - (void)requestJsonOperationWithModel:(NSDictionary *)param
                                action:(NSString *)action
@@ -288,12 +370,61 @@
      }];
 }
 
+- (void)requestJsonArrayWXOperationWithParam:(NSDictionary *)param
+                                    action:(NSString *)action
+                                modelClass:(Class)modelClass
+                            normalResponse:(void(^)(NSString *status, id data, NSMutableArray *array))normalResponse
+                         exceptionResponse:(void(^)(NSError *error))exceptionResponse
+{
+    [self requestJsonWXOperationWithInfo:param
+                           serviceType:@""
+                                action:action
+                        normalResponse:^(NSString *status, id data)
+     {
+         if ([data isKindOfClass:[NSArray class]])
+         {
+             NSMutableArray *returnArr = [NSMutableArray array];
+             for (id dic in data)
+             {
+                 [returnArr addObject:[[modelClass alloc] initWithDictionary:dic]];
+             }
+             normalResponse(status, data, returnArr);
+         }
+         else
+         {
+             normalResponse(status, data, [@[] mutableCopy]);
+         }
+     }
+                     exceptionResponse:^(NSError *error)
+     {
+         exceptionResponse(error);
+     }];
+}
+
 - (void)requestJsonOperationWithParam:(NSDictionary *)param
                                action:(NSString *)action
                        normalResponse:(void(^)(NSString *status, id data))normalResponse
                     exceptionResponse:(void(^)(NSError *error))exceptionResponse
 {
     [self requestJsonOperationWithInfo:param
+                           serviceType:@""
+                                action:action
+                        normalResponse:^(NSString *status, id data)
+     {
+         normalResponse(status, data);
+     }
+                     exceptionResponse:^(NSError *error)
+     {
+         exceptionResponse(error);
+     }];
+}
+
+- (void)requestJsonWXOperationWithParam:(NSDictionary *)param
+                               action:(NSString *)action
+                       normalResponse:(void(^)(NSString *status, id data))normalResponse
+                    exceptionResponse:(void(^)(NSError *error))exceptionResponse
+{
+    [self requestJsonWXOperationWithInfo:param
                            serviceType:@""
                                 action:action
                         normalResponse:^(NSString *status, id data)
@@ -317,6 +448,7 @@
     {
         _availableUrlString = MAIN_SERVECE_BASE_STR;
     }
+    
     NSString *requestStr = [NSString stringWithFormat:@"%@%@?", _availableUrlString, action];
     
     
@@ -397,6 +529,7 @@
     {
         _availableUrlString = MAIN_SERVECE_BASE_STR;
     }
+    
     NSString *requestStr = [NSString stringWithFormat:@"%@%@?", _availableUrlString, action];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -495,6 +628,7 @@
     {
         _availableUrlString = MAIN_SERVECE_BASE_STR;
     }
+    
     NSString *requestStr = [NSString stringWithFormat:@"%@%@?", _availableUrlString, action];
     
     

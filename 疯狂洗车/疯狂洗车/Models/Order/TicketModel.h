@@ -42,8 +42,16 @@
 
 @property (strong, nonatomic) NSString *code_status;
 
+@property (nonatomic, strong) NSString *total_counts;
+
+@property (nonatomic, strong) NSString *pack_name;
 
 
+@property (nonatomic, strong) NSString *pack_remark;
+
+@property (nonatomic, strong) NSString *pack_title;
+
+@property (nonatomic, strong) NSString *service_name;
 
 
 @end

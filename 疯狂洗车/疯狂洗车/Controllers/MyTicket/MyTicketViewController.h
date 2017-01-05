@@ -28,7 +28,7 @@
     
     IBOutlet UIImageView *_noTickeyImageView;
     
-    IBOutlet UIView             *_topView;
+//    IBOutlet UIView             *_topView;
     
     IBOutlet UISegmentedControl *_segmentControl;
 }

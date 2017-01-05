@@ -150,20 +150,23 @@
     UINavigationController *homeNavi = [[UINavigationController alloc] initWithRootViewController:homePage];
     
     
-//    InsuranceViewController *insuranceController = [[InsuranceViewController alloc] initWithNibName:@"InsuranceViewController" bundle:nil];
-    InsuranceViewController *insuranceController = [[InsuranceViewController alloc] init];
-
-    
-    UINavigationController *insuranceNavi = [[UINavigationController alloc] initWithRootViewController:insuranceController];
+////    InsuranceViewController *insuranceController = [[InsuranceViewController alloc] initWithNibName:@"InsuranceViewController" bundle:nil];
+//    InsuranceViewController *insuranceController = [[InsuranceViewController alloc] init];
+//
+//    
+//    UINavigationController *insuranceNavi = [[UINavigationController alloc] initWithRootViewController:insuranceController];
     
     UIViewController *mine = ALLOC_WITH_CLASSNAME(@"MineViewController");
     UINavigationController *mineNavi = [[UINavigationController alloc] initWithRootViewController:mine];
     
     [tabBarController setViewControllers:@[homeNavi,
-                                           insuranceNavi,
+//                                           insuranceNavi,
                                            mineNavi]];
-    NSArray *tabBarItemImages = @[@"img_tabbar_carwash", @"img_tabbar_insurance",@"img_tabbar_mine"];
-    NSArray *tabBarItemTitle = @[@"首页", @"保险",@"我的"];
+//    NSArray *tabBarItemImages = @[@"img_tabbar_carwash", @"img_tabbar_insurance",@"img_tabbar_mine"];
+//    NSArray *tabBarItemTitle = @[@"首页", @"保险",@"我的"];
+    
+    NSArray *tabBarItemImages = @[@"img_tabbar_carwash", @"img_tabbar_mine"];
+    NSArray *tabBarItemTitle = @[@"优快保", @"我的"];
     
     NSInteger index = 0;
     for (RDVTabBarItem *item in [[tabBarController tabBar] items])

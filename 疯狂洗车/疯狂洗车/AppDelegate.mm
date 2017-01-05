@@ -38,6 +38,8 @@
 #import "ActivitysController.h"
 #import "StartInfoModel.h"
 
+#import "AFNetworking.h"
+
 #define refreshSecond 60 //轮循刷新频率
 
 #define defaultCarBrandVerNo  @"1.0" //数据库车辆品牌版本号
@@ -91,6 +93,9 @@
     
     //注册推送
     [self registNotification:application];
+    
+    _mapManager = [[BMKMapManager alloc]init];
+    BOOL ret = [_mapManager start:@"4ucTofpT2sSjmh8IAVfYGEROE7ZpEa9f"  generalDelegate:nil];
 
     //推送token设为全局变量
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kDeviceToken])
@@ -410,18 +415,19 @@
     UINavigationController *homeNavi = [[UINavigationController alloc] initWithRootViewController:homePage];
     
     
-//    InsuranceViewController *insuranceController = [[InsuranceViewController alloc] initWithNibName:@"InsuranceViewController" bundle:nil];
-    InsuranceViewController *insuranceController = [[InsuranceViewController alloc] init];
-
-    
-    UINavigationController *insuranceNavi = [[UINavigationController alloc] initWithRootViewController:insuranceController];
+//    InsuranceViewController *insuranceController = [[InsuranceViewController alloc] init];
+//
+//    
+//    UINavigationController *insuranceNavi = [[UINavigationController alloc] initWithRootViewController:insuranceController];
 
     UIViewController *mine = ALLOC_WITH_CLASSNAME(@"MineViewController");
     UINavigationController *mineNavi = [[UINavigationController alloc] initWithRootViewController:mine];
     
     [tabBarController setViewControllers:@[homeNavi,
-                                           insuranceNavi,
+//                                           insuranceNavi,
                                            mineNavi]];
+    
+    
     [self customizeTabBarForController:tabBarController];
     
     [self.window setRootViewController:tabBarController];
@@ -439,8 +445,11 @@
 
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController
 {
-    NSArray *tabBarItemImages = @[@"img_tabbar_carwash", @"img_tabbar_insurance",@"img_tabbar_mine"];
-    NSArray *tabBarItemTitle = @[@"首页", @"保险",@"我的"];
+//    NSArray *tabBarItemImages = @[@"img_tabbar_carwash", @"img_tabbar_insurance",@"img_tabbar_mine"];
+//    NSArray *tabBarItemTitle = @[@"首页", @"保险",@"我的"];
+//    
+    NSArray *tabBarItemImages = @[@"img_tabbar_carwash", @"img_tabbar_mine"];
+    NSArray *tabBarItemTitle = @[@"优快保", @"我的"];
     
     NSInteger index = 0;
     for (RDVTabBarItem *item in [[tabBarController tabBar] items])
@@ -548,6 +557,8 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     NSLog(@"applicationWillEnterForeground");
     [[NSNotificationCenter defaultCenter] postNotificationName:kShouldUpdateCenter object:nil];
+    if(_appconfig == nil)
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTELocationChange object:nil];
 
 }
 
@@ -661,6 +672,61 @@
 
 }
 
+
+- (BOOL) application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    if ([[url absoluteString] rangeOfString:kWeixinAppKey].location != NSNotFound)
+    {
+        return [WXApi handleOpenURL:url
+                           delegate:self];
+    }
+    if ([[url absoluteString] rangeOfString:[NSString stringWithFormat:@"wb%@",kWeiboAppKey]].location != NSNotFound)
+    {
+        return [WeiboSDK handleOpenURL:url
+                              delegate:self];
+    }
+    
+    
+    //跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给SDK
+    if ([url.host isEqualToString:@"safepay"])
+    {
+        [[AlipaySDK defaultService]
+         processOrderWithPaymentResult:url
+         standbyCallback:^(NSDictionary *resultDic)
+         {
+             NSLog(@"result = %@", resultDic);
+             
+             
+             NSDictionary *submitDic = @{@"member_id":_userInfo.member_id};
+             [WebService requestJsonModelWithParam:submitDic
+                                            action:@"member/service/get"
+                                        modelClass:[UserInfo class]
+                                    normalResponse:^(NSString *status, id data, JsonBaseModel *model)
+              {
+                  if (status.intValue > 0)
+                  {
+                      UserInfo *userInfo = (UserInfo *)model;
+                      _userInfo.account_remainder = userInfo.account_remainder;
+                      [[NSUserDefaults standardUserDefaults] setObject:[userInfo convertToDictionary]
+                                                                forKey:kUserInfoKey];
+                      //    [[NSUserDefaults standardUserDefaults] setObject:userInfo.token forKey:kLoginToken];
+                      [[NSUserDefaults standardUserDefaults] synchronize];
+                  }
+                  else
+                  {
+                      
+                  }
+              }
+                                 exceptionResponse:^(NSError *error) {
+                                     
+                                     
+                                 }];
+             
+             [[NSNotificationCenter defaultCenter] postNotificationName:kPaySuccessNotification object:resultDic];
+         }];
+    }
+    return YES;
+}
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -1228,7 +1294,8 @@
         [item addSubview:_hotLabel];
         _activityView.hidden = NO;
     }
-    _hotLabel.hidden = !shouldShould;
+//    _hotLabel.hidden = !shouldShould;
+    _hotLabel.hidden = YES;
 }
 
 
@@ -1295,13 +1362,13 @@
         
         _unReadMessageCount = (int)unreadMessageCount;
         RDVTabBarController *controller = (RDVTabBarController *)self.window.rootViewController;
-        RDVTabBarItem *item = controller.tabBar.items[2];
+        RDVTabBarItem *item = controller.tabBar.items[1];
         [[NSNotificationCenter defaultCenter] postNotificationName:kUnreadSystemMessageNotification
                                                             object:nil];
         
         if (_activityView == nil)
         {
-            _activityView = [[TabActivityCircle alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/3/2+10, 3, 9, 9)];
+            _activityView = [[TabActivityCircle alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2/2+10, 3, 9, 9)];
             [item addSubview:_activityView];
         }
         _activityView.hidden = NO;
@@ -1359,6 +1426,5 @@
                             exceptionResponse:^(NSError *error) {
     }];
 }
-
 
 @end

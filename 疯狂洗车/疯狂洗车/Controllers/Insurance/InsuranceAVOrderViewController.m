@@ -12,8 +12,8 @@
 #import "WebServiceHelper.h"
 #import "ThirdPayWayCell.h"
 #import "OrderSuccessViewController.h"
-#import "UPPayPlugin.h"
-#import "UPPayPluginDelegate.h"
+//#import "UPPayPlugin.h"
+//#import "UPPayPluginDelegate.h"
 #import "UIView+Toast.h"
 #import "PayHelper.h"
 #import "AddNewCarController.h"
@@ -42,7 +42,7 @@ MyCarCellDelegate,
 MyTicketDelegate,
 AddNewCarDelegate,
 UIActionSheetDelegate,
-UPPayPluginDelegate,
+//UPPayPluginDelegate,
 MoreRequestDelegate,
 OrderTimerPickerViewDelegate,
 AddressSelectDelegate,
@@ -411,7 +411,7 @@ static NSString *serviceMoreRequestCellIdentifier = @"ServiceMoreRequestCell";
     }
     else
     {
-        return 3;
+        return 2;
     }
 }
 
@@ -1488,10 +1488,11 @@ static NSString *serviceMoreRequestCellIdentifier = @"ServiceMoreRequestCell";
                  {
                      [MBProgressHUD hideAllHUDsForView:self.view
                                               animated:YES];
-                     [UPPayPlugin startPay:payRespone.trade_no
-                                      mode:payRespone.mode
-                            viewController:self
-                                  delegate:self];
+                     //银联
+//                     [UPPayPlugin startPay:payRespone.trade_no
+//                                      mode:payRespone.mode
+//                            viewController:self
+//                                  delegate:self];
                      
                  }
                                 exceptionResponse:^(NSError *error) {

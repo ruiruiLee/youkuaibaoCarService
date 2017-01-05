@@ -39,6 +39,11 @@
                                action:(NSString *)action
                       normalResponse:(void(^)(NSString *status, id data))normalResponse
                    exceptionResponse:(void(^)(NSError *error))exceptionResponse;
+
+- (void)requestJsonWXOperationWithParam:(NSDictionary *)param
+                                 action:(NSString *)action
+                         normalResponse:(void(^)(NSString *status, id data))normalResponse
+                      exceptionResponse:(void(^)(NSError *error))exceptionResponse;
 /**
  *  发送返回值为JsonBaseModel对象的接口
  *
@@ -59,6 +64,13 @@
                                 modelClass:(Class)modelClass
                             normalResponse:(void(^)(NSString *status, id data, NSMutableArray *array))normalResponse
                          exceptionResponse:(void(^)(NSError *error))exceptionResponse;
+
+//微信端
+- (void)requestJsonArrayWXOperationWithParam:(NSDictionary *)param
+                                      action:(NSString *)action
+                                  modelClass:(Class)modelClass
+                              normalResponse:(void(^)(NSString *status, id data, NSMutableArray *array))normalResponse
+                           exceptionResponse:(void(^)(NSError *error))exceptionResponse;
 
 
 //新的图片上传接口

@@ -18,10 +18,10 @@
 #import "AddNewCarController.h"
 #import "MyTicketViewController.h"
 #import "OrderSuccessViewController.h"
-#import "UPPayPlugin.h"
-#import "UPPayPluginDelegate.h"
+//#import "UPPayPlugin.h"
+//#import "UPPayPluginDelegate.h"
 
-@interface CarNurseRescueOrderViewController ()<MoreRequestDelegate,AddressSelectDelegate,AddNewCarDelegate,MyTicketDelegate,UPPayPluginDelegate>
+@interface CarNurseRescueOrderViewController ()<MoreRequestDelegate,AddressSelectDelegate,AddNewCarDelegate,MyTicketDelegate>//,UPPayPluginDelegate>
 {
     
     NSInteger       _currentPayType;
@@ -912,10 +912,11 @@
                  {
                      [MBProgressHUD hideAllHUDsForView:self.view
                                               animated:YES];
-                     [UPPayPlugin startPay:payRespone.trade_no
-                                      mode:payRespone.mode
-                            viewController:self
-                                  delegate:self];
+                     //银联
+//                     [UPPayPlugin startPay:payRespone.trade_no
+//                                      mode:payRespone.mode
+//                            viewController:self
+//                                  delegate:self];
                      
                  }
                                 exceptionResponse:^(NSError *error) {

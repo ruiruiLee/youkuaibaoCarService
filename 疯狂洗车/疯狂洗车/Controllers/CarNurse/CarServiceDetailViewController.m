@@ -334,56 +334,67 @@
     else//按照保养、划痕、美容分组车服务
     {
         NSMutableArray *resultArray = [NSMutableArray array];
-        ServiceGroupModel *baoYangGroupModel = [[ServiceGroupModel alloc] init];
-        baoYangGroupModel.serviceType = @"1";
-        ServiceGroupModel *huaHenGroupModel = [[ServiceGroupModel alloc] init];
-        huaHenGroupModel.serviceType = @"2";
-        ServiceGroupModel *meiRongGroupModel = [[ServiceGroupModel alloc] init];
-        meiRongGroupModel.serviceType = @"3";
-        NSMutableArray *groupArray = [NSMutableArray arrayWithArray:@[baoYangGroupModel,meiRongGroupModel,huaHenGroupModel]];
-        for (int x = 0; x<targetArray.count; x++)
-        {
-            CarNurseServiceModel *model = targetArray[x];
-            
-            for (int y = 0; y<groupArray.count; y++)
-            {
-                ServiceGroupModel *groupModel = groupArray[y];
-                if (model.service_type.intValue == groupModel.serviceType.intValue)
-                {
-                    [groupModel.subServiceArray addObject:model];
-                }
+//        ServiceGroupModel *baoYangGroupModel = [[ServiceGroupModel alloc] init];
+//        baoYangGroupModel.serviceType = @"1";
+//        ServiceGroupModel *huaHenGroupModel = [[ServiceGroupModel alloc] init];
+//        huaHenGroupModel.serviceType = @"2";
+//        ServiceGroupModel *meiRongGroupModel = [[ServiceGroupModel alloc] init];
+//        meiRongGroupModel.serviceType = @"3";
+        ServiceGroupModel *groupModel = [[ServiceGroupModel alloc] init];
+        groupModel.serviceType = self.service_type;
+        for (int i = 0; i < targetArray.count; i++) {
+            CarNurseServiceModel *model = targetArray[i];
+            if(model.service_type.intValue == groupModel.serviceType.intValue){
+                [groupModel.subServiceArray addObject:model];
             }
         }
-        if (self.service_type.intValue == 20)
-        {
-            for (int x = 0; x<groupArray.count; x++)
-            {
-                ServiceGroupModel *groupModel = groupArray[x];
-                if (groupModel.subServiceArray.count > 0)
-                {
-                    [resultArray addObject:groupModel];
-                }
-            }
-        }
-        else
-        {
-            for (int x = 0; x<groupArray.count; x++)
-            {
-                ServiceGroupModel *groupModel = groupArray[x];
-
-                if (groupModel.subServiceArray.count > 0)
-                {
-                    if (groupModel.serviceType.intValue == self.service_type.intValue)
-                    {
-                        [resultArray insertObject:groupModel atIndex:0];
-                    }
-                    else
-                    {
-                        [resultArray addObject:groupModel];
-                    }
-                }
-            }
-        }
+        
+        [resultArray addObject:groupModel];
+        
+//        NSMutableArray *groupArray = [NSMutableArray arrayWithArray:@[baoYangGroupModel,meiRongGroupModel,huaHenGroupModel]];
+//        for (int x = 0; x<targetArray.count; x++)
+//        {
+//            CarNurseServiceModel *model = targetArray[x];
+//            
+//            for (int y = 0; y<groupArray.count; y++)
+//            {
+//                ServiceGroupModel *groupModel = groupArray[y];
+//                if (model.service_type.intValue == groupModel.serviceType.intValue)
+//                {
+//                    [groupModel.subServiceArray addObject:model];
+//                }
+//            }
+//        }
+//        if (self.service_type.intValue == 20)
+//        {
+//            for (int x = 0; x<groupArray.count; x++)
+//            {
+//                ServiceGroupModel *groupModel = groupArray[x];
+//                if (groupModel.subServiceArray.count > 0)
+//                {
+//                    [resultArray addObject:groupModel];
+//                }
+//            }
+//        }
+//        else
+//        {
+//            for (int x = 0; x<groupArray.count; x++)
+//            {
+//                ServiceGroupModel *groupModel = groupArray[x];
+//
+//                if (groupModel.subServiceArray.count > 0)
+//                {
+//                    if (groupModel.serviceType.intValue == self.service_type.intValue)
+//                    {
+//                        [resultArray insertObject:groupModel atIndex:0];
+//                    }
+//                    else
+//                    {
+//                        [resultArray addObject:groupModel];
+//                    }
+//                }
+//            }
+//        }
         return resultArray;
     }
 }
@@ -866,7 +877,9 @@
 - (void)didRightButtonTouch
 {
     
-    __weak typeof(self) weakSelf=self;
+//    __weak typeof(self) weakSelf=self;
+    
+//    http://ibwxt.leanapp.cn/?#!/ruleuse?memberId=117 
     
     [PhotoBroswerVC show:self type:PhotoBroswerVCTypePush index:0 photoModelBlock:^NSArray *{
         

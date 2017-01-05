@@ -12,6 +12,9 @@
 #include <objc/runtime.h>
 #import "MTA.h"
 
+#import "KGStatusBar.h"
+#import "NetManager.h"
+
 
 @interface BaseViewController () <UIGestureRecognizerDelegate>
 
@@ -21,10 +24,73 @@
 
 @implementation BaseViewController
 
+// 处理注册通知 kReachabilityChangedNotification
+- (void)reachabilityChanged
+{
+    NetworkStatus status = [[NetManager defaultReachability] currentReachabilityStatus];
+    switch (status)
+    {
+        case NotReachable:
+        {
+            [KGStatusBar showErrorWithStatus:@"无法连接网络，请稍后再试！"];
+            break;
+        }
+        case ReachableViaWiFi:
+        {
+            [KGStatusBar showSuccessWithStatus:@"成功连接wifi，请刷新！"];
+            NSLog(@" NetworkStatus : ReachableViaWiFi");
+            if(_appconfig == nil){
+                [self netWorkReceive];
+            }
+            break;
+        }
+        case ReachableViaWWAN:
+        {
+            [KGStatusBar showSuccessWithStatus:@"当前网络为流量模式"];
+            NSLog(@" NetworkStatus : ReachableViaWWAN");
+            if(_appconfig == nil){
+                [self netWorkReceive];
+            }
+            break;
+        }
+        default:
+            //[KGStatusBar showWithStatus:@"Loading..."];
+            [KGStatusBar dismiss];
+            break;
+    }
+}
+
+- (void) netWorkReceive
+{
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NSLog(@"netWorkReceive");
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTELocationChange object:nil];
+    
+}
+
+// 注册网络连接状态的改变通知
+- (void)regitserSystemAsObserver{
+    // 注册网络连接状态的改变通知
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    [[NetManager defaultReachability] startNotifier];     // 开始监听网络
+    
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self performSelector:@selector(regitserSystemAsObserver) withObject:nil afterDelay:0.5f];
     
     [self.navigationController.navigationBar setBackgroundImage:self.isClubController?[UIImage imageNamed:@"navi_club_bg"]:[UIImage imageNamed:@"navi_bg"]
                                                   forBarMetrics:0];
@@ -250,6 +316,7 @@
                        @{@"describe":@"VIP送修年审页面",@"Class":@"InsuranceRepaierOrAVViewController"},
                        @{@"describe":@"年审下单页面",@"Class":@"InsuranceAVOrderViewController"},
                        @{@"describe":@"我的页面",@"Class":@"MineViewController"},
+                       @{@"describe":@"车小保",@"Class":@"CheXiaoBaoViewController"},
                        @{@"describe":@"活动",@"Class":@"ActivitysController"}];
     return names;
 }

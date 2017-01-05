@@ -34,6 +34,9 @@
 #import "CarWashListCell.h"
 #import "CarNurseListCell.h"
 #import "QuickRescueListCell.h"
+#import "BaseAppointVC.h"
+
+#import "define.h"
 
 
 @interface CrazyCarWashMapViewController ()<BottomButlerDelegate,BottomCarWashDelegate,BottomCarNurseDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
@@ -57,6 +60,9 @@
     int                          _maxLevel;
     
     NSInteger                    _mapLevelStatus;//0位设置 1大气泡 2小气泡
+    
+    
+    
     
 }
 
@@ -195,7 +201,7 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
         }
         else if ([self.service_type isEqualToString:@"2"])
         {
-            [self setTitle:@"划痕"];
+            [self setTitle:@"板喷／快修"];
         }
         else if ([self.service_type isEqualToString:@"3"])
         {
@@ -213,6 +219,9 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
     _mapView.showsUserLocation = YES;
     
     
+    _youkuaibaoCoordinate = [[CLLocation alloc] initWithLatitude:30.607999 longitude:104.026333].coordinate;
+    
+    
     //加载并设置地图中心为用户所在位置，若用户选择城市不是当前所在城市则设置选择城市的市中心
     NSDictionary *resultDic = [DBManager queryCityByCityID:[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey]];
     
@@ -223,6 +232,8 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
         if ([userCity.CITY_ID isEqualToString:_userCityModel.CITY_ID])
         {
             _settingCenter = YES;
+            if([userCity.CITY_ID isEqualToString:@"1"])
+                _publicUserCoordinate = _youkuaibaoCoordinate;
             _centerCoordinate =_publicUserCoordinate;
             _overallCoordinate = _centerCoordinate;
             _lastCoordinate = _publicUserCoordinate;
@@ -245,7 +256,8 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
             MKCoordinateRegion theRegion;
             theRegion.center = userCityCoordinate;
             theRegion.span = theSpan;
-            
+            if([userCity.CITY_ID isEqualToString:@"1"])
+                userCityCoordinate = _youkuaibaoCoordinate;
             _settingCenter = YES;
             _isLaunching = YES;
             _centerCoordinate = userCityCoordinate;
@@ -2049,11 +2061,29 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
     }
     else
     {
-        CarServiceDetailViewController *controller = ALLOC_WITH_CLASSNAME(@"CarServiceDetailViewController");
-        controller.selectedCarNurse = targetModel;
-        controller.service_type = self.service_type;
-        //controller.isEditTime = isOrderTime;
-        [self.navigationController pushViewController:controller animated:YES];
+        if([self.service_type isEqualToString:@"2"] && [((CarNurseModel *)targetModel).car_wash_id isEqualToString:Owner_CarWah_ID]){
+            BaseAppointVC *vc = [[BaseAppointVC alloc] initWithNibName:nil bundle:nil];
+            vc.selectedCarNurse = targetModel;
+            vc.service_type = self.service_type;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else if (([self.service_type isEqualToString:@"1"] || [self.service_type isEqualToString:@"3"])){
+                BaseAppointVC *vc = [[BaseAppointVC alloc] initWithNibName:nil bundle:nil];
+                vc.selectedCarNurse = targetModel;
+                vc.service_type = self.service_type;
+                [self.navigationController pushViewController:vc animated:YES];
+        }
+        else{
+            CarServiceDetailViewController *viewController = ALLOC_WITH_CLASSNAME(@"CarServiceDetailViewController");
+            viewController.selectedCarNurse = targetModel;
+            viewController.service_type = self.service_type;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+//        CarServiceDetailViewController *controller = ALLOC_WITH_CLASSNAME(@"CarServiceDetailViewController");
+//        controller.selectedCarNurse = targetModel;
+//        controller.service_type = self.service_type;
+//        //controller.isEditTime = isOrderTime;
+//        [self.navigationController pushViewController:controller animated:YES];
     }
     
     [_searchDisplayController setActive:NO animated:YES];

@@ -16,8 +16,8 @@
 #import "AddressSelectViewController.h"
 #import "OrderSuccessViewController.h"
 #import "MyTicketViewController.h"
-#import "UPPayPlugin.h"
-#import "UPPayPluginDelegate.h"
+//#import "UPPayPlugin.h"
+//#import "UPPayPluginDelegate.h"
 #import "UIView+Toast.h"
 #import "PayHelper.h"
 #import "CarInfos.h"
@@ -39,7 +39,7 @@ MyCarDetailCellDelegate,
 MyTicketDelegate,
 AddNewCarDelegate,
 UIActionSheetDelegate,
-UPPayPluginDelegate,
+//UPPayPluginDelegate,
 AddressSelectDelegate,
 YearlyInspectionCellDelegate>
 {
@@ -434,7 +434,7 @@ static NSString *ticketPayWayCellIdentifier = @"TicketPayWayCell";
     }
     else
     {
-        return 3;
+        return 2 ;
     }
 }
 
@@ -1452,10 +1452,11 @@ static NSString *ticketPayWayCellIdentifier = @"TicketPayWayCell";
                  {
                      [MBProgressHUD hideAllHUDsForView:self.view
                                               animated:YES];
-                     [UPPayPlugin startPay:payRespone.trade_no
-                                      mode:payRespone.mode
-                            viewController:self
-                                  delegate:self];
+                     //银联
+//                     [UPPayPlugin startPay:payRespone.trade_no
+//                                      mode:payRespone.mode
+//                            viewController:self
+//                                  delegate:self];
                      
                  }
                                 exceptionResponse:^(NSError *error) {

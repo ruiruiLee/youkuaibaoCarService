@@ -10,7 +10,7 @@
 
 #import "YKBShareHelper.h"
 //#import "WXApi.h"
-//#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/QQApiInterface.h>
 //#import "WeiboSDK.h"
 
 @implementation ShareMenuView
@@ -518,18 +518,18 @@
 
 - (void)shareContetAppToQQ
 {
-//    QQApiNewsObject *newsObj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:_urlString]
-//                                                        title:_titleString
-//                                                  description:_contentString
-//                                             previewImageURL:[NSURL URLWithString:_shareImageUrl]];
-//    SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
-//    //将内容分享到qq
-//    QQApiSendResultCode sent = [QQApiInterface sendReq:req];
-//    
-//    if (sent == EQQAPISENDSUCESS)
-//    {
-//        [Constants showMessage:@"分享成功"];
-//    }
+    QQApiNewsObject *newsObj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:_urlString]
+                                                        title:_titleString
+                                                  description:_contentString
+                                             previewImageURL:[NSURL URLWithString:_shareImageUrl]];
+    SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
+    //将内容分享到qq
+    QQApiSendResultCode sent = [QQApiInterface sendReq:req];
+    
+    if (sent == EQQAPISENDSUCESS)
+    {
+        [Constants showMessage:@"分享成功"];
+    }
 }
 
 

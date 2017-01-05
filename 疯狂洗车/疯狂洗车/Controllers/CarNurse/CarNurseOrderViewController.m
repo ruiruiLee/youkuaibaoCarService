@@ -19,11 +19,11 @@
 #import "AddNewCarController.h"
 #import "MyTicketViewController.h"
 #import "OrderSuccessViewController.h"
-#import "UnionPayResopne.h"
-#import "UPPayPlugin.h"
-#import "UPPayPluginDelegate.h"
+//#import "UnionPayResopne.h"
+//#import "UPPayPlugin.h"
+//#import "UPPayPluginDelegate.h"
 
-@interface CarNurseOrderViewController ()<OrderTimerPickerViewDelegate,MoreRequestDelegate,AddressSelectDelegate,AddNewCarDelegate,MyTicketDelegate,UPPayPluginDelegate>
+@interface CarNurseOrderViewController ()<OrderTimerPickerViewDelegate,MoreRequestDelegate,AddressSelectDelegate,AddNewCarDelegate,MyTicketDelegate>//,UPPayPluginDelegate>
 {
     OrderTimerPickerView *_orderTimerPickerView;
     
@@ -1038,10 +1038,12 @@
                  {
                      [MBProgressHUD hideAllHUDsForView:self.view
                                               animated:YES];
-                     [UPPayPlugin startPay:payRespone.trade_no
-                                      mode:payRespone.mode
-                            viewController:self
-                                  delegate:self];
+                     
+                     //银联
+//                     [UPPayPlugin startPay:payRespone.trade_no
+//                                      mode:payRespone.mode
+//                            viewController:self
+//                                  delegate:self];
                      
                  }
                                 exceptionResponse:^(NSError *error) {

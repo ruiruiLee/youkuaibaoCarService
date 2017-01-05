@@ -64,6 +64,8 @@ int base64_self_test( int verbose );
 
 + (NSData *)decodeString:(NSString *)string;
 
++ (NSString *) base64Encode:(NSString *) string;
+
 @end
 
 

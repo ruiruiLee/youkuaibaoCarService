@@ -13,6 +13,8 @@
 #import "MBProgressHUD+Add.h"
 #import "WebServiceHelper.h"
 #import "AppVersionCell.h"
+#import "CheXiaoBaoViewController.h"
+#import "define.h"
 
 
 @interface MoreController () <UIActionSheetDelegate>
@@ -61,14 +63,14 @@ static NSString *appVersionCellIndentifier = @"AppVersionCell";
 {
     [super viewWillAppear:animated];
     
-    _titleArray = [@[@"意见反馈",@"退出登录"] mutableCopy];
-    _imagesArray = @[@"more_feedback",@"more_exit_icon"];
-    _controllersArray = @[@"FeedBackController"];
+    _titleArray = [@[@"关于优快保",@"意见反馈",@"退出登录"] mutableCopy];
+    _imagesArray = @[@"more_share_icon", @"more_feedback",@"more_exit_icon"];
+    _controllersArray = @[@"CheXiaoBaoViewController", @"FeedBackController"];
     if ([_userInfo.if_salesman boolValue])
     {
-        _titleArray = [@[@"意见反馈",@"退出登录", @"提交车场信息"] mutableCopy];
-        _imagesArray = @[@"more_feedback",@"more_exit_icon", @"more_addcarwashyard"];
-        _controllersArray = @[@"FeedBackController",@"",@"AddWashYardViewController"];
+        _titleArray = [@[@"关于优快保",@"意见反馈",@"退出登录", @"提交车场信息"] mutableCopy];
+        _imagesArray = @[@"more_share_icon", @"more_feedback",@"more_exit_icon", @"more_addcarwashyard"];
+        _controllersArray = @[@"CheXiaoBaoViewController", @"FeedBackController",@"",@"AddWashYardViewController"];
     }
     
     [_menuTable reloadData];
@@ -143,10 +145,15 @@ static NSString *appVersionCellIndentifier = @"AppVersionCell";
     {
         return;
     }
-    if (indexPath.row != 1)
+    if (indexPath.row != 2)
     {
         id controller = ALLOC_WITH_CLASSNAME(_controllersArray[indexPath.row]);
         [self.navigationController pushViewController:controller animated:YES];
+        if(indexPath.row == 0){
+            CheXiaoBaoViewController *chexiaobao = (CheXiaoBaoViewController*) controller;
+            [chexiaobao setTitle:_titleArray[0]];
+            chexiaobao.webUrl = [NSString stringWithFormat:ABOUT_UKB, BASE_Uri_FOR_WEB, _userInfo.member_id];
+        }
     }
     else
     {

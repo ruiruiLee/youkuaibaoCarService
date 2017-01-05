@@ -11,6 +11,8 @@
 #import "TicketModel.h"
 #import "ADVModel.h"
 #import "ActivitysController.h"
+#import "CheXiaoBaoViewController.h"
+#import "define.h"
 
 
 
@@ -43,45 +45,56 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
     
     if ([self.delegate respondsToSelector:@selector(didFinishTicketSelect:)])//当用户由车服务下单页面进入优惠券列表事的显示设置
     {
-        [rightBtn setTitle:@"不使用券" forState:UIControlStateNormal];
-        [rightBtn setTitleColor:self.isClubController?[UIColor whiteColor]:[UIColor colorWithRed:96.0/255.0
+        [rightBtn setTitle:@"使用说明" forState:UIControlStateNormal];
+        [rightBtn setTitleColor:[UIColor colorWithRed:96.0/255.0
                                                 green:96.0/255.0
                                                  blue:96.0/255.0
                                                 alpha:1.0] forState:UIControlStateNormal];
-        [rightBtn addTarget:self action:@selector(didCleanTicketSelect) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        //该情况不需要显示顶部segment
-        _topView.hidden = YES;
-        for (int x = 0; x<_topView.constraints.count; x++)
-        {
-            NSLayoutConstraint *layoutConstraint = _topView.constraints[x];
-            if (layoutConstraint.firstAttribute == NSLayoutAttributeHeight)
-            {
-                [_topView removeConstraint:layoutConstraint];
-                break;
-            }
-            
-        }
-        NSDictionary* views = NSDictionaryOfVariableBindings(_topView);
-        NSString *constrainString = [NSString stringWithFormat:@"V:[_topView(%d)]",0];
-        
-        [_topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constrainString
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:views]];
-
+        [rightBtn addTarget:self
+                     action:@selector(didRightButtonTouch)
+           forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
         [self.navigationItem setRightBarButtonItem:rightItem];
+        
+//        [rightBtn setTitle:@"不使用券" forState:UIControlStateNormal];
+//        [rightBtn setTitleColor:self.isClubController?[UIColor whiteColor]:[UIColor colorWithRed:96.0/255.0
+//                                                green:96.0/255.0
+//                                                 blue:96.0/255.0
+//                                                alpha:1.0] forState:UIControlStateNormal];
+//        [rightBtn addTarget:self action:@selector(didCleanTicketSelect) forControlEvents:UIControlEventTouchUpInside];
+//        
+        
+        //该情况不需要显示顶部segment
+//        _topView.hidden = YES;
+//        for (int x = 0; x<_topView.constraints.count; x++)
+//        {
+//            NSLayoutConstraint *layoutConstraint = _topView.constraints[x];
+//            if (layoutConstraint.firstAttribute == NSLayoutAttributeHeight)
+//            {
+//                [_topView removeConstraint:layoutConstraint];
+//                break;
+//            }
+//            
+//        }
+//        NSDictionary* views = NSDictionaryOfVariableBindings(_topView);
+//        NSString *constrainString = [NSString stringWithFormat:@"V:[_topView(%d)]",0];
+//        
+//        [_topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constrainString
+//                                                                            options:0
+//                                                                            metrics:nil
+//                                                                              views:views]];
+
+//        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+//        [self.navigationItem setRightBarButtonItem:rightItem];
     }
     else//当用户由“我的”页面进入优惠券列表事的显示设置
     {
-        if (_appconfig.service_code_intro == nil || [_appconfig.service_code_intro isEqualToString:@""])
-        {
-            
-        }
-        else
-        {
+//        if (_appconfig.service_code_intro == nil || [_appconfig.service_code_intro isEqualToString:@""])
+//        {
+//            
+//        }
+//        else
+//        {
             [rightBtn setTitle:@"使用说明" forState:UIControlStateNormal];
             [rightBtn setTitleColor:[UIColor colorWithRed:96.0/255.0
                                                     green:96.0/255.0
@@ -92,7 +105,7 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
                forControlEvents:UIControlEventTouchUpInside];
             UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
             [self.navigationItem setRightBarButtonItem:rightItem];
-        }
+//        }
 
     }
 
@@ -126,46 +139,46 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
     _pageIndex = 1;
     NSDictionary *submitDic = nil;
     
-    if (_topView.hidden)
-    {
-        submitDic = @{@"service_type":self.serviceType,
-                      @"member_id":_userInfo.member_id,
-                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-                      @"page_size":@"20",
-                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-                      @"is_used":@"3"};
-
-    }
-    else if (_segmentControl.selectedSegmentIndex == 0)
-    {
+//    if (_topView.hidden)
+//    {
+//        submitDic = @{@"service_type":self.serviceType,
+//                      @"member_id":_userInfo.member_id,
+//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
+//                      @"page_size":@"20",
+//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
+//                      @"is_used":@"3"};
+//
+//    }
+//    else if (_segmentControl.selectedSegmentIndex == 0)
+//    {
       submitDic = @{@"service_type":self.serviceType,
                     @"member_id":_userInfo.member_id,
                     @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
                     @"page_size":@"20",
                     @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
                     @"is_used":@"0"};
-    }
-    else if (_segmentControl.selectedSegmentIndex == 1)
-    {
-        submitDic = @{@"service_type":self.serviceType,
-                      @"member_id":_userInfo.member_id,
-                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-                      @"page_size":@"20",
-                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-                      @"is_used":@"1"};
-    }
-    else
-    {
-        submitDic = @{@"service_type":self.serviceType,
-                      @"member_id":_userInfo.member_id,
-                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-                      @"page_size":@"20",
-                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-                      @"is_used":@"2"};
-    }
+//    }
+//    else if (_segmentControl.selectedSegmentIndex == 1)
+//    {
+//        submitDic = @{@"service_type":self.serviceType,
+//                      @"member_id":_userInfo.member_id,
+//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
+//                      @"page_size":@"20",
+//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
+//                      @"is_used":@"1"};
+//    }
+//    else
+//    {
+//        submitDic = @{@"service_type":self.serviceType,
+//                      @"member_id":_userInfo.member_id,
+//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
+//                      @"page_size":@"20",
+//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
+//                      @"is_used":@"2"};
+//    }
     
     self.view.userInteractionEnabled = NO;
-    [WebService requestJsonArrayOperationWithParam:submitDic
+    [WebService requestJsonArrayWXOperationWithParam:submitDic
                                             action:@"serviceCode/service/list"
                                         modelClass:[TicketModel class]
                                     normalResponse:^(NSString *status, id data, NSMutableArray *array)
@@ -229,46 +242,46 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
         return;
     }
     NSDictionary *submitDic = nil;
-    if (_topView.hidden)
-    {
-        submitDic = @{@"service_type":self.serviceType,
-                      @"member_id":_userInfo.member_id,
-                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-                      @"page_size":@"20",
-                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-                      @"is_used":@"3"};
-        
-    }
-    else if (_segmentControl.selectedSegmentIndex == 0)
-    {
+//    if (_topView.hidden)
+//    {
+//        submitDic = @{@"service_type":self.serviceType,
+//                      @"member_id":_userInfo.member_id,
+//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
+//                      @"page_size":@"20",
+//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
+//                      @"is_used":@"3"};
+//        
+//    }
+//    else if (_segmentControl.selectedSegmentIndex == 0)
+//    {
         submitDic = @{@"service_type":self.serviceType,
                       @"member_id":_userInfo.member_id,
                       @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
                       @"page_size":@"20",
                       @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
                       @"is_used":@"0"};
-    }
-    else if (_segmentControl.selectedSegmentIndex == 1)
-    {
-        submitDic = @{@"service_type":self.serviceType,
-                      @"member_id":_userInfo.member_id,
-                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-                      @"page_size":@"20",
-                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-                      @"is_used":@"1"};
-    }
-    else
-    {
-        submitDic = @{@"service_type":self.serviceType,
-                      @"member_id":_userInfo.member_id,
-                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-                      @"page_size":@"20",
-                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-                      @"is_used":@"2"};
-    }
+//    }
+//    else if (_segmentControl.selectedSegmentIndex == 1)
+//    {
+//        submitDic = @{@"service_type":self.serviceType,
+//                      @"member_id":_userInfo.member_id,
+//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
+//                      @"page_size":@"20",
+//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
+//                      @"is_used":@"1"};
+//    }
+//    else
+//    {
+//        submitDic = @{@"service_type":self.serviceType,
+//                      @"member_id":_userInfo.member_id,
+//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
+//                      @"page_size":@"20",
+//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
+//                      @"is_used":@"2"};
+//    }
 
     self.view.userInteractionEnabled = NO;
-    [WebService requestJsonArrayOperationWithParam:submitDic
+    [WebService requestJsonArrayWXOperationWithParam:submitDic
                                             action:@"serviceCode/service/list"
                                         modelClass:[TicketModel class]
                                     normalResponse:^(NSString *status, id data, NSMutableArray *array)
@@ -332,7 +345,7 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 115.0*SCREEN_WIDTH/375.0;
+    return 146.0*SCREEN_WIDTH/375.0;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -379,14 +392,21 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
 
 - (void)didRightButtonTouch
 {
-    ADVModel *model = [[ADVModel alloc] init];
-    model.url = _appconfig.service_code_intro;
-    model.url_type = @"1";
-    model.title = @"使用说明";
-    ActivitysController *viewController = [[ActivitysController alloc] initWithNibName:@"ActivitysController" bundle:nil];
-    viewController.advModel = model;
-    viewController.forbidAddMark = NO;
-    [self.navigationController pushViewController:viewController animated:YES];
+//    ADVModel *model = [[ADVModel alloc] init];
+//    model.url = _appconfig.service_code_intro;
+//    model.url_type = @"1";
+//    model.title = @"使用说明";
+//    ActivitysController *viewController = [[ActivitysController alloc] initWithNibName:@"ActivitysController" bundle:nil];
+//    viewController.advModel = model;
+//    viewController.forbidAddMark = NO;
+//    [self.navigationController pushViewController:viewController animated:YES];
+    
+    CheXiaoBaoViewController *vc = [[CheXiaoBaoViewController alloc] initWithNibName:@"CheXiaoBaoViewController" bundle:nil];
+    NSString *url = [NSString stringWithFormat:TICKET_SHI_YONG_SHUOMING, BASE_Uri_FOR_WEB, _userInfo.member_id];
+    vc.webUrl = url;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    [vc setTitle:@"使用说明"];
 }
 
 - (void)didReceiveMemoryWarning {

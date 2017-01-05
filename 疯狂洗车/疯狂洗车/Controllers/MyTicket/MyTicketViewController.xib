@@ -1,88 +1,49 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyTicketViewController">
             <connections>
                 <outlet property="_noTickeyImageView" destination="E8u-hx-poD" id="A1p-d7-Iim"/>
-                <outlet property="_segmentControl" destination="XD6-xU-mO7" id="O4X-nw-eed"/>
                 <outlet property="_ticketListTableView" destination="noX-Nu-7EO" id="x9T-R5-xUa"/>
-                <outlet property="_topView" destination="7h6-FX-Sb8" id="r0z-FU-oqS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_noTicket" translatesAutoresizingMaskIntoConstraints="NO" id="E8u-hx-poD">
-                    <rect key="frame" x="90" y="150" width="141" height="126"/>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="img_noTicket" translatesAutoresizingMaskIntoConstraints="NO" id="E8u-hx-poD">
+                    <frame key="frameInset" minX="90" minY="150" width="141" height="126"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="126" id="JUv-CD-5VI"/>
                         <constraint firstAttribute="width" constant="141" id="hWg-Uw-hqh"/>
                     </constraints>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="noX-Nu-7EO" customClass="HeaderFooterTableView">
-                    <rect key="frame" x="0.0" y="44" width="320" height="436"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="noX-Nu-7EO" customClass="HeaderFooterTableView">
+                    <frame key="frameInset" minY="44" width="320" height="436"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="t0d-rx-iOv"/>
                         <outlet property="delegate" destination="-1" id="SoA-WB-kg9"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7h6-FX-Sb8">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20d-xQ-qmo">
-                            <rect key="frame" x="0.0" y="43" width="320" height="1"/>
-                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="AIy-gc-XtS"/>
-                            </constraints>
-                        </view>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XD6-xU-mO7">
-                            <rect key="frame" x="10" y="8" width="300" height="29"/>
-                            <segments>
-                                <segment title="未使用"/>
-                                <segment title="已使用"/>
-                                <segment title="已过期"/>
-                            </segments>
-                            <color key="tintColor" red="0.92156862750000001" green="0.3294117647" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="didSegmentControlValueChange:" destination="-1" eventType="valueChanged" id="lbl-fx-1eJ"/>
-                            </connections>
-                        </segmentedControl>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="20d-xQ-qmo" secondAttribute="bottom" id="1EA-Tv-9kt"/>
-                        <constraint firstAttribute="trailing" secondItem="20d-xQ-qmo" secondAttribute="trailing" id="2vX-65-MMq"/>
-                        <constraint firstAttribute="centerY" secondItem="XD6-xU-mO7" secondAttribute="centerY" id="5Bp-1q-yGA"/>
-                        <constraint firstAttribute="height" constant="44" id="H1U-jv-FLo"/>
-                        <constraint firstAttribute="trailing" secondItem="XD6-xU-mO7" secondAttribute="trailing" constant="10" id="LB1-6E-fK3"/>
-                        <constraint firstItem="20d-xQ-qmo" firstAttribute="leading" secondItem="7h6-FX-Sb8" secondAttribute="leading" id="iUq-sb-hOD"/>
-                        <constraint firstItem="XD6-xU-mO7" firstAttribute="leading" secondItem="7h6-FX-Sb8" secondAttribute="leading" constant="10" id="v5Z-QK-FIQ"/>
-                    </constraints>
-                </view>
             </subviews>
-            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.90212953090667725" green="0.90210258960723877" blue="0.90211784839630127" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="7h6-FX-Sb8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5fb-W0-lJd"/>
                 <constraint firstItem="noX-Nu-7EO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="APh-QG-xwe"/>
+                <constraint firstItem="noX-Nu-7EO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FHe-cx-GTA"/>
                 <constraint firstAttribute="centerX" secondItem="E8u-hx-poD" secondAttribute="centerX" id="HtU-b5-flC"/>
-                <constraint firstItem="7h6-FX-Sb8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="M0p-zx-JXS"/>
                 <constraint firstItem="noX-Nu-7EO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="R6x-vt-ATn"/>
-                <constraint firstAttribute="trailing" secondItem="7h6-FX-Sb8" secondAttribute="trailing" id="XgA-zw-fVa"/>
-                <constraint firstItem="noX-Nu-7EO" firstAttribute="top" secondItem="7h6-FX-Sb8" secondAttribute="bottom" id="h1d-Dw-nXt"/>
                 <constraint firstAttribute="trailing" secondItem="noX-Nu-7EO" secondAttribute="trailing" id="iwN-mA-laU"/>
                 <constraint firstAttribute="bottom" secondItem="noX-Nu-7EO" secondAttribute="bottom" id="vKz-Bx-lDT"/>
                 <constraint firstItem="E8u-hx-poD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="150" id="wca-la-6oR"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="R6x-vt-ATn"/>

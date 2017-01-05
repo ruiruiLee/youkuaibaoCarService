@@ -30,12 +30,14 @@
 #import "OrderSuccessViewController.h"
 #import "ThirdPayWayCell.h"
 #import "MapNavigationViewController.h"
-#import "UPPayPlugin.h"
-#import "UPPayPluginDelegate.h"
+//#import "UPPayPlugin.h"
+//#import "UPPayPluginDelegate.h"
 #import "SupportCarModel.h"
 #import "OrderRealPayInfoCell.h"
 
-@interface CarWashOrderViewController ()<AddCarsCellDelegate,TicketPayWayCellDelegate,MyCarCellDelegate,MyTicketDelegate,AddNewCarDelegate,CarWashInfoCellDelegate,UIActionSheetDelegate,UPPayPluginDelegate>
+#import "PaySuccessedVC.h"
+
+@interface CarWashOrderViewController ()<AddCarsCellDelegate,TicketPayWayCellDelegate,MyCarCellDelegate,MyTicketDelegate,AddNewCarDelegate,CarWashInfoCellDelegate,UIActionSheetDelegate>//,UPPayPluginDelegate>
 {
     NSMutableArray  *_myCarsArray;
     
@@ -491,7 +493,7 @@ static NSString *orderRealPayInfoCellIdentifier = @"OrderRealPayInfoCell";
     }
     else
     {
-        return 3;
+        return 2;
     }
 }
 
@@ -1624,10 +1626,11 @@ static NSString *orderRealPayInfoCellIdentifier = @"OrderRealPayInfoCell";
              {
                  [MBProgressHUD hideAllHUDsForView:self.view
                                           animated:YES];
-                 [UPPayPlugin startPay:payRespone.trade_no
-                                  mode:payRespone.mode
-                        viewController:self
-                              delegate:self];
+                 //银联
+//                 [UPPayPlugin startPay:payRespone.trade_no
+//                                  mode:payRespone.mode
+//                        viewController:self
+//                              delegate:self];
                  
              }
                             exceptionResponse:^(NSError *error) {
@@ -1698,25 +1701,37 @@ static NSString *orderRealPayInfoCellIdentifier = @"OrderRealPayInfoCell";
                  [[NSUserDefaults standardUserDefaults] setValue:_userInfo.convertToDictionary forKey:kUserInfoKey];
                  [[NSUserDefaults standardUserDefaults] synchronize];
                  
-                 
                  NSMutableArray *tmpArray = [self.navigationController.viewControllers mutableCopy];
                  [tmpArray removeLastObject];
-                 if ([_appconfig.open_share_order_flag isEqualToString:@"1"])
-                 {
-                     OrderSuccessViewController *viewController = [[OrderSuccessViewController alloc] initWithNibName:@"OrderSuccessViewController"
-                                                                                                               bundle:nil];
-                     
-                     viewController.share_order_url = [data objectForKey:@"share_order_url"];
-                     viewController.isClubController = self.isClubController;
-                     
-                     [tmpArray addObject:viewController];
-                 }
-                 else
-                 {
-                     MyOrdersController *viewController = [[MyOrdersController alloc] initWithNibName:@"MyOrdersController" bundle:nil];
-                     [tmpArray addObject:viewController];
-                 }
+                 
+                 PaySuccessedVC *vc = [[PaySuccessedVC alloc] initWithNibName:@"PaySuccessedVC" bundle:nil];
+                 [tmpArray addObject:vc];
+                 vc.outTradeNo = tradeNo;
+                 vc.giftType = @"xiche";
+                 
                  [self.navigationController setViewControllers:tmpArray animated:YES];
+//                 NSMutableArray *tmpArray = [self.navigationController.viewControllers mutableCopy];
+//                 [tmpArray removeLastObject];
+////                 if ([_appconfig.open_share_order_flag isEqualToString:@"1"])
+////                 {
+////                     OrderSuccessViewController *viewController = [[OrderSuccessViewController alloc] initWithNibName:@"OrderSuccessViewController"
+////                                                                                                               bundle:nil];
+//                     
+//                     PaySuccessedVC *vc = [[PaySuccessedVC alloc] initWithNibName:@"PaySuccessedVC" bundle:nil];
+//                     [tmpArray addObject:vc];
+//                     vc.outTradeNo = [data objectForKey:@"out_trade_no"];
+//                     
+////                     viewController.share_order_url = [data objectForKey:@"share_order_url"];
+////                     viewController.isClubController = self.isClubController;
+//                     
+//                     [tmpArray addObject:vc];
+////                 }
+////                 else
+////                 {
+////                     MyOrdersController *viewController = [[MyOrdersController alloc] initWithNibName:@"MyOrdersController" bundle:nil];
+////                     [tmpArray addObject:viewController];
+////                 }
+//                 [self.navigationController setViewControllers:tmpArray animated:YES];
                  
              }
              else
@@ -1952,24 +1967,38 @@ static NSString *orderRealPayInfoCellIdentifier = @"OrderRealPayInfoCell";
          NSLog(@"third/pay/checkPay %@",data);
          self.view.userInteractionEnabled = YES;
          [MBProgressHUD hideHUDForView:self.view animated:YES];
+         
          NSMutableArray *tmpArray = [self.navigationController.viewControllers mutableCopy];
          [tmpArray removeLastObject];
-         if ([_appconfig.open_share_order_flag isEqualToString:@"1"])
-         {
-             OrderSuccessViewController *viewController = [[OrderSuccessViewController alloc] initWithNibName:@"OrderSuccessViewController"
-                                                                                                       bundle:nil];
-             
-             viewController.share_order_url = [data objectForKey:@"share_order_url"];
-             viewController.isClubController = self.isClubController;
-             
-             [tmpArray addObject:viewController];
-         }
-         else
-         {
-             MyOrdersController *viewController = [[MyOrdersController alloc] initWithNibName:@"MyOrdersController" bundle:nil];
-             [tmpArray addObject:viewController];
-         }
+         
+         PaySuccessedVC *vc = [[PaySuccessedVC alloc] initWithNibName:@"PaySuccessedVC" bundle:nil];
+         [tmpArray addObject:vc];
+         vc.outTradeNo = string;
+         vc.giftType = @"xiche";
+         
          [self.navigationController setViewControllers:tmpArray animated:YES];
+         
+//         NSMutableArray *tmpArray = [self.navigationController.viewControllers mutableCopy];
+//         [tmpArray removeLastObject];
+////         if ([_appconfig.open_share_order_flag isEqualToString:@"1"])
+////         {
+////             OrderSuccessViewController *viewController = [[OrderSuccessViewController alloc] initWithNibName:@"OrderSuccessViewController"
+////                                                                                                       bundle:nil];
+////             
+////             viewController.share_order_url = [data objectForKey:@"share_order_url"];
+////             viewController.isClubController = self.isClubController;
+////             
+////             [tmpArray addObject:viewController];
+//             PaySuccessedVC *vc = [[PaySuccessedVC alloc] initWithNibName:@"PaySuccessedVC" bundle:nil];
+//             [tmpArray addObject:vc];
+//             vc.outTradeNo = [data objectForKey:@"out_trade_no"];
+////         }
+////         else
+////         {
+////             MyOrdersController *viewController = [[MyOrdersController alloc] initWithNibName:@"MyOrdersController" bundle:nil];
+////             [tmpArray addObject:viewController];
+////         }
+//         [self.navigationController setViewControllers:tmpArray animated:YES];
          
 
          

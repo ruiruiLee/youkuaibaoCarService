@@ -812,4 +812,31 @@ NSString *const kJuheKey = @"135f64c53d7280468a014a7d16d6a288";
     }
 }
 
++ (NSDate*) convertDateFromString:(NSString*)string
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    [formatter setDateFormat:@"yyyy-MM-dd HH"];
+    NSDate *date=[formatter dateFromString:string];
+    return date;
+}
+
+//+ (NSString *) getTicketsStringWIthValue:(NSInteger) value
+//{
+//    if(value == 100000){
+//        _ticketPriceLabel.text = @"免费";
+//        _priceTitleLabel.text = @"";
+//        _lbExplainInfo.text = [model.code_desc stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    }else if (value >=10000 && value < 100000){
+//        CGFloat f = price / 10000.0;
+//        _ticketPriceLabel.text = [NSString stringWithFormat:@"%.1f", f];
+//        _priceTitleLabel.text = @"折";
+//        _lbExplainInfo.text = @"";
+//    }
+//    else{
+//        _ticketPriceLabel.text = [NSString stringWithFormat:@"%d",model.price.intValue];
+//        _priceTitleLabel.text = @"元";
+//        _lbExplainInfo.text = @"";
+//    }
+//}
+
 @end

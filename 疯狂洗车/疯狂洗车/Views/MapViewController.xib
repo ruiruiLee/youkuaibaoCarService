@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController">
+            <connections>
+                <outlet property="cityTableview" destination="cGw-6f-6t5" id="SJ5-af-Vwg"/>
+                <outlet property="mapPin" destination="EvD-DO-yV5" id="dwI-6X-cnp"/>
+                <outlet property="mapView" destination="uM9-EK-WVO" id="JMZ-nY-P3e"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cGw-6f-6t5">
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="AhT-5w-cpt"/>
+                        <outlet property="delegate" destination="-1" id="7ku-aq-RWX"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uM9-EK-WVO" customClass="BMKMapView">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EvD-DO-yV5">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="35" id="OK4-16-zLE"/>
+                                <constraint firstAttribute="height" constant="35" id="rf9-pX-Syh"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="serach_Map.png"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="EvD-DO-yV5" firstAttribute="centerX" secondItem="uM9-EK-WVO" secondAttribute="centerX" id="Nb5-WX-n8S"/>
+                        <constraint firstItem="EvD-DO-yV5" firstAttribute="centerY" secondItem="uM9-EK-WVO" secondAttribute="centerY" constant="-15" id="a7v-sg-wng"/>
+                        <constraint firstAttribute="height" constant="200" id="g7a-NS-yNJ"/>
+                        <constraint firstItem="EvD-DO-yV5" firstAttribute="centerY" secondItem="uM9-EK-WVO" secondAttribute="centerY" constant="-15" id="h2v-Un-l2Z"/>
+                        <constraint firstItem="EvD-DO-yV5" firstAttribute="centerX" secondItem="uM9-EK-WVO" secondAttribute="centerX" id="vzp-7i-OfG"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="uM9-EK-WVO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2dd-mU-ZvQ"/>
+                <constraint firstItem="uM9-EK-WVO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="651-SB-iNa"/>
+                <constraint firstAttribute="bottom" secondItem="cGw-6f-6t5" secondAttribute="bottom" id="CsK-2V-Wvq"/>
+                <constraint firstAttribute="trailing" secondItem="uM9-EK-WVO" secondAttribute="trailing" id="KCg-Tg-QEX"/>
+                <constraint firstItem="cGw-6f-6t5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VjQ-SE-Vai"/>
+                <constraint firstItem="cGw-6f-6t5" firstAttribute="top" secondItem="uM9-EK-WVO" secondAttribute="bottom" id="YkR-lV-DYI"/>
+                <constraint firstAttribute="trailing" secondItem="cGw-6f-6t5" secondAttribute="trailing" id="Zv7-II-qQY"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="serach_Map.png" width="228" height="228"/>
+    </resources>
+</document>

@@ -19,11 +19,11 @@
 #import "MyTicketViewController.h"
 #import "OrderSuccessViewController.h"
 #import "ButlerMapViewController.h"
-#import "UPPayPlugin.h"
-#import "UPPayPluginDelegate.h"
+//#import "UPPayPlugin.h"
+//#import "UPPayPluginDelegate.h"
 
 
-@interface ButlerOrderViewController ()<MoreRequestDelegate,AddressSelectDelegate,AddNewCarDelegate,MyTicketDelegate,UPPayPluginDelegate>
+@interface ButlerOrderViewController ()<MoreRequestDelegate,AddressSelectDelegate,AddNewCarDelegate,MyTicketDelegate>//,UPPayPluginDelegate>
 {
     
     NSInteger       _currentPayType;
@@ -953,10 +953,10 @@
                  {
                      [MBProgressHUD hideAllHUDsForView:self.view
                                               animated:YES];
-                     [UPPayPlugin startPay:payRespone.trade_no
-                                      mode:payRespone.mode
-                            viewController:self
-                                  delegate:self];
+//                     [UPPayPlugin startPay:payRespone.trade_no
+//                                      mode:payRespone.mode
+//                            viewController:self
+//                                  delegate:self];
                      
                  }
                                 exceptionResponse:^(NSError *error) {

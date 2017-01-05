@@ -167,6 +167,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 }
 
 + (BOOL)hideHUDForView:(UIView *)view animated:(BOOL)animated {
+    if([[MBProgressHUD allHUDsForView:view] count] > 1)
+        animated = NO;
 	MBProgressHUD *hud = [self HUDForView:view];
 	if (hud != nil) {
 		hud.removeFromSuperViewOnHide = YES;
@@ -403,6 +405,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	isFinished = YES;
 	self.alpha = 0.0f;
 	if (removeFromSuperViewOnHide) {
+        NSLog(@"%@", self);
 		[self removeFromSuperview];
 	}
 #if NS_BLOCKS_AVAILABLE

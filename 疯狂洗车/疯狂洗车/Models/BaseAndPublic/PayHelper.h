@@ -24,6 +24,8 @@
 
 }
 
++ (id)defaultHelper;
+
 + (void)startAlipayWithPrice:(NSString*)payPrice
                 andUserCarID:(NSString*)carID
                 andCarWashID:(NSString*)carWashId

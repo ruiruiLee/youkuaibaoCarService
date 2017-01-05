@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheXianOrderListVC">
+            <connections>
+                <outlet property="_listTable" destination="zhn-hV-yJy" id="4p3-eM-VDk"/>
+                <outlet property="_noOrderView" destination="IK2-Qt-jdg" id="mjl-Is-nqb"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IK2-Qt-jdg">
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="img_order_null" translatesAutoresizingMaskIntoConstraints="NO" id="SsK-AM-pGZ">
+                            <frame key="frameInset" minX="264" width="52" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="56" id="CvW-QA-2w5"/>
+                                <constraint firstAttribute="width" constant="52" id="pLj-3q-L8z"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="您还没有车险保单！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEu-La-ZJR">
+                            <frame key="frameInset" minX="191" minY="76" width="198" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.46310216189999998" green="0.46308830379999999" blue="0.46309614180000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="SsK-AM-pGZ" firstAttribute="top" secondItem="IK2-Qt-jdg" secondAttribute="top" id="81z-bn-a3E"/>
+                        <constraint firstItem="PEu-La-ZJR" firstAttribute="top" secondItem="SsK-AM-pGZ" secondAttribute="bottom" constant="20" id="8W1-h7-bZp"/>
+                        <constraint firstAttribute="height" constant="200" id="DA3-wt-lb1"/>
+                        <constraint firstAttribute="height" constant="100" id="H8u-Wg-Mss"/>
+                        <constraint firstAttribute="centerX" secondItem="SsK-AM-pGZ" secondAttribute="centerX" id="dL0-RM-YL1"/>
+                        <constraint firstItem="SsK-AM-pGZ" firstAttribute="centerX" secondItem="PEu-La-ZJR" secondAttribute="centerX" id="j5f-ts-YDY"/>
+                        <constraint firstAttribute="width" constant="100" id="l85-3h-Kta"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="l85-3h-Kta"/>
+                            <exclude reference="H8u-Wg-Mss"/>
+                        </mask>
+                    </variation>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zhn-hV-yJy" customClass="HeaderFooterTableView">
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiv-YE-PiZ">
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="GT1-EI-kLB"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="IK2-Qt-jdg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="2z9-Qi-LA6"/>
+                <constraint firstItem="zhn-hV-yJy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7cn-dx-iyg"/>
+                <constraint firstAttribute="bottom" secondItem="zhn-hV-yJy" secondAttribute="bottom" id="B5a-o5-hlT"/>
+                <constraint firstItem="IK2-Qt-jdg" firstAttribute="top" secondItem="wiv-YE-PiZ" secondAttribute="bottom" constant="120" id="BUW-R9-bQE"/>
+                <constraint firstItem="zhn-hV-yJy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XIV-Vg-Msp"/>
+                <constraint firstItem="wiv-YE-PiZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Zfj-Sm-UzH"/>
+                <constraint firstAttribute="trailing" secondItem="wiv-YE-PiZ" secondAttribute="trailing" id="dhu-dQ-owh"/>
+                <constraint firstItem="zhn-hV-yJy" firstAttribute="top" secondItem="wiv-YE-PiZ" secondAttribute="top" id="h7Y-ya-vJw"/>
+                <constraint firstAttribute="trailing" secondItem="IK2-Qt-jdg" secondAttribute="trailing" constant="10" id="nJk-4y-HWx"/>
+                <constraint firstAttribute="trailing" secondItem="zhn-hV-yJy" secondAttribute="trailing" id="qIL-Gh-C8R"/>
+                <constraint firstItem="wiv-YE-PiZ" firstAttribute="top" secondItem="zhn-hV-yJy" secondAttribute="top" id="yvO-mS-aGV"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="img_order_null" width="52" height="56"/>
+    </resources>
+</document>

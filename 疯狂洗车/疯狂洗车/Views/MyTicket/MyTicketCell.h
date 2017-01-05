@@ -13,24 +13,22 @@
 {
     IBOutlet UIView      *_ticketView;
     
-    IBOutlet UILabel     *_componyNameLabel;
-    
     IBOutlet UILabel     *_ticketNameLabel;
     
     IBOutlet UILabel     *_priceTitleLabel;
     IBOutlet UILabel     *_ticketPriceLabel;
     
-    IBOutlet UILabel     *_ticketTimeTitle;
-    IBOutlet UILabel     *_ticketTimeLabel;
-    
+    IBOutlet UILabel     *_ticketBeginTimeLabel;
     IBOutlet UILabel     *_ticketEndTimeLabel;
     IBOutlet UIView      *_ticketInfoView;
-    
-    IBOutlet UILabel     *_payFlagLabel;
     
     IBOutlet UIImageView *_ticketAbilitySoonIcon;
     
     IBOutlet UIImageView *_ticketStatusImageView;
+    
+    IBOutlet UILabel    *_lbExplainInfo;
+    IBOutlet UILabel    *_lbMerchantUse;
+    IBOutlet UILabel    *_lbTicketDescribe;
 }
 
 - (void)setDisplayInfo:(TicketModel*)model;

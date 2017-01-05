@@ -258,4 +258,8 @@ BOOL                    _loginShouldCreate;
                normalResponse:(void(^)(CarInfos *result))normalResponse
             exceptionResponse:(void(^)(void))exceptionResponse;
 
++ (NSDate*) convertDateFromString:(NSString*)string;
+
++ (NSString *) getTicketsStringWIthValue:(NSInteger) value;
+
 @end

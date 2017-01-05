@@ -88,5 +88,7 @@ extern NSString *const NOTELocationChange;
 - (void)updateUserCurrentLocationStreetSuccessResponse:(void(^)(void))successResponse
                                           failResponse:(void(^)(void))failResponse;
 
+- (CLLocation *) getUserCurrentLocation;
+
 
 @end

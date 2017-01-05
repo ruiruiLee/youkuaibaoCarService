@@ -202,6 +202,17 @@ int base64_decode( unsigned char *dst, int *dlen,
 	return data;
 }
 
++ (NSString *) base64Encode:(NSString *) string
+{
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    
+    //2.对二进制数据进行base64编码，返回编码后的字符串
+    
+    return [data base64EncodedStringWithOptions:0];
+}
+
 @end
 
 #endif
