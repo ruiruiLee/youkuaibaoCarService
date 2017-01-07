@@ -688,14 +688,8 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
 
 - (IBAction)didPageButtonTouch:(UIButton *)sender
 {
-//    if (_cityServiceArray == nil || _cityServiceArray.count == 0)
-//    {
-//        [Constants showMessage:@"获取不到城市服务信息，请确认您已打开并允许使用定位功能"];
-//        return;
-//
-//    }
     if (_cityServiceArray == nil || _cityServiceArray.count == 0){
-        [Constants showMessage:@"获取信息失败,清检查你的网络刷新页面！"];
+        [Constants showMessage:@"获取城市服务信息失败,清检查你的网络刷新页面！"];
         return;
     }
     

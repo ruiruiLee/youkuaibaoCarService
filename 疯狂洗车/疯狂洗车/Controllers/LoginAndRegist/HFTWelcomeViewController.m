@@ -90,11 +90,11 @@
             
             if (SCREEN_HEIGHT < 568)
             {
-                cancelButton.frame = CGRectMake(imageView.frame.size.width/2-75, SCREEN_HEIGHT-60, 150, 40);
+                cancelButton.frame = CGRectMake(imageView.frame.size.width/2-75, SCREEN_HEIGHT-96, 150, 40);
             }
             else
             {
-                cancelButton.frame = CGRectMake(imageView.frame.size.width/2-75, SCREEN_HEIGHT-105*SCREEN_WIDTH/375.0, 150, 40);
+                cancelButton.frame = CGRectMake(imageView.frame.size.width/2-75, SCREEN_HEIGHT-105*SCREEN_WIDTH/375.0 - 36, 150, 40);
             }
             [cancelButton setTitle:@"立即体验" forState:UIControlStateNormal];
             [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

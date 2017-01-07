@@ -35,7 +35,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0Z-Eq-U6t">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0Z-Eq-U6t">
                         <frame key="frameInset" minX="22" minY="39" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="crH-Nn-gk2"/>
@@ -138,7 +138,7 @@
                     <constraint firstItem="qQ2-26-4oV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="0W1-fH-Eso"/>
                     <constraint firstItem="trb-VA-0Ng" firstAttribute="centerY" secondItem="qQ2-26-4oV" secondAttribute="centerY" id="2iM-N6-OFr"/>
                     <constraint firstAttribute="trailing" secondItem="Exg-w1-8rj" secondAttribute="trailing" constant="15" id="3Ey-jL-P3H"/>
-                    <constraint firstItem="P0Z-Eq-U6t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="14" id="EKt-jz-yyv"/>
+                    <constraint firstItem="P0Z-Eq-U6t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="EKt-jz-yyv"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nZV-7P-wbn" secondAttribute="trailing" constant="8" id="F1I-xm-GDJ"/>
                     <constraint firstItem="SR2-cK-qud" firstAttribute="top" secondItem="WZt-at-fDp" secondAttribute="bottom" id="FIW-LK-3QB"/>
                     <constraint firstItem="Hrm-AM-9AE" firstAttribute="leading" secondItem="P0Z-Eq-U6t" secondAttribute="trailing" constant="10" id="Fl9-aY-5z6"/>

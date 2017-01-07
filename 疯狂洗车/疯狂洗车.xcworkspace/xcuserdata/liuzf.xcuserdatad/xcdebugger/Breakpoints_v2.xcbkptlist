@@ -201,54 +201,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/Appoint/BaseAppointVC.m"
-            timestampString = "505212204.289607"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "934"
-            endingLineNumber = "934"
-            landmarkName = "-didRightButtonTouch"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[BaseAppointVC didRightButtonTouch]"
-                  moduleName = "CarWash"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Appoint/BaseAppointVC.m"
-                  timestampString = "505301573.092031"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "934"
-                  endingLineNumber = "934"
-                  offsetFromSymbolStart = "584">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__36-[BaseAppointVC didRightButtonTouch]_block_invoke"
-                  moduleName = "CarWash"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Appoint/BaseAppointVC.m"
-                  timestampString = "505301573.093865"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "934"
-                  endingLineNumber = "934"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/Order/CarWashOrderViewController.m"
             timestampString = "505218988.02048"
             startingColumnNumber = "9223372036854775807"
@@ -266,12 +218,12 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505301573.097816"
+                  timestampString = "505392814.617081"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
                   endingLineNumber = "2005"
-                  offsetFromSymbolStart = "696">
+                  offsetFromSymbolStart = "624">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -281,12 +233,12 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505301573.100225"
+                  timestampString = "505392814.621161"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
                   endingLineNumber = "2005"
-                  offsetFromSymbolStart = "116">
+                  offsetFromSymbolStart = "108">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -296,12 +248,12 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505301573.103776"
+                  timestampString = "505392814.624498"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
                   endingLineNumber = "2005"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "59">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -479,6 +431,22 @@
             startingLineNumber = "55"
             endingLineNumber = "55"
             landmarkName = "-loadShareInfo"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/RescueAppointVC.m"
+            timestampString = "505370877.108349"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
+            landmarkName = "-onGetReverseGeoCodeResult:result:errorCode:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

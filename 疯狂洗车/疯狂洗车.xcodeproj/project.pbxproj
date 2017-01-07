@@ -5624,8 +5624,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Zhu (6NN7QK522Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Zhu (6NN7QK522Y)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu You Kuai Bao Network Technology Co., Ltd. (Q8Z5QWUAGN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu You Kuai Bao Network Technology Co., Ltd. (Q8Z5QWUAGN)";
 				DEVELOPMENT_TEAM = Q8Z5QWUAGN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5667,8 +5667,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = CarWash;
-				PROVISIONING_PROFILE = "e334ecc0-c55c-435f-9a3b-cffec8ecd993";
-				PROVISIONING_PROFILE_SPECIFIER = CarWashDevelopment;
+				PROVISIONING_PROFILE = "80f959a7-a910-4c82-a1a6-2201cb049ccd";
+				PROVISIONING_PROFILE_SPECIFIER = CrazyCarWashDisProfile0307;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
 			};
@@ -5680,9 +5680,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Zhu (6NN7QK522Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Zhu (6NN7QK522Y)";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu You Kuai Bao Network Technology Co., Ltd. (Q8Z5QWUAGN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu You Kuai Bao Network Technology Co., Ltd. (Q8Z5QWUAGN)";
+				DEVELOPMENT_TEAM = Q8Z5QWUAGN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5722,8 +5722,8 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = CarWash;
-				PROVISIONING_PROFILE = "e334ecc0-c55c-435f-9a3b-cffec8ecd993";
-				PROVISIONING_PROFILE_SPECIFIER = CarWashDevelopment;
+				PROVISIONING_PROFILE = "80f959a7-a910-4c82-a1a6-2201cb049ccd";
+				PROVISIONING_PROFILE_SPECIFIER = CrazyCarWashDisProfile0307;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
 			};
