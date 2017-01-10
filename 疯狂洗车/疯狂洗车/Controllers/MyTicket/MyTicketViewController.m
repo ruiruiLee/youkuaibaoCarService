@@ -13,6 +13,9 @@
 #import "ActivitysController.h"
 #import "CheXiaoBaoViewController.h"
 #import "define.h"
+#import "UIView+Toast.h"
+
+#import "PresentedTicketsViewController.h"
 
 
 
@@ -29,6 +32,11 @@
 
 static NSString *myTicketCellIndentifier = @"MyTicketCell";
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPresentSuccessAndRefreshTicketsListNotification object:nil];
+}
+
 
 - (void)viewDidLoad
 {
@@ -43,7 +51,7 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
     rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
 
     
-    if ([self.delegate respondsToSelector:@selector(didFinishTicketSelect:)])//当用户由车服务下单页面进入优惠券列表事的显示设置
+    if (!self.isInMine)//当用户由车服务下单页面进入优惠券列表事的显示设置
     {
         [rightBtn setTitle:@"使用说明" forState:UIControlStateNormal];
         [rightBtn setTitleColor:[UIColor colorWithRed:96.0/255.0
@@ -55,60 +63,38 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
            forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
         [self.navigationItem setRightBarButtonItem:rightItem];
-        
-//        [rightBtn setTitle:@"不使用券" forState:UIControlStateNormal];
-//        [rightBtn setTitleColor:self.isClubController?[UIColor whiteColor]:[UIColor colorWithRed:96.0/255.0
-//                                                green:96.0/255.0
-//                                                 blue:96.0/255.0
-//                                                alpha:1.0] forState:UIControlStateNormal];
-//        [rightBtn addTarget:self action:@selector(didCleanTicketSelect) forControlEvents:UIControlEventTouchUpInside];
-//        
-        
-        //该情况不需要显示顶部segment
-//        _topView.hidden = YES;
-//        for (int x = 0; x<_topView.constraints.count; x++)
-//        {
-//            NSLayoutConstraint *layoutConstraint = _topView.constraints[x];
-//            if (layoutConstraint.firstAttribute == NSLayoutAttributeHeight)
-//            {
-//                [_topView removeConstraint:layoutConstraint];
-//                break;
-//            }
-//            
-//        }
-//        NSDictionary* views = NSDictionaryOfVariableBindings(_topView);
-//        NSString *constrainString = [NSString stringWithFormat:@"V:[_topView(%d)]",0];
-//        
-//        [_topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constrainString
-//                                                                            options:0
-//                                                                            metrics:nil
-//                                                                              views:views]];
-
-//        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-//        [self.navigationItem setRightBarButtonItem:rightItem];
     }
     else//当用户由“我的”页面进入优惠券列表事的显示设置
     {
-//        if (_appconfig.service_code_intro == nil || [_appconfig.service_code_intro isEqualToString:@""])
-//        {
-//            
-//        }
-//        else
-//        {
-            [rightBtn setTitle:@"使用说明" forState:UIControlStateNormal];
-            [rightBtn setTitleColor:[UIColor colorWithRed:96.0/255.0
-                                                    green:96.0/255.0
-                                                     blue:96.0/255.0
-                                                    alpha:1.0] forState:UIControlStateNormal];
-            [rightBtn addTarget:self
-                         action:@selector(didRightButtonTouch)
-               forControlEvents:UIControlEventTouchUpInside];
-            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-            [self.navigationItem setRightBarButtonItem:rightItem];
-//        }
-
+//        [rightBtn setTitle:@"转赠" forState:UIControlStateNormal];
+//        [rightBtn setTitleColor:[UIColor colorWithRed:0xff/255.0
+//                                                green:0x66/255.0
+//                                                 blue:0x19/255.0
+//                                                alpha:1.0] forState:UIControlStateNormal];
+//        [rightBtn addTarget:self
+//                     action:@selector(doBtnPresentedViewController)
+//           forControlEvents:UIControlEventTouchUpInside];
+//        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+//        [self.navigationItem setRightBarButtonItem:rightItem];
+//        rightBtn.frame = CGRectMake(0, 0, 50, 36);
+//        
+//        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+//        headerView.backgroundColor = _COLOR(0xe3, 0xe3, 0xe3);
+//        
+//        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 84, 2, 78, 36)];
+//        btn.titleLabel.font = [UIFont systemFontOfSize:16];
+//        [btn setTitle:@"使用说明" forState:UIControlStateNormal];
+//        [btn setTitleColor:[UIColor colorWithRed:96.0/255.0
+//                                           green:96.0/255.0
+//                                            blue:96.0/255.0
+//                                           alpha:1.0] forState:UIControlStateNormal];
+//        [btn addTarget:self
+//                action:@selector(didRightButtonTouch)
+//      forControlEvents:UIControlEventTouchUpInside];
+//        [headerView addSubview:btn];
+//        
+//        _ticketListTableView.tableHeaderView = headerView;
     }
-
     
     [_ticketListTableView registerNib:[UINib nibWithNibName:myTicketCellIndentifier
                                                      bundle:[NSBundle mainBundle]]
@@ -121,8 +107,16 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
                                              action:@selector(getMoreUserTickets)];
 
 
+    _pageIndex = 1;
+    [_ticketListTableView tableViewHeaderBeginRefreshing];
     
-    [self getAllUserTickets];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyRefreshTicketsList:) name:kPresentSuccessAndRefreshTicketsListNotification object:nil];
+}
+
+- (void) notifyRefreshTicketsList:(NSNotification *) notify
+{
+    _pageIndex = 1;
+    [_ticketListTableView tableViewHeaderBeginRefreshing];
 }
 
 #pragma mark - 选择顶部segmented切换券状态 Method
@@ -139,43 +133,12 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
     _pageIndex = 1;
     NSDictionary *submitDic = nil;
     
-//    if (_topView.hidden)
-//    {
-//        submitDic = @{@"service_type":self.serviceType,
-//                      @"member_id":_userInfo.member_id,
-//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-//                      @"page_size":@"20",
-//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-//                      @"is_used":@"3"};
-//
-//    }
-//    else if (_segmentControl.selectedSegmentIndex == 0)
-//    {
       submitDic = @{@"service_type":self.serviceType,
                     @"member_id":_userInfo.member_id,
                     @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
                     @"page_size":@"20",
                     @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
                     @"is_used":@"0"};
-//    }
-//    else if (_segmentControl.selectedSegmentIndex == 1)
-//    {
-//        submitDic = @{@"service_type":self.serviceType,
-//                      @"member_id":_userInfo.member_id,
-//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-//                      @"page_size":@"20",
-//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-//                      @"is_used":@"1"};
-//    }
-//    else
-//    {
-//        submitDic = @{@"service_type":self.serviceType,
-//                      @"member_id":_userInfo.member_id,
-//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-//                      @"page_size":@"20",
-//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-//                      @"is_used":@"2"};
-//    }
     
     self.view.userInteractionEnabled = NO;
     [WebService requestJsonArrayWXOperationWithParam:submitDic
@@ -183,6 +146,45 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
                                         modelClass:[TicketModel class]
                                     normalResponse:^(NSString *status, id data, NSMutableArray *array)
     {
+        if(self.isInMine){
+            if(array.count == 0){
+                UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] init]];
+                [self.navigationItem setRightBarButtonItem:rightItem];
+            }else
+            {
+                UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 68, 36)];
+                rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+                [rightBtn setTitle:@"转赠" forState:UIControlStateNormal];
+                [rightBtn setTitleColor:[UIColor colorWithRed:0xff/255.0
+                                                        green:0x66/255.0
+                                                         blue:0x19/255.0
+                                                        alpha:1.0] forState:UIControlStateNormal];
+                [rightBtn addTarget:self
+                             action:@selector(doBtnPresentedViewController)
+                   forControlEvents:UIControlEventTouchUpInside];
+                UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+                [self.navigationItem setRightBarButtonItem:rightItem];
+                rightBtn.frame = CGRectMake(0, 0, 50, 36);
+                
+                UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+                headerView.backgroundColor = _COLOR(0xe3, 0xe3, 0xe3);
+                
+                UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 2, 88, 36)];
+                btn.titleLabel.font = [UIFont systemFontOfSize:16];
+                [btn setTitle:@"?使用说明" forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor colorWithRed:96.0/255.0
+                                                   green:96.0/255.0
+                                                    blue:96.0/255.0
+                                                   alpha:1.0] forState:UIControlStateNormal];
+                [btn addTarget:self
+                        action:@selector(didRightButtonTouch)
+              forControlEvents:UIControlEventTouchUpInside];
+                [headerView addSubview:btn];
+                
+                _ticketListTableView.tableHeaderView = headerView;
+            }
+        }
+        
         if (status.intValue > 0 && array.count > 0)
         {
             if (_pageIndex == 1)
@@ -193,7 +195,6 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
             {
                 [_ticketArray addObjectsFromArray:array];
             }
-            [_ticketListTableView tableViewHeaderEndRefreshing];
             if (array.count >= 20)
             {
                 _canLoadMore = YES;
@@ -222,6 +223,7 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
             _canLoadMore = NO;
         }
         self.view.userInteractionEnabled = YES;
+        [_ticketListTableView tableViewHeaderEndRefreshing];
     }
                                  exceptionResponse:^(NSError *error)
     {
@@ -230,6 +232,7 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
         _ticketListTableView.hidden = YES;
         _canLoadMore = NO;
         [_ticketListTableView tableViewHeaderEndRefreshing];
+        [self.view makeToast:[error domain]];
 
     }];
 }
@@ -242,43 +245,14 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
         return;
     }
     NSDictionary *submitDic = nil;
-//    if (_topView.hidden)
-//    {
-//        submitDic = @{@"service_type":self.serviceType,
-//                      @"member_id":_userInfo.member_id,
-//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-//                      @"page_size":@"20",
-//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-//                      @"is_used":@"3"};
-//        
-//    }
-//    else if (_segmentControl.selectedSegmentIndex == 0)
-//    {
+
         submitDic = @{@"service_type":self.serviceType,
                       @"member_id":_userInfo.member_id,
                       @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
                       @"page_size":@"20",
                       @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
                       @"is_used":@"0"};
-//    }
-//    else if (_segmentControl.selectedSegmentIndex == 1)
-//    {
-//        submitDic = @{@"service_type":self.serviceType,
-//                      @"member_id":_userInfo.member_id,
-//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-//                      @"page_size":@"20",
-//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-//                      @"is_used":@"1"};
-//    }
-//    else
-//    {
-//        submitDic = @{@"service_type":self.serviceType,
-//                      @"member_id":_userInfo.member_id,
-//                      @"page_index":[NSString stringWithFormat:@"%d",_pageIndex],
-//                      @"page_size":@"20",
-//                      @"car_wash_id":self.targetCarWashID == nil?@"":self.targetCarWashID,
-//                      @"is_used":@"2"};
-//    }
+
 
     self.view.userInteractionEnabled = NO;
     [WebService requestJsonArrayWXOperationWithParam:submitDic
@@ -332,6 +306,7 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
          _noTickeyImageView.hidden = NO;
          _ticketListTableView.hidden = YES;
          _canLoadMore = NO;
+         [self.view makeToast:[error domain]];
      }];
 }
 
@@ -390,6 +365,12 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
 
 #pragma mark - 跳转至使用说明 Method
 
+- (void) doBtnPresentedViewController
+{
+    PresentedTicketsViewController *vc = [[PresentedTicketsViewController alloc] initWithNibName:@"PresentedTicketsViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)didRightButtonTouch
 {
 //    ADVModel *model = [[ADVModel alloc] init];
@@ -414,14 +395,6 @@ static NSString *myTicketCellIndentifier = @"MyTicketCell";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -249,7 +249,7 @@ static NSString *orderRealPayInfoCellIdentifier = @"OrderRealPayInfoCell";
 - (void)getUserAllTicketsFromService
 {
     self.view.userInteractionEnabled = YES;
-    if (!_userInfo.member_id)//根据是否登陆更新显示
+    if (!_userInfo.member_id)//根据是否登录更新显示
     {
         
         [self updateDisplayPayPrice];

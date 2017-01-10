@@ -567,6 +567,10 @@
 		86E5A7E41E00028700D2ABF3 /* PaySuccessedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86E5A7E21E00028700D2ABF3 /* PaySuccessedVC.xib */; };
 		86E5A7E81E0002AC00D2ABF3 /* AppointSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 86E5A7E61E0002AC00D2ABF3 /* AppointSuccessVC.m */; };
 		86E5A7E91E0002AC00D2ABF3 /* AppointSuccessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86E5A7E71E0002AC00D2ABF3 /* AppointSuccessVC.xib */; };
+		86F4192E1E20BE2100B02FE8 /* PresentedTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F4192C1E20BE2100B02FE8 /* PresentedTicketsViewController.m */; };
+		86F4192F1E20BE2100B02FE8 /* PresentedTicketsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F4192D1E20BE2100B02FE8 /* PresentedTicketsViewController.xib */; };
+		86F419331E20C8F800B02FE8 /* PresentedTicketsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F419311E20C8F800B02FE8 /* PresentedTicketsTableViewCell.m */; };
+		86F419341E20C8F800B02FE8 /* PresentedTicketsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F419321E20C8F800B02FE8 /* PresentedTicketsTableViewCell.xib */; };
 		BBD2A8C4737CAA520BF23261 /* libPods-疯狂洗车.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 898A34CC1700F2D771827A4A /* libPods-疯狂洗车.a */; };
 		DE2B389E1A7380770037679F /* UIUnderlinedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2B389D1A7380770037679F /* UIUnderlinedButton.m */; };
 		DE2B38A21A73CE400037679F /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2B38A11A73CE400037679F /* UIView+Toast.m */; };
@@ -1694,6 +1698,12 @@
 		86E5A7E51E0002AC00D2ABF3 /* AppointSuccessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointSuccessVC.h; sourceTree = "<group>"; };
 		86E5A7E61E0002AC00D2ABF3 /* AppointSuccessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointSuccessVC.m; sourceTree = "<group>"; };
 		86E5A7E71E0002AC00D2ABF3 /* AppointSuccessVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppointSuccessVC.xib; sourceTree = "<group>"; };
+		86F4192B1E20BE2100B02FE8 /* PresentedTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentedTicketsViewController.h; sourceTree = "<group>"; };
+		86F4192C1E20BE2100B02FE8 /* PresentedTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentedTicketsViewController.m; sourceTree = "<group>"; };
+		86F4192D1E20BE2100B02FE8 /* PresentedTicketsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentedTicketsViewController.xib; sourceTree = "<group>"; };
+		86F419301E20C8F800B02FE8 /* PresentedTicketsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentedTicketsTableViewCell.h; sourceTree = "<group>"; };
+		86F419311E20C8F800B02FE8 /* PresentedTicketsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentedTicketsTableViewCell.m; sourceTree = "<group>"; };
+		86F419321E20C8F800B02FE8 /* PresentedTicketsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentedTicketsTableViewCell.xib; sourceTree = "<group>"; };
 		898A34CC1700F2D771827A4A /* libPods-疯狂洗车.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-疯狂洗车.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE2B389C1A7380770037679F /* UIUnderlinedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUnderlinedButton.h; sourceTree = "<group>"; };
 		DE2B389D1A7380770037679F /* UIUnderlinedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIUnderlinedButton.m; sourceTree = "<group>"; };
@@ -2902,6 +2912,9 @@
 				28C1CA461B0DE4C10006EA8D /* MyTicketViewController.h */,
 				28C1CA471B0DE4C10006EA8D /* MyTicketViewController.m */,
 				28C1CA481B0DE4C10006EA8D /* MyTicketViewController.xib */,
+				86F4192B1E20BE2100B02FE8 /* PresentedTicketsViewController.h */,
+				86F4192C1E20BE2100B02FE8 /* PresentedTicketsViewController.m */,
+				86F4192D1E20BE2100B02FE8 /* PresentedTicketsViewController.xib */,
 			);
 			path = MyTicket;
 			sourceTree = "<group>";
@@ -2914,6 +2927,9 @@
 				28C1CA4E1B0DE5D20006EA8D /* MyTicketCell.xib */,
 				28C1CA511B0DEAF10006EA8D /* MyTicketCycleView.h */,
 				28C1CA521B0DEAF10006EA8D /* MyTicketCycleView.m */,
+				86F419301E20C8F800B02FE8 /* PresentedTicketsTableViewCell.h */,
+				86F419311E20C8F800B02FE8 /* PresentedTicketsTableViewCell.m */,
+				86F419321E20C8F800B02FE8 /* PresentedTicketsTableViewCell.xib */,
 			);
 			path = MyTicket;
 			sourceTree = "<group>";
@@ -4779,6 +4795,7 @@
 				FEB2035C1A78C552008407C3 /* ActivitysController.xib in Resources */,
 				2827240A1B5390E500E1DDBE /* MessageListCell.xib in Resources */,
 				289194831BE3408500F656AB /* ServiceDetailCell.xib in Resources */,
+				86F4192F1E20BE2100B02FE8 /* PresentedTicketsViewController.xib in Resources */,
 				28445C011AEF3BC8006DC3BF /* ChartCell.xib in Resources */,
 				2866FFE21AC5138300C17D78 /* BottomCarWashView.xib in Resources */,
 				28307AFC1B704E79004BD4D2 /* MainAdvView_6.xib in Resources */,
@@ -4931,6 +4948,7 @@
 				2867F88B1B4E94D2003CE0F8 /* InsuranceRatiosCell.xib in Resources */,
 				28EC575B1C156BDD007CA277 /* MineFundationCell.xib in Resources */,
 				28A10F891B2A8B7200552534 /* ButlerDetailViewController.xib in Resources */,
+				86F419341E20C8F800B02FE8 /* PresentedTicketsTableViewCell.xib in Resources */,
 				285FF8851C58C9D60090807B /* CarServiceSelectHeaderView.xib in Resources */,
 				28C1CA281B0D8CDC0006EA8D /* MineTicketCell.xib in Resources */,
 				28547DAD1B0338AA00373FE2 /* PayWayCell.xib in Resources */,
@@ -5122,6 +5140,7 @@
 				28F036B21B1C515F002355C4 /* SDWebImageDecoder.m in Sources */,
 				282723FE1B536A9000E1DDBE /* MessageModel.m in Sources */,
 				28DF2C3E1B5E34FA00B14A24 /* KGStatusBar.m in Sources */,
+				86F4192E1E20BE2100B02FE8 /* PresentedTicketsViewController.m in Sources */,
 				28CB56F91BD5F1E9001A4504 /* InsuranceDetailsViewController.m in Sources */,
 				FE81460D1A6E015300D213C8 /* ASIS3BucketObject.m in Sources */,
 				FE8146171A6E015300D213C8 /* MBProgressHUD.m in Sources */,
@@ -5345,6 +5364,7 @@
 				28F036C51B1C515F002355C4 /* LFRoundProgressView.m in Sources */,
 				28255B271ADBB29300515AC5 /* PayModel.m in Sources */,
 				28EC575A1C156BDD007CA277 /* MineFundationCell.m in Sources */,
+				86F419331E20C8F800B02FE8 /* PresentedTicketsTableViewCell.m in Sources */,
 				28A10F941B2AAE1600552534 /* BottomButlerView.m in Sources */,
 				284887D01B47739E0097B054 /* MapNavigationViewController.m in Sources */,
 				281CD9921BEC504000320613 /* UIView+MJExtension.m in Sources */,

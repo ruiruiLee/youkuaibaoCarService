@@ -151,13 +151,13 @@
                                     <constraint firstItem="ewW-Sp-nLc" firstAttribute="top" secondItem="waq-db-csd" secondAttribute="top" constant="15" id="Fmb-1J-y9e"/>
                                     <constraint firstItem="qUZ-Mf-qak" firstAttribute="leading" secondItem="YfM-sO-NxK" secondAttribute="leading" id="HyR-2X-avk"/>
                                     <constraint firstItem="m56-ja-fON" firstAttribute="leading" secondItem="qUZ-Mf-qak" secondAttribute="trailing" id="NKk-aA-qkQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="CpX-wU-rf1" secondAttribute="bottom" constant="10" id="Qvp-ej-sxt"/>
+                                    <constraint firstAttribute="bottom" secondItem="CpX-wU-rf1" secondAttribute="bottom" constant="12" id="Qvp-ej-sxt"/>
                                     <constraint firstItem="CpX-wU-rf1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2Ny-c7-8bb" secondAttribute="bottom" constant="4" id="bbX-Ri-oyb"/>
                                     <constraint firstItem="YfM-sO-NxK" firstAttribute="top" secondItem="waq-db-csd" secondAttribute="top" constant="12" id="dmG-KM-zK0"/>
                                     <constraint firstItem="eBu-2k-tvh" firstAttribute="leading" secondItem="YfM-sO-NxK" secondAttribute="trailing" id="nuV-pj-H7E"/>
                                     <constraint firstItem="eBu-2k-tvh" firstAttribute="baseline" secondItem="YfM-sO-NxK" secondAttribute="baseline" id="q0J-jm-vTy"/>
                                     <constraint firstItem="2Ny-c7-8bb" firstAttribute="leading" secondItem="YfM-sO-NxK" secondAttribute="leading" id="wQM-wH-VcU"/>
-                                    <constraint firstAttribute="trailing" secondItem="CpX-wU-rf1" secondAttribute="trailing" constant="15" id="zqU-8W-OAi"/>
+                                    <constraint firstAttribute="trailing" secondItem="CpX-wU-rf1" secondAttribute="trailing" constant="75" id="zqU-8W-OAi"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -190,11 +190,11 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="6RX-5k-JeJ"/>
                                 <exclude reference="7L9-13-Zz8"/>
                                 <exclude reference="Gax-85-MwO"/>
                                 <exclude reference="VIS-QB-92D"/>
                                 <exclude reference="ZDw-EA-G9G"/>
+                                <exclude reference="6RX-5k-JeJ"/>
                             </mask>
                         </variation>
                     </view>
@@ -215,6 +215,7 @@
                 <outlet property="_priceTitleLabel" destination="f9F-H1-4ZN" id="gD6-TV-2v9"/>
                 <outlet property="_ticketAbilitySoonIcon" destination="ewW-Sp-nLc" id="6oq-8I-5G5"/>
                 <outlet property="_ticketBeginTimeLabel" destination="qUZ-Mf-qak" id="PU7-vb-kdJ"/>
+                <outlet property="_ticketBgView" destination="Sho-Wt-Q9r" id="RGG-KC-aca"/>
                 <outlet property="_ticketEndTimeLabel" destination="m56-ja-fON" id="yf3-hz-2QL"/>
                 <outlet property="_ticketInfoView" destination="waq-db-csd" id="EfY-fI-wQ2"/>
                 <outlet property="_ticketNameLabel" destination="YfM-sO-NxK" id="bQf-Yi-YuB"/>

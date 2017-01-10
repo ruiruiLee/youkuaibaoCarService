@@ -93,6 +93,14 @@
 
 }
 
+/****************************************
+ ****************************************
+ **                                    **
+ ** 上线打包使用，发送真实验证码            **
+ **                                    **
+ ****************************************
+ ****************************************/
+
 - (IBAction)didSubmitButtonTouch:(id)sender
 {
     [self closeKeyBoard];
@@ -109,69 +117,99 @@
     }
     else if (self.viewController == nil || ![_mobileField.text isEqualToString:self.viewController.mobile])
     {
-//        self.view.userInteractionEnabled = NO;
-//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//        
-//        NSDictionary *submitDic = @{@"phone":_mobileField.text,
-//                                    @"verify_type":@"1",
-//                                    @"user_type":@"1",
-//                                    @"code_type":@"1"};
-//        [WebService requestJsonOperationWithParam:submitDic
-//                                           action:@"code/service/get"
-//                                   normalResponse:^(NSString *status, id data)
-//         {
-//             if (status.intValue > 0)
-//             {
-//                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//                 [MBProgressHUD showSuccess:@"验证码获取成功!" toView:[[[UIApplication sharedApplication] delegate] window]];
-//                 
-//                 self.viewController = [[QuickLoginCheckViewController alloc] initWithNibName:@"QuickLoginCheckViewController"
-//                                                                                       bundle:nil];
-//                 self.viewController.mobile = _mobileField.text;
-//                 [self.navigationController pushViewController:self.viewController animated:YES];
-//             }
-//             else
-//             {
-//                 [MBProgressHUD hideAllHUDsForView:self.view
-//                                          animated:YES];
-//                 [MBProgressHUD showError:@"获取验证码失败"
-//                                   toView:self.view];
-//             }
-//             self.view.userInteractionEnabled = YES;
-//         }
-//                                exceptionResponse:^(NSError *error)
-//         {
-//             [MBProgressHUD hideAllHUDsForView:self.view
-//                                      animated:YES];
-//
-//             [MBProgressHUD showError:[error domain]
-//                               toView:[[[UIApplication sharedApplication] delegate] window]];
-//
-//             self.view.userInteractionEnabled = YES;
-//             if (self.viewController == nil)
-//             {
-//                 self.viewController = [[QuickLoginCheckViewController alloc] initWithNibName:@"QuickLoginCheckViewController"
-//                                                                                       bundle:nil];
-//             }
-//             self.viewController.mobile = _mobileField.text;
-//             [self.navigationController pushViewController:self.viewController animated:YES];
-//         }];
+        self.view.userInteractionEnabled = NO;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        NSDictionary *submitDic = @{@"phone":_mobileField.text,
+                                    @"verify_type":@"1",
+                                    @"user_type":@"1",
+                                    @"code_type":@"1"};
+        [WebService requestJsonOperationWithParam:submitDic
+                                           action:@"code/service/get"
+                                   normalResponse:^(NSString *status, id data)
+         {
+             if (status.intValue > 0)
+             {
+                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                 [MBProgressHUD showSuccess:@"验证码获取成功!" toView:[[[UIApplication sharedApplication] delegate] window]];
+                 
+                 self.viewController = [[QuickLoginCheckViewController alloc] initWithNibName:@"QuickLoginCheckViewController"
+                                                                                       bundle:nil];
+                 self.viewController.mobile = _mobileField.text;
+                 [self.navigationController pushViewController:self.viewController animated:YES];
+             }
+             else
+             {
+                 [MBProgressHUD hideAllHUDsForView:self.view
+                                          animated:YES];
+                 [MBProgressHUD showError:@"获取验证码失败"
+                                   toView:self.view];
+             }
+             self.view.userInteractionEnabled = YES;
+         }
+                                exceptionResponse:^(NSError *error)
+         {
+             [MBProgressHUD hideAllHUDsForView:self.view
+                                      animated:YES];
+
+             [MBProgressHUD showError:[error domain]
+                               toView:[[[UIApplication sharedApplication] delegate] window]];
+
+             self.view.userInteractionEnabled = YES;
+             if (self.viewController == nil)
+             {
+                 self.viewController = [[QuickLoginCheckViewController alloc] initWithNibName:@"QuickLoginCheckViewController"
+                                                                                       bundle:nil];
+             }
+             self.viewController.mobile = _mobileField.text;
+             [self.navigationController pushViewController:self.viewController animated:YES];
+         }];
     }
     else
     {
-//        self.viewController.mobile = _mobileField.text;
-//        [self.navigationController pushViewController:self.viewController animated:YES];
+        self.viewController.mobile = _mobileField.text;
+        [self.navigationController pushViewController:self.viewController animated:YES];
     }
-    if (self.viewController == nil)
-    {
-        self.viewController = [[QuickLoginCheckViewController alloc] initWithNibName:@"QuickLoginCheckViewController"
-                                                                              bundle:nil];
-    }
-    self.viewController.mobile = _mobileField.text;
-    [self.navigationController pushViewController:self.viewController animated:YES];
 }
 
 
+/****************************************
+ ****************************************
+ **                                    **
+ ** 测试登陆使用不发送真实验证码            **
+ **                                    **
+ ****************************************
+ ****************************************/
+
+//- (IBAction)didSubmitButtonTouch:(id)sender
+//{
+//    [self closeKeyBoard];
+//    
+//    if (!_mobileField.text || [_mobileField.text length] == 0)
+//    {
+//        [self.view makeToast:@"请输入您的手机号"];
+//        return;
+//    }
+//    if (_mobileField.text.length < 11)
+//    {
+//        [self.view makeToast:@"请输入正确的手机号"];
+//        return;
+//    }
+//    else if (self.viewController == nil || ![_mobileField.text isEqualToString:self.viewController.mobile])
+//    {
+//
+//    }
+//    else
+//    {
+//    }
+//    if (self.viewController == nil)
+//    {
+//        self.viewController = [[QuickLoginCheckViewController alloc] initWithNibName:@"QuickLoginCheckViewController"
+//                                                                              bundle:nil];
+//    }
+//    self.viewController.mobile = _mobileField.text;
+//    [self.navigationController pushViewController:self.viewController animated:YES];
+//}
 
 
 

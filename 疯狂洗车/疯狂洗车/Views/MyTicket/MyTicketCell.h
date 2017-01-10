@@ -29,6 +29,8 @@
     IBOutlet UILabel    *_lbExplainInfo;
     IBOutlet UILabel    *_lbMerchantUse;
     IBOutlet UILabel    *_lbTicketDescribe;
+    
+    IBOutlet UIImageView *_ticketBgView;
 }
 
 - (void)setDisplayInfo:(TicketModel*)model;

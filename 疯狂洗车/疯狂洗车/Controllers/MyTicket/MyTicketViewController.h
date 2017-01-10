@@ -27,10 +27,6 @@
     NSMutableArray       *_ticketArray;
     
     IBOutlet UIImageView *_noTickeyImageView;
-    
-//    IBOutlet UIView             *_topView;
-    
-    IBOutlet UISegmentedControl *_segmentControl;
 }
 
 @property (strong, nonatomic) NSString *serviceType;//优惠券类型
@@ -38,5 +34,7 @@
 @property (strong, nonatomic) NSString *targetCarWashID;//是否存在目标车场，用于是否只查询目标车场优惠券
 
 @property (assign, nonatomic) id <MyTicketDelegate> delegate;
+
+@property (assign, nonatomic) BOOL isInMine;
 
 @end

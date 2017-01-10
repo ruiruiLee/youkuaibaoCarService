@@ -75,7 +75,7 @@
                                               NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ndata
                                                                                                        options:NSJSONReadingMutableContainers
                                                                                                          error:&jsonError];
-                                              
+                                              NSLog(@"%@-----%@", requestStr, jsonDict);
                                               
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   if ([jsonDict valueForKey:@"state"])
@@ -157,8 +157,7 @@
                                               NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ndata
                                                                                                        options:NSJSONReadingMutableContainers
                                                                                                          error:&jsonError];
-                                              
-                                              NSLog(@"%@", jsonDict);
+                                              NSLog(@"%@---%@",requestStr, jsonDict);
                                               
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   if ([jsonDict valueForKey:@"state"])

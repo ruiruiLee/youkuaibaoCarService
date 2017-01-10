@@ -99,7 +99,7 @@
         [self setTitle:@"保养"];
     }
     else if ([self.service_type isEqualToString:@"2"]){
-        [self setTitle:@"板喷／快修"];
+        [self setTitle:@"钣喷／快修"];
     }
     else if ([self.service_type isEqualToString:@"3"]){
         [self setTitle:@"美容"];

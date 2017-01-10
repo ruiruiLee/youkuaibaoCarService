@@ -21,6 +21,15 @@
 #define STATIC_SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
 
+
+/**********************
+ **
+ ** 发布版本时候注意测试环境和登陆时验证短信获取
+ **
+ **********************/
+
+
+//****************begin*****/
 //测试环境
 //#define BASE_Uri_FOR_WEB @"http://ibwxt.leanapp.cn"
 //#define MAIN_SERVECE_BASE_STR @"http://118.123.249.87:8080/"  //测服
@@ -31,6 +40,8 @@
 #define MAIN_SERVECE_BASE_STR @"http://118.123.249.69:8080/" //正服
 #define Service_WX_STR @"http://car.wx.ukuaibao.com/"//微信后台
 #define Owner_CarWah_ID  @"5617"
+
+///**************end*******/
 
 #define GU_JIA_URL @"%@/?#!/gujia?memberId=%@&type=%@&carWashId=%@" //@“http://ibwx.leanapp.cn/?#!/gujia?memberId=776&type=1&carWashId=5217”
 #define CHE_XIAO_BAP_URL @"%@/#!/chexiaobao/app?memberId=%@"

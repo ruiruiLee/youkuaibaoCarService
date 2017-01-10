@@ -53,5 +53,7 @@
 
 @property (nonatomic, strong) NSString *service_name;
 
+@property (nonatomic, assign) NSInteger share_status;
+
 
 @end

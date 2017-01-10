@@ -17,27 +17,6 @@
     
     _ticketNameLabel.adjustsFontSizeToFitWidth  = YES;
     _ticketPriceLabel.adjustsFontSizeToFitWidth = YES;
-//    if (SCREEN_WIDTH < 375)
-//    {
-////        _componyNameLabel.font = [UIFont systemFontOfSize:11];
-//        _ticketNameLabel.font = [UIFont systemFontOfSize:15];
-//        _ticketPriceLabel.font = [UIFont systemFontOfSize:26];
-////        _ticketTimeLabel.font = [UIFont systemFontOfSize:11];
-//        _ticketEndTimeLabel.font = [UIFont systemFontOfSize:11];
-////        _ticketTimeTitle.font = [UIFont systemFontOfSize:11];
-//
-//        
-//    }
-//    else
-//    {
-////        _componyNameLabel.font = [UIFont systemFontOfSize:16];
-//        _ticketNameLabel.font = [UIFont systemFontOfSize:20];
-//        _ticketPriceLabel.font = [UIFont systemFontOfSize:35];
-////        _ticketTimeLabel.font = [UIFont systemFontOfSize:11];
-//        _ticketEndTimeLabel.font = [UIFont systemFontOfSize:11];
-////        _ticketTimeTitle.font = [UIFont systemFontOfSize:11];
-//
-//    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,35 +27,11 @@
 
 - (void)setDisplayInfo:(TicketModel*)model
 {
-//    _componyNameLabel.text = model.comp_name;
-
-//    if (model.times_limit.intValue >= 999)
-//    {
-//        _ticketPriceLabel.text = @"年卡";
-//    }
-//    else
-//    {
-//        _ticketPriceLabel.text = [NSString stringWithFormat:@"%d",model.price.intValue];
-//    }
-    
     _ticketNameLabel.text = [model.service_name stringByReplacingOccurrencesOfString:@" " withString:@""];
     _ticketBeginTimeLabel.text = model.begin_time == nil?@"":model.begin_time;
     _ticketEndTimeLabel.text = [NSString stringWithFormat:@"~%@",model.end_time == nil?@"":model.end_time];
     _lbTicketDescribe.text = [NSString stringWithFormat:@"(%@)", model.pack_title];
     _lbMerchantUse.text = model.pack_remark;
-//    if ([model.pay_flag isEqualToString:@"1"])
-//    {
-//        _payFlagLabel.hidden = YES;
-//    }
-//    else
-//    {
-//        _payFlagLabel.hidden = NO;
-//    }
-//    
-//    _ticketTimeLabel.textColor = [UIColor colorWithRed:96.0/255.0
-//                                                 green:96.0/255.0
-//                                                  blue:96.0/255.0
-//                                                 alpha:1.0];
     
     NSInteger price = [model.price integerValue];
     if(price == 100000){
@@ -158,6 +113,13 @@
                                                       green:84/255.0
                                                        blue:1/255.0
                                                       alpha:1.0];
+    }
+    
+    if(model.share_status == 1){
+        _ticketBgView.image = [UIImage imageNamed:@"bg_myTicket_present"];
+    }
+    else{
+        _ticketBgView.image = [UIImage imageNamed:@"bg_myTicket"];
     }
 }
 

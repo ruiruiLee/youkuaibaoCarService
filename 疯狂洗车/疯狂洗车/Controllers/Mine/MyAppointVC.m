@@ -120,7 +120,7 @@
                                  exceptionResponse:^(NSError *error)
      {
          [_listTable tableViewHeaderEndRefreshing];
-         [self.view makeToast:@"暂无数据"];
+         [Constants showMessage:[error domain]];
      }];
 }
 
@@ -169,7 +169,7 @@
                                  exceptionResponse:^(NSError *error)
      {
          [_listTable tableViewfooterEndRefreshing];
-         [self.view makeToast:@"没有更多数据了"];
+         [Constants showMessage:[error domain]];
      }];
 }
 

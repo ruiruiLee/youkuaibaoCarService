@@ -38,6 +38,8 @@ extern NSString *const kWXPaySuccessNotification;
 extern NSString *const kAddCommentsSuccess;
 extern NSString *const kShouldUpdateCenter;
 
+extern NSString *const kPresentSuccessAndRefreshTicketsListNotification;
+
 
 extern NSString *const kShouldUpdateInsurance;
 

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Models/WebService/WebServiceHelper.m"
-            timestampString = "505208219.470945"
+            timestampString = "505643125.066602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "767"
-            endingLineNumber = "767"
+            startingLineNumber = "766"
+            endingLineNumber = "766"
             landmarkName = "-getWeatherInfoWithCityInfo:normalResponse:exceptionResponse:"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,7 +218,7 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505392814.617081"
+                  timestampString = "505653094.590899"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
@@ -233,7 +233,7 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505392814.621161"
+                  timestampString = "505653094.592636"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
@@ -248,7 +248,7 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505392814.624498"
+                  timestampString = "505653094.594343"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
@@ -431,22 +431,6 @@
             startingLineNumber = "55"
             endingLineNumber = "55"
             landmarkName = "-loadShareInfo"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/RescueAppointVC.m"
-            timestampString = "505370877.108349"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
-            landmarkName = "-onGetReverseGeoCodeResult:result:errorCode:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

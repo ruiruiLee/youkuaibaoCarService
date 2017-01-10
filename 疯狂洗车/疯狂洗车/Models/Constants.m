@@ -234,6 +234,7 @@ NSString *const kForceExitNotifaction = @"kForceExitNotifaction";
 NSString *const kLoginSuccessNotifaction = @"kLoginSuccessNotifaction";
 NSString *const kLogoutSuccessNotifaction = @"kLogoutSuccessNotifaction";
 NSString *const kLoginByCheckCodeSuccessNotifaction = @"kLoginByCheckCodeSuccessNotifaction";
+NSString *const kPresentSuccessAndRefreshTicketsListNotification = @"kPresentSuccessAndRefreshTicketsListNotification";
 
 NSString *const kFinishCitySettingNotifaction = @"FinishCitySettingNotifaction";
 

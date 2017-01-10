@@ -50,7 +50,7 @@
             break;
         case 2:
         {
-            self.lbSAerviceName.text = @"板喷／快修";
+            self.lbSAerviceName.text = @"钣喷／快修";
         }
             break;
         case 3:

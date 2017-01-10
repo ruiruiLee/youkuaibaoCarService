@@ -819,7 +819,7 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
             vc.webUrl = url;
             [self.navigationController pushViewController:vc animated:YES];
             
-            [vc setTitle:@"二手车估价"];
+            [vc setTitle:@"车辆买卖"];
         }
             break;
         case 20:
@@ -1258,7 +1258,7 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
                                 @"city_id"   :[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey]};
 //推荐服务
     NSLog(@"%@", @"推荐服务");
-    [WebService requestJsonArrayOperationWithParam:submitDic
+    [WebService requestJsonArrayWXOperationWithParam:submitDic
                                             action:@"carWash/service/recommend"
                                         modelClass:[CarNurseModel class]
                                     normalResponse:^(NSString *status, id data, NSMutableArray *array)

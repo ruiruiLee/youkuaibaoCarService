@@ -128,7 +128,7 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
 {
     [super viewWillAppear:animated];
     
-    if (_userInfo.member_id)//用户已登陆，刷新数据
+    if (_userInfo.member_id)//用户已登录，刷新数据
     {
         NSDictionary *submitDic = @{@"member_id":_userInfo.member_id};
         [WebService requestJsonModelWithParam:submitDic
@@ -452,6 +452,7 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
                                                                                               bundle:nil];
             
             viewController.serviceType = @"";
+            viewController.isInMine = YES;
             
             [self.navigationController pushViewController:viewController animated:YES];
         }
