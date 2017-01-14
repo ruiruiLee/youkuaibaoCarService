@@ -32,7 +32,7 @@ typedef enum {
 
 ///枚举：logo位置
 typedef enum {
-    BMKLogoPositionLeftBottom = 0,          /// 地图左下方
+    BMKLogoPositionLeftBottom = 0,          /// 地图左下方ƒ
     BMKLogoPositionLeftTop,                 /// 地图左上方
     BMKLogoPositionCenterBottom,            /// 地图中下方
     BMKLogoPositionCenterTop,               /// 地图中上方

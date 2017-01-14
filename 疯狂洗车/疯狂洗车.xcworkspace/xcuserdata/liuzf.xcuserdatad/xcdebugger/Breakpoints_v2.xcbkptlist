@@ -169,38 +169,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/CarWash/CarWashMapViewController.m"
-            timestampString = "504782059.170743"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
-            landmarkName = "-loadAllCarWashFromRecent"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/CarWash/CarWashMapViewController.m"
-            timestampString = "504782066.030562"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
-            landmarkName = "-loadAllCarNurseFromKeyWord:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/Order/CarWashOrderViewController.m"
             timestampString = "505218988.02048"
             startingColumnNumber = "9223372036854775807"
@@ -218,7 +186,7 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505653094.590899"
+                  timestampString = "505997532.493509"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
@@ -233,7 +201,7 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505653094.592636"
+                  timestampString = "505997532.495602"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
@@ -248,7 +216,7 @@
                   moduleName = "CarWash"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuzf/Desktop/youkuaibaoCarService/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/%E7%96%AF%E7%8B%82%E6%B4%97%E8%BD%A6/Controllers/Order/CarWashOrderViewController.m"
-                  timestampString = "505653094.594343"
+                  timestampString = "505997532.497857"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "2005"
@@ -431,6 +399,102 @@
             startingLineNumber = "55"
             endingLineNumber = "55"
             landmarkName = "-loadShareInfo"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Models/GPSLocationManager/GPSLocationManager.m"
+            timestampString = "505794494.843227"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
+            landmarkName = "-updateUserCurrentLocationStreetSuccessResponse:failResponse:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Models/GPSLocationManager/GPSLocationManager.m"
+            timestampString = "505794518.324243"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "706"
+            endingLineNumber = "706"
+            landmarkName = "-didShouldUpdateCenter"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Models/GPSLocationManager/GPSLocationManager.m"
+            timestampString = "505794543.626932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "-amapLocationManager:didFailWithError:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/CarWash/CarWashMapViewController.m"
+            timestampString = "505972832.586216"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
+            landmarkName = "-loadAllCarNurseFromKeyWord:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/CrazyCarWashMap/CrazyCarWashMapViewController.m"
+            timestampString = "505987688.455586"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "690"
+            endingLineNumber = "690"
+            landmarkName = "-mapView:didUpdateUserLocation:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x75af;&#x72c2;&#x6d17;&#x8f66;/Controllers/CrazyCarWashMap/CrazyCarWashMapViewController.m"
+            timestampString = "505987696.430045"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "740"
+            endingLineNumber = "740"
+            landmarkName = "-mapView:didSelectAnnotationView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

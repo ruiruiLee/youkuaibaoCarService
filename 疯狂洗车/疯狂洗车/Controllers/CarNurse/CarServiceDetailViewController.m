@@ -85,7 +85,7 @@
         [self setTitle:@"车保姆"];
     }
     
-    UIButton *rightButotn = [[UIButton alloc] initWithFrame:CGRectMake(0, 12, 64, 32)];
+    UIButton *rightButotn = [[UIButton alloc] initWithFrame:CGRectMake(0, 12, 74, 32)];
     [rightButotn setTitle:@"车场介绍" forState:UIControlStateNormal];
     rightButotn.titleLabel.font = [UIFont systemFontOfSize:16];
     [rightButotn setTitleColor:self.isClubController?[UIColor whiteColor]:[UIColor colorWithRed:96.0/255.0 green:96.0/255.0 blue:96.0/255.0 alpha:1.0]

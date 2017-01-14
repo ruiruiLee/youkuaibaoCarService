@@ -232,18 +232,23 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
         if ([userCity.CITY_ID isEqualToString:_userCityModel.CITY_ID])
         {
             _settingCenter = YES;
-            if([userCity.CITY_ID isEqualToString:@"1"])
-                _publicUserCoordinate = _youkuaibaoCoordinate;
             _centerCoordinate =_publicUserCoordinate;
             _overallCoordinate = _centerCoordinate;
+            if([userCity.CITY_ID isEqualToString:@"1"] && [_service_type isEqualToString:@"2"])
+                _overallCoordinate = _youkuaibaoCoordinate;
             _lastCoordinate = _publicUserCoordinate;
             _isLaunching = YES;
             float scale = 320.0/SCREEN_WIDTH;
             
             _isLaunching = YES;
             
-            [_mapView setRegion:MKCoordinateRegionMakeWithDistance(_centerCoordinate, _defaultRadius*scale, _defaultRadius*scale)
+            if([_service_type isEqualToString:@"2"])
+                [_mapView setRegion:MKCoordinateRegionMakeWithDistance(_overallCoordinate, _defaultRadius*scale, _defaultRadius*scale)
                        animated:YES];
+            else{
+                [_mapView setRegion:MKCoordinateRegionMakeWithDistance(_centerCoordinate, _defaultRadius*scale, _defaultRadius*scale)
+                           animated:YES];
+            }
             [self obtainCarNurseByRegonAndRound:[self getCurrentMapRound]];
 
         }
@@ -256,12 +261,17 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
             MKCoordinateRegion theRegion;
             theRegion.center = userCityCoordinate;
             theRegion.span = theSpan;
-            if([userCity.CITY_ID isEqualToString:@"1"])
-                userCityCoordinate = _youkuaibaoCoordinate;
             _settingCenter = YES;
             _isLaunching = YES;
             _centerCoordinate = userCityCoordinate;
             _overallCoordinate = _centerCoordinate;
+            if([userCity.CITY_ID isEqualToString:@"1"] && [_service_type isEqualToString:@"2"])
+                _overallCoordinate = _youkuaibaoCoordinate;
+            
+            if([_service_type isEqualToString:@"2"]){
+                theRegion.center = _overallCoordinate;
+            }
+            
             [_mapView setRegion:theRegion animated:YES];
             _haveMoved = YES;
             [self obtainCarNurseByRegonAndRound:[self getCurrentMapRound]];
@@ -437,8 +447,8 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _listTableView)
-    {
-        if (_canLoadMore && indexPath.row == _listDataArray.count - 1)
+    {//当为板喷快修时，不加在更多
+        if (![_service_type isEqualToString:@"2"] && _canLoadMore && indexPath.row == _listDataArray.count - 1)
         {
             [self loadAllCarNurseFromRecent];
         }
@@ -485,7 +495,7 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
     _rightBtn.userInteractionEnabled = NO;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.view.userInteractionEnabled = NO;
-    [WebService requestJsonArrayOperationWithParam:submitDic
+    [WebService requestJsonArrayWXOperationWithParam:submitDic
                                             action:[self.service_type isEqualToString:@"6"]?@"carWash/service/getRescue":@"carWash/service/list"
                                         modelClass:[CarNurseModel class]
                                     normalResponse:^(NSString *status, id data, NSMutableArray *array)
@@ -1050,37 +1060,84 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
                  shouldAdd = YES;
              }
 
-             double mixDistance = 0;
-             for (int x = 0; x<5; x++)
-             {
-                 CarNurseModel *addTargrt = nil;
+             if([_service_type isEqualToString:@"2"]){
                  for (int y = 0; y<array.count; y++)
                  {
-                     if (y == 0)
+                     CarNurseModel *tmpModel = array[y];
+                     if([tmpModel.car_wash_id isEqualToString:Owner_CarWah_ID])
                      {
-                         CarNurseModel *tmpModel = array[y];
-                         addTargrt = tmpModel;
+                         [tmpRecentDataArray addObject:tmpModel];
+                         [array removeObject:tmpModel];
+                         break;
+                     }
+                 }
+                 
+                 double mixDistance = 0;
+                 for (int x = 0; x<5; x++)
+                 {
+                     CarNurseModel *addTargrt = nil;
+                     //查找优快保
+                     for (int y = 0; y<array.count; y++)
+                     {
+//                         if (y == 0)
+//                         {
+//                             CarNurseModel *tmpModel = array[y];
+//                             addTargrt = tmpModel;
+//                         }
+//                         else
+//                         {
+                             CarNurseModel *tmpModel = array[y];
+                             if (tmpModel.distance.doubleValue < addTargrt.distance.doubleValue && tmpModel.distance.doubleValue > mixDistance)
+                             {
+                                 addTargrt = tmpModel;
+                             }
+//                         }
+                     }
+                     if (addTargrt && tmpRecentDataArray.count < 5 && addTargrt.distance.doubleValue <= 2.0 && shouldAdd)
+                     {
+                         mixDistance = addTargrt.distance.doubleValue;
+                         [tmpRecentDataArray addObject:addTargrt];
+                         [array removeObject:addTargrt];
                      }
                      else
                      {
-                         CarNurseModel *tmpModel = array[y];
-                         if (tmpModel.distance.doubleValue < addTargrt.distance.doubleValue && tmpModel.distance.doubleValue > mixDistance)
-                         {
-                             addTargrt = tmpModel;
-                         }
+                         break;
                      }
                  }
-                 if (addTargrt && tmpRecentDataArray.count < 5 && addTargrt.distance.doubleValue <= 2.0 && shouldAdd)
+             }else{
+                 double mixDistance = 0;
+                 for (int x = 0; x<5; x++)
                  {
-                     mixDistance = addTargrt.distance.doubleValue;
-                     [tmpRecentDataArray addObject:addTargrt];
-                     [array removeObject:addTargrt];
-                 }
-                 else
-                 {
-                     break;
+                     CarNurseModel *addTargrt = nil;
+                     for (int y = 0; y<array.count; y++)
+                     {
+                         if (y == 0)
+                         {
+                             CarNurseModel *tmpModel = array[y];
+                             addTargrt = tmpModel;
+                         }
+                         else
+                         {
+                             CarNurseModel *tmpModel = array[y];
+                             if (tmpModel.distance.doubleValue < addTargrt.distance.doubleValue && tmpModel.distance.doubleValue > mixDistance)
+                             {
+                                 addTargrt = tmpModel;
+                             }
+                         }
+                     }
+                     if (addTargrt && tmpRecentDataArray.count < 5 && addTargrt.distance.doubleValue <= 2.0 && shouldAdd)
+                     {
+                         mixDistance = addTargrt.distance.doubleValue;
+                         [tmpRecentDataArray addObject:addTargrt];
+                         [array removeObject:addTargrt];
+                     }
+                     else
+                     {
+                         break;
+                     }
                  }
              }
+
              if (tmpRecentDataArray.count >= 3)
              {
                  [_recentDataArray addObjectsFromArray:tmpRecentDataArray];
@@ -1148,6 +1205,8 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
          }
 
          _rightBtn.userInteractionEnabled = YES;
+         
+         [self scrollViewDidEndDecelerating:_bottomScrollView];
          
         }
                                  exceptionResponse:^(NSError *error)
@@ -1405,16 +1464,23 @@ static NSString *quickRescueListCellIdentifier = @"QuickRescueListCell";
     _isFixing = YES;
     if ([_userCityModel.CITY_ID isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey]])
     {
-    CLLocation  *userLocation = [[CLLocation alloc] initWithLatitude:_publicUserCoordinate.latitude
-                                                           longitude:_publicUserCoordinate.longitude];
-    CLLocation  *targetLocation = [[CLLocation alloc] initWithLatitude:carNurseModel.latitude.doubleValue
-                                                             longitude:carNurseModel.longitude.doubleValue];
-    
-    CLLocationDistance distance = [userLocation distanceFromLocation:targetLocation];
-    
-    
-    MKCoordinateRegion targetRegion = MKCoordinateRegionMakeWithDistance(_publicUserCoordinate, distance*2+1000, distance*2+1000);
-    [_mapView setRegion:targetRegion animated:YES];
+//    CLLocation  *userLocation = [[CLLocation alloc] initWithLatitude:_publicUserCoordinate.latitude
+//                                                           longitude:_publicUserCoordinate.longitude];
+//    CLLocation  *targetLocation = [[CLLocation alloc] initWithLatitude:carNurseModel.latitude.doubleValue
+//                                                             longitude:carNurseModel.longitude.doubleValue];
+//    
+//    CLLocationDistance distance = [userLocation distanceFromLocation:targetLocation];
+//    
+//    
+//    MKCoordinateRegion targetRegion = MKCoordinateRegionMakeWithDistance(_publicUserCoordinate, distance*2+1000, distance*2+1000);
+//    [_mapView setRegion:targetRegion animated:YES];
+        
+        _centerCoordinate = CLLocationCoordinate2DMake([carNurseModel.latitude doubleValue],
+                                                       [carNurseModel.longitude doubleValue]);
+        
+        [_mapView setRegion:MKCoordinateRegionMakeWithDistance(_centerCoordinate, 6000, 6000)
+                   animated:YES];
+        
     }
     else
     {
