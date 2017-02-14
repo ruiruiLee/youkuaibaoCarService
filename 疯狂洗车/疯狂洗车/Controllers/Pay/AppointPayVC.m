@@ -24,7 +24,7 @@
 
 #import "define.h"
 
-#define Pay_Format  @"-%.2f元"
+#define Pay_Format  @"%.2f元"
 
 @interface AppointPayVC () <MyTicketDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
 {
@@ -68,10 +68,13 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     
     _ticketPayStatus = YES;
     _balancePayStatus = YES;
+    _buyouhuiStatus = NO ;
     [self.btnTicketSelect setImage:[UIImage imageNamed:@"btn_select_light_selected"] forState:UIControlStateSelected];
     [self.btnBalanceSelect setImage:[UIImage imageNamed:@"btn_select_light_selected"] forState:UIControlStateSelected];
+    [self.btnShowBuYouHui setImage:[UIImage imageNamed:@"btn_select_light_selected"] forState:UIControlStateSelected];
     
     self.tfAmount.delegate = self;
+    self.tfBuYouHuiAmount.delegate = self;
     
     self.btnPay.layer.cornerRadius = 4;
     self.screenWidth.constant = STATIC_SCREEN_WIDTH;
@@ -86,6 +89,10 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
                                                   bundle:[NSBundle mainBundle]]
             forCellReuseIdentifier:thirdPayWayCellIdentifier];
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    if(_appointModel.pay_price != nil && ![_appointModel.pay_price isKindOfClass:[NSNull class]]){
+        self.tfAmount.text = _appointModel.pay_price;
+    }
 }
 
 //微信支付回调通知
@@ -201,6 +208,10 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
 {
     _appointModel = model;
     
+    if(_appointModel.pay_price != nil && ![_appointModel.pay_price isKindOfClass:[NSNull class]]){
+        self.tfAmount.text = _appointModel.pay_price;
+    }
+    
     [self resetData];
     [self loadData];
     [self loadBalance];
@@ -214,15 +225,41 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     [self showTicketPay:(_carWashModel && _carWashModel.code_count == 0)?NO:YES];
     [self showBanancePay:([_userInfo.account_remainder doubleValue] > 0.0) ? YES:NO];
     self.lbTicketName.text = [NSString stringWithFormat:@"%@", _carWashModel.code_name];
-    self.lbBalance.text = [NSString stringWithFormat:@"%@元", _userInfo.account_remainder];
     
-    if(_appointModel.pay_price != nil && ![_appointModel.pay_price isKindOfClass:[NSNull class]])
-        self.tfAmount.text = _appointModel.pay_price;
+    NSString *str = [NSString stringWithFormat:@"可用余额%@元", _userInfo.account_remainder];
+    NSRange range = [str rangeOfString:[NSString stringWithFormat:@"%@", _userInfo.account_remainder]];
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
+    [att addAttribute:NSForegroundColorAttributeName
+     
+                value:_COLOR(0xff, 0x66, 0x19)
+     
+                range:range];
     
-    double account = [_tfAmount.text doubleValue];
+    [att addAttribute:NSFontAttributeName
+     
+                value:_FONT(18)
+     
+                range:range];
+    
+    self.lbBalance.attributedText = att;
+    
+    if(_buyouhuiStatus){
+        self.bucanyuyouhuijineHeight.constant = 40;
+    }
+    else{
+        self.bucanyuyouhuijineHeight.constant = 0;
+        self.tfBuYouHuiAmount.text = @"";
+    }
+    
+    double amount = [_tfAmount.text doubleValue];
+    double no = [_tfBuYouHuiAmount.text doubleValue];
+    if(no > amount)
+        no = amount;
+    double account = amount - no;
     
     self.btnTicketSelect.selected = _ticketPayStatus;
     self.btnBalanceSelect.selected = _balancePayStatus;
+    self.btnShowBuYouHui.selected = _buyouhuiStatus;
     
     double ticket = 0;
     if(_ticketPayStatus && _carWashModel.code_count > 0){
@@ -242,7 +279,7 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     if([_userInfo.account_remainder doubleValue] > 0.0 && _balancePayStatus)
         balance = [_userInfo.account_remainder doubleValue];
     
-    [self calculateActualPay:account ticket:ticket balance:balance];
+    [self calculateActualPay:amount ticket:ticket balance:balance];
 }
 
 - (double) getTicketValue:(double) ticket name:(NSString*) name serviceType:(NSInteger) type
@@ -266,10 +303,16 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     self.btnBalanceSelect.hidden = !flag;
     self.lbBalanceTitle.hidden = !flag;
     
-    self.lbNoBalance.hidden = flag;
+    self.lbLine.hidden = !flag;
     
-    if(!flag)
+    if(!flag){
         _balancePayStatus = NO;
+        self.yueHeight.constant = 0;
+        self.yuepayHeight.constant = 0;
+    }else{
+        self.yueHeight.constant = 40;
+        self.yuepayHeight.constant = 40;
+    }
 }
 
 - (void) showTicketPay:(BOOL) flag
@@ -282,8 +325,15 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     
     self.lbNoTicket.hidden = flag;
     
-    if(!flag)
+    if(!flag){
         _ticketPayStatus = NO;
+        self.youhuiquanpayHeight.constant = 0;
+        self.bucanyuyouhuijineselectHeight.constant = 0;
+        _buyouhuiStatus = NO;
+    }else{
+        self.youhuiquanpayHeight.constant = 40;
+        self.bucanyuyouhuijineselectHeight.constant = 32;
+    }
 }
 
 - (IBAction)btnSelectNewTickets:(id)sender
@@ -352,6 +402,13 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     [self resetData];
 }
 
+- (IBAction)doBtnBuYouHuiJinE:(id)sender
+{
+    _buyouhuiStatus = !_buyouhuiStatus;
+    
+    [self resetData];
+}
+
 - (void) requestTicketPay
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -371,7 +428,6 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
 
 - (double) calculateActualPay:(double) orderCount ticket:(double) ticket balance:(double) balance
 {
-    self.lbSubAmount.text = [NSString stringWithFormat:@"%.2f元", orderCount];
     if(orderCount < ticket)
         ticket = orderCount;
     self.lbTicketPay.text = [NSString stringWithFormat:Pay_Format, ticket];
@@ -384,7 +440,17 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     double actual = orderCount - ticket - balance;
     if(actual < 0)
         actual = 0;
-    self.lbActualPay.text = [NSString stringWithFormat:Pay_Format, actual];
+//    self.lbActualPay.text = [NSString stringWithFormat:@"%.2f元", actual];
+    
+    NSString *str = [NSString stringWithFormat:@"¥%.2f", actual];
+     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
+    [att addAttribute:NSFontAttributeName
+     
+                          value:[UIFont systemFontOfSize:12.0]
+     
+                          range:NSMakeRange(0, 1)];
+    
+    self.lbActualPay.attributedText = att;
     
     return actual;
 }
@@ -451,6 +517,16 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if(textField == self.tfBuYouHuiAmount){
+        if([_tfAmount.text doubleValue] < [_tfBuYouHuiAmount.text doubleValue]){
+            _tfBuYouHuiAmount.text = _tfAmount.text;
+        }
+    }else{
+        if([_tfAmount.text doubleValue] < [_tfBuYouHuiAmount.text doubleValue]){
+            _tfBuYouHuiAmount.text = @"";
+        }
+    }
+    
     [self resetData];
 }
 
@@ -588,6 +664,9 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     if(buttonIndex == 0){
         NSString *account = _tfAmount.text;
         double amount = [account doubleValue];
+        double a = [_tfBuYouHuiAmount.text doubleValue];
+        if(a > amount)
+            a = amount;
         double ticket = 0;
         if(_ticketPayStatus && _carWashModel.code_count > 0){
             ticket = _carWashModel.price;
@@ -595,13 +674,13 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
                 ticket = [self getTicketValue:ticket name:_carWashModel.code_name serviceType:[_appointModel.service_type integerValue]];
             }
             else if (ticket > 10000 && ticket < 100000){
-                ticket = amount - (int)(amount * ticket / 100000.0);
+                ticket = amount - a - (int)((amount - a) * ticket / 100000.0);
             }
             
         }
     
-        if(amount < ticket)
-            ticket = amount;
+        if(amount - a < ticket)
+            ticket = amount - a;
         
         double balance = 0;
         if([_userInfo.account_remainder doubleValue] > 0.0 && _balancePayStatus)
@@ -661,6 +740,9 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     [dic setObject:[NSString stringWithFormat:@"%.2f", remainder] forKey:@"pay_money"];
     [dic setObject:@"0" forKey:@"is_super"];
     [dic setObject:account forKey:@"total_money"];
+    if(_buyouhuiStatus){
+        [dic setObject:_tfBuYouHuiAmount.text forKey:@"bcyyh_money"];
+    }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -731,6 +813,10 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     [dic setObject:@"0" forKey:@"is_super"];
     [dic setObject:account forKey:@"total_money"];
     
+    if(_buyouhuiStatus){
+        [dic setObject:_tfBuYouHuiAmount.text forKey:@"bcyyh_money"];
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [WebService requestJsonWXOperationWithParam:dic
@@ -757,7 +843,7 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
       }];
 }
 
-//wechat pay
+//AliPay pay
 - (void) requestAliPay:(double) ticket balance:(double) balance other:(double) other amount:(double) amount
 {
     NSString *account = _tfAmount.text;
@@ -766,7 +852,7 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     [dic setObject:@"order" forKey:@"op_type"];
     [dic setObject:_appointModel.member_id forKey:@"member_id"];
     
-    [dic setObject:[NSString stringWithFormat:@"%.2f", other] forKey:@"money"];
+//    [dic setObject:[NSString stringWithFormat:@"%.2f", other] forKey:@"money"];
     [dic setObject:_appointModel.service_type forKey:@"service_type"];
     [dic setObject:_appointModel.out_trade_no forKey:@"out_trade_no"];
     [dic setObject:_appointModel.car_id forKey:@"car_id"];
@@ -781,12 +867,17 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     [dic setObject:_appointModel.longitude forKey:@"longitude"];
     [dic setObject:_appointModel.latitude forKey:@"latitude"];
     
+    if(_buyouhuiStatus){
+        [dic setObject:_tfBuYouHuiAmount.text forKey:@"bcyyh_money"];
+    }
+    
     double remainder = [account doubleValue] -  ticket;
     if(remainder > balance)
         remainder = balance;
     [dic setObject:[NSString stringWithFormat:@"%.2f", remainder] forKey:@"remainder"];
     [dic setObject:@"0" forKey:@"is_super"];
     [dic setObject:account forKey:@"total_money"];
+    [dic setObject:[NSString stringWithFormat:@"%.2f", other] forKey:@"money"];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -798,7 +889,6 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
          self.view.userInteractionEnabled = YES;
          if (status.intValue > 0)
          {
-//             [self submitPayRequestAlipay:data];
              [PayHelper submitPayRequestToAliPay:data];
          }
          else

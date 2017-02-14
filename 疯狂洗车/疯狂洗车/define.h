@@ -31,11 +31,17 @@
 
 //****************begin*****/
 //测试环境
+
 //#define BASE_Uri_FOR_WEB @"http://ibwxt.leanapp.cn"
-//#define MAIN_SERVECE_BASE_STR @"http://118.123.249.87:8080/"  //测服
+//#define MAIN_SERVECE_BASE_STR @"http://118.123.249.87:8081/"  //测服
 //#define Service_WX_STR @"http://car.wxt.ukuaibao.com/"//微信后台
 //#define Owner_CarWah_ID @"5217"
+
+//
+//#define Service_WX_STR @"http://shuaidehen.imwork.net/UKB.Car.Weixin/"
+
 //正式环境
+
 #define BASE_Uri_FOR_WEB @"http://ibwx.leanapp.cn"
 #define MAIN_SERVECE_BASE_STR @"http://118.123.249.69:8080/" //正服
 #define Service_WX_STR @"http://car.wx.ukuaibao.com/"//微信后台
