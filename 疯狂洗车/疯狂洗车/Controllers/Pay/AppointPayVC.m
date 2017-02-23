@@ -93,6 +93,12 @@ static NSString *thirdPayWayCellIdentifier = @"ThirdPayWayCell";
     if(_appointModel.pay_price != nil && ![_appointModel.pay_price isKindOfClass:[NSNull class]]){
         self.tfAmount.text = _appointModel.pay_price;
     }
+    
+    if(_appointModel.bcyyh_price != nil && ![_appointModel.bcyyh_price isKindOfClass:[NSNull class]] && [_appointModel.bcyyh_price doubleValue] > 0){
+        self.tfBuYouHuiAmount.text = _appointModel.bcyyh_price;
+        _buyouhuiStatus = YES;
+        self.btnShowBuYouHui.selected = YES;
+    }
 }
 
 //微信支付回调通知

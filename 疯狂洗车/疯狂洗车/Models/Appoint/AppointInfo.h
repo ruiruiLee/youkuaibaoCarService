@@ -40,5 +40,6 @@
 @property (nonatomic, strong) NSString *service_type;
 @property (nonatomic, strong) NSString *total_counts;
 @property (nonatomic, strong) NSString *update_time;
+@property (nonatomic, strong) NSString *bcyyh_price;
 
 @end
