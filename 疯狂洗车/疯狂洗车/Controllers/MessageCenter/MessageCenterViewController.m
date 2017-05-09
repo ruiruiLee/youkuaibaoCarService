@@ -126,7 +126,6 @@ static NSString *messageListCellWithIdentifier = @"MessageListCell";
         ADVModel *headerModel = [[ADVModel alloc] init];
         
         headerModel.url = [dic objectForKey:@"url"];
-        headerModel.url_type = [dic objectForKey:@"url_type"];
         headerModel.title = [dic objectForKey:@"url_title"];
 
         

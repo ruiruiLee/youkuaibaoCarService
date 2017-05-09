@@ -630,15 +630,15 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
 
 - (void)shareToFrends
 {
-    NSString *shareAppUrl = nil;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kShareAppUrl])
-    {
-        shareAppUrl = [[NSUserDefaults standardUserDefaults] objectForKey:kShareAppUrl];
-    }
-    else
-    {
-        shareAppUrl = kDownloadUrl;
-    }
+    NSString *shareAppUrl = Invite_Url;
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:kShareAppUrl])
+//    {
+//        shareAppUrl = [[NSUserDefaults standardUserDefaults] objectForKey:kShareAppUrl];
+//    }
+//    else
+//    {
+//        shareAppUrl = kDownloadUrl;
+//    }
     
     NSString *mainAdvImage = nil;
     
@@ -653,16 +653,16 @@ static NSString *mineFundationCellIndentifier = @"MineFundationCell";
         shareImage = [UIImage imageNamed:@"img_share_icon"];
     }
     
-    NSString *shareContent = nil;
+    NSString *shareContent = @"8小时钣喷快修，4s店品质服务，免费上门接送车，进口环保水性漆，您身边的爱车服务管家。";
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kShareContent])
-    {
-        shareContent = [[NSUserDefaults standardUserDefaults] objectForKey:kShareContent];
-    }
-    else
-    {
-        shareContent = @"不办卡, 也优惠。100多个城市，2000多家优质车场，随时随地，想洗就洗。关注优快保微信，可领优惠券。APP下载：http://t.cn/Rwjwb0D";
-    }
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:kShareContent])
+//    {
+//        shareContent = [[NSUserDefaults standardUserDefaults] objectForKey:kShareContent];
+//    }
+//    else
+//    {
+//        shareContent = @"不办卡, 也优惠。100多个城市，2000多家优质车场，随时随地，想洗就洗。关注优快保微信，可领优惠券。APP下载：http://t.cn/Rwjwb0D";
+//    }
     
     NSString *shareTitle = nil;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kShareAppTitle])

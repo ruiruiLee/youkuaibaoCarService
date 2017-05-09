@@ -56,10 +56,6 @@ NSString *const NOTELocationChange = @"LocationChangeNotifaction";
         _locationManager.delegate = self;
         _locationManager.distanceFilter = 100.0f;
         _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-//        if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0)
-//        {
-//            [_locationManager requestWhenInUseAuthorization];
-//        }
         [_locationManager startUpdatingLocation];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -519,7 +515,11 @@ NSString *const NOTELocationChange = @"LocationChangeNotifaction";
 - (void)setUpOrderShareParameterWithNormalResponse:(void(^)(void))normalResponse
                                  exceptionResponse:(void(^)(void))exceptionResponse
 {
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTELocationLaunchSuccess
+                                                        object:nil];
+    _appconfig = nil;
+    normalResponse();
+    return;
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey])
     {
         _appconfig = nil;
@@ -541,7 +541,7 @@ NSString *const NOTELocationChange = @"LocationChangeNotifaction";
                  
              }
              else
-             {
+             {//不同城市的客户电话
                  _kefudianhuaNumber = _appconfig.service_phone;
              }
              

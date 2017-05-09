@@ -291,6 +291,71 @@
     [dataTask resume];
 }
 
+- (void)requestJsonLearnCloudOperationWithInfo:(NSDictionary *)info
+                           serviceType:(NSString *)serviceType
+                                action:(NSString *)action
+                        normalResponse:(void(^)(NSString *status, id data))normalResponse
+                     exceptionResponse:(void(^)(NSError *error))exceptionResponse
+{
+    
+    NSString *requestStr = [NSString stringWithFormat:@"%@%@", LearnCloud_Service_Base_Addr, action];
+    
+    
+    NSMutableURLRequest *request = nil;
+    request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST"
+                                                            URLString:requestStr
+                                                           parameters:info
+                                                                error:nil];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                completionHandler:
+                                      ^(NSData *data, NSURLResponse *response, NSError *error)
+                                      {
+                                          if (error == nil)
+                                          {
+                                              
+                                              NSError *jsonError = nil;
+                                              NSString *receiveStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                                              NSData * ndata = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
+                                              NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:ndata
+                                                                                                       options:NSJSONReadingMutableContainers
+                                                                                                         error:&jsonError];
+                                              
+                                              NSLog(@"%@---%@-----%@", requestStr, info, jsonDict);
+                                              
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  if ([jsonDict valueForKey:@"code"])
+                                                  {
+                                                      if ([[jsonDict valueForKey:@"code"] intValue] == 200)
+                                                      {
+                                                          normalResponse([jsonDict valueForKey:@"code"], [[jsonDict valueForKey:@"data"] objectForKey:@"rows"]);
+                                                          return ;
+                                                      }
+                                                      else
+                                                      {
+                                                          NSError *exceptionError  = [[NSError alloc] initWithDomain:[jsonDict valueForKey:@"msg"] code:0 userInfo:jsonDict];
+                                                          exceptionResponse(exceptionError);
+                                                          return ;
+                                                      }
+                                                  }
+                                              });
+                                          }
+                                          else
+                                          {
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  NSError *error = [[NSError alloc] initWithDomain:@"服务器无法连接，请稍后再试"
+                                                                                              code:0
+                                                                                          userInfo:nil];
+                                                  exceptionResponse(error);
+                                                  return;
+                                              });
+                                              
+                                          }
+                                      }];
+    // 使用resume方法启动任务
+    [dataTask resume];
+}
+
 
 - (void)requestJsonOperationWithModel:(NSDictionary *)param
                                action:(NSString *)action
@@ -376,6 +441,37 @@
                          exceptionResponse:(void(^)(NSError *error))exceptionResponse
 {
     [self requestJsonWXOperationWithInfo:param
+                           serviceType:@""
+                                action:action
+                        normalResponse:^(NSString *status, id data)
+     {
+         if ([data isKindOfClass:[NSArray class]])
+         {
+             NSMutableArray *returnArr = [NSMutableArray array];
+             for (id dic in data)
+             {
+                 [returnArr addObject:[[modelClass alloc] initWithDictionary:dic]];
+             }
+             normalResponse(status, data, returnArr);
+         }
+         else
+         {
+             normalResponse(status, data, [@[] mutableCopy]);
+         }
+     }
+                     exceptionResponse:^(NSError *error)
+     {
+         exceptionResponse(error);
+     }];
+}
+
+- (void)requestJsonArrayLearnCloudOperationWithParam:(NSDictionary *)param
+                                    action:(NSString *)action
+                                modelClass:(Class)modelClass
+                            normalResponse:(void(^)(NSString *status, id data, NSMutableArray *array))normalResponse
+                         exceptionResponse:(void(^)(NSError *error))exceptionResponse
+{
+    [self requestJsonLearnCloudOperationWithInfo:param
                            serviceType:@""
                                 action:action
                         normalResponse:^(NSString *status, id data)
@@ -805,7 +901,7 @@
         {
             if ([imageName isEqualToString:kCustomLaunch])
             {
-                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCustomLaunch];
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCustomLaunch];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
             else
@@ -820,7 +916,7 @@
             NSLog(@"%@图片下载完成",imageName);
             if ([imageName isEqualToString:kCustomLaunch])
             {
-                [[NSUserDefaults standardUserDefaults] setBool:YES
+                [[NSUserDefaults standardUserDefaults] setBool:NO
                                                         forKey:kCustomLaunch];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }

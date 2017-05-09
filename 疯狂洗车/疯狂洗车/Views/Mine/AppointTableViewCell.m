@@ -28,6 +28,8 @@
     btnPay.layer.cornerRadius = 4;
     
     self.logo.layer.cornerRadius = 4;
+    
+    [self.btnService setTitle:_kefudianhuaNumber forState:UIControlStateNormal];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -52,5 +54,16 @@
     }
 }
 
+- (IBAction)ringServicePhone:(id)sender{
+    [Constants showMessage:@"拨打客服电话呼叫救援？"
+                  delegate:self
+                       tag:0
+              buttonTitles:@"取消",@"确定", nil];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",_kefudianhuaNumber]]];
+}
 
 @end

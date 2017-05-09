@@ -368,27 +368,32 @@
 }
 
 #pragma mark - 用户点击自定义闪屏页面弹出广告 Method
-
+//启动完成后弹出广告
 - (void)didTouchOnLaunchButtoned
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [_customLaunchImageView hideMainAdvView];
     if (_startInfo != nil )
     {
-        if ([_startInfo.adv_url isEqualToString:@""] || _startInfo.adv_url == nil)
+        if ([_startInfo.imgUrl isEqualToString:@""] || _startInfo.imgUrl == nil || [_startInfo.isRedirect integerValue] != 1)
         {
             return;
         }
         else
         {
             ADVModel *headerModel = [[ADVModel alloc] init];
-            headerModel.url = _startInfo.adv_url;
-            headerModel.url_type = _startInfo.url_type;
-            headerModel.title = _startInfo.url_tilte;
+            headerModel.url = _startInfo.url;
+            headerModel.title = _startInfo.title;
+            headerModel.imgUrl = _startInfo.imgUrl;
+            headerModel.newsId = _startInfo.newsId;
+            headerModel.createdAt = _startInfo.createdAt;
+            headerModel.isRedirect = _startInfo.isRedirect;
+            headerModel.content = _startInfo.content;
+            if(_startInfo.url == nil || [_startInfo.url isEqualToString:@""]){
+                headerModel.url = [NSString stringWithFormat:@"http://ibroker.leanapp.cn/news/view/%@", _startInfo.newsId];
+            }
             ActivitysController *viewController = [[ActivitysController alloc] initWithNibName:@"ActivitysController" bundle:nil];
             viewController.advModel = headerModel;
-            
-            viewController.forbidAddMark = [headerModel.url_type isEqualToString:@"2"]?NO:YES;
             
             UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:viewController];
             
@@ -399,8 +404,6 @@
                                                        }];
         }
     }
-
-
 }
 
 #pragma mark - 生成TabBar Method
@@ -988,58 +991,37 @@
 
 - (void)updateProjectSplashImage
 {
-    
+
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kUserInfoKey])
     {
-        _startInfo = [[StartInfoModel alloc] initWithCacheKey:kStartInfoKey];
-    }
-
-    NSString *pixelsString = nil;
-    
-    if (SCREEN_WIDTH < 375)
-    {
-        if (SCREEN_HEIGHT < 568)
-        {
-            pixelsString = @"640*960";
-        }
-        else
-        {
-            pixelsString = @"640*1136";
-        }
-    }
-    else if (SCREEN_WIDTH > 375)
-    {
-        pixelsString = @"1242*2208";
-    }
-    else
-    {
-        pixelsString = @"750*1334";
+        _startInfo = [[ADVModel alloc] initWithCacheKey:kStartInfoKey];
     }
     
-    NSDictionary *submitdDic = @{@"app_type":@"2",
-                                 @"pixels":pixelsString,
-                                 @"user_type":@1};
-    [WebService requestJsonModelWithParam:submitdDic
-                                   action:@"system/service/startinfo"
-                               modelClass:[StartInfoModel class]
-                           normalResponse:^(NSString *status, id data, JsonBaseModel *model)
-     {
-         _startInfo = (StartInfoModel*)model;
-         [[NSUserDefaults standardUserDefaults] setObject:[_startInfo convertToDictionary]
-                                                   forKey:kStartInfoKey];
-         [[NSUserDefaults standardUserDefaults] synchronize];
-         if (![_startInfo.app_splash_img isEqualToString:@""] && _startInfo.app_splash_img != nil)
-         {
-             [WebService downloadImageFromServiceWithUrl:_startInfo.app_splash_img
-                                                 forName:kCustomLaunch
-                                            andMediaType:@""];
-             
-         }
-
-    }
-                        exceptionResponse:^(NSError *error) {
-        
-    }];
+    NSDictionary *submitdDic = @{@"category":@"20",
+                                 @"offset"  :@"0",
+                                 @"limite"  :@"1"};
+    
+    [WebService requestJsonArrayLearnCloudOperationWithParam:submitdDic
+                                                      action:@"api/news/category/news"
+                                                  modelClass:[ADVModel class]
+                                              normalResponse:^(NSString *status, id data, NSMutableArray *array) {
+                                                  if([array count] > 0){
+                                                      _startInfo = (ADVModel*)[array objectAtIndex:0];
+                                                      [[NSUserDefaults standardUserDefaults] setObject:[_startInfo convertToDictionary]
+                                                                                                forKey:kStartInfoKey];
+                                                      [[NSUserDefaults standardUserDefaults] synchronize];
+                                                      if (![_startInfo.imgUrl isEqualToString:@""] && _startInfo.imgUrl != nil)
+                                                      {
+                                                          [WebService downloadImageFromServiceWithUrl:_startInfo.imgUrl
+                                                                                              forName:kCustomLaunch
+                                                                                         andMediaType:@""];
+                                                          
+                                                      }
+                                                  }
+                                              }
+                                           exceptionResponse:^(NSError *error) {
+                                               
+                                           }];
 }
 
 #pragma mark - 更新应用参数 Method
@@ -1075,21 +1057,25 @@
             }
             
             
-            if (![[data objectForKey:@"brand_ver_no"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kCarBrandVerNo]])
-            {
-                NSLog(@"品牌过期了");
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCarBrandNeedUpdate];
-            }
-            if (![[data objectForKey:@"series_ver_no"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kCarSeriesVerNo]])
-            {
-                NSLog(@"车系过期了");
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCarSeriesNeedUpdate];
-            }
-            if (![[data objectForKey:@"kind_ver_no"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kCarKindVerNo]])
-            {
-                NSLog(@"车型过期了");
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCarKindNeedUpdate];
-            }
+//            if ([data objectForKey:@"brand_ver_no"] != nil && ![[data objectForKey:@"brand_ver_no"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kCarBrandVerNo]])
+//            {
+//                NSLog(@"品牌过期了");
+//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCarBrandNeedUpdate];
+//            }else{
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCarBrandNeedUpdate];
+//            }
+//            if ([data objectForKey:@"series_ver_no"] != nil && ![[data objectForKey:@"series_ver_no"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kCarSeriesVerNo]])
+//            {
+//                NSLog(@"车系过期了");
+//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCarSeriesNeedUpdate];
+//            }else
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCarSeriesNeedUpdate];
+//            if ([data objectForKey:@"kind_ver_no"] != nil && ![[data objectForKey:@"kind_ver_no"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:kCarKindVerNo]])
+//            {
+//                NSLog(@"车型过期了");
+//                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kCarKindNeedUpdate];
+//            }else
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kCarKindNeedUpdate];
             
             
             [userDefault setObject:[data objectForKey:@"update_content"]

@@ -39,13 +39,15 @@
 
 //
 //#define Service_WX_STR @"http://shuaidehen.imwork.net/UKB.Car.Weixin/"
+//#define LearnCloud_Service_Base_Addr @"http://ibroker.leanapp.cn/";
 
 //正式环境
 
-#define BASE_Uri_FOR_WEB @"http://ibwx.leanapp.cn"
-#define MAIN_SERVECE_BASE_STR @"http://118.123.249.69:8080/" //正服
+#define BASE_Uri_FOR_WEB @"http://h5.ukuaibao.com"//@"http://ibwx.leanapp.cn"
+#define MAIN_SERVECE_BASE_STR @"http://car.ukuaibao.com:8080/"//@"http://118.123.249.69:8080/" //正服
 #define Service_WX_STR @"http://car.wx.ukuaibao.com/"//微信后台
 #define Owner_CarWah_ID  @"5617"
+#define LearnCloud_Service_Base_Addr @"http://ibroker.leanapp.cn/"
 
 ///**************end*******/
 
@@ -59,5 +61,7 @@
 
 #define SERVICE_PHONE @"4000803939"
 
+
+#define Invite_Url @"http://a.app.qq.com/o/simple.jsp?pkgname=com.bestway.carwash"
 
 #endif /* define_h */

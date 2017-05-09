@@ -45,22 +45,22 @@
 - (void)requestInsuranceHomeModelNormalResponse:(void(^)(void))normalResponse
                               exceptionResponse:(void(^)(void))exceptionResponse
 {
-    NSDictionary *submitDic = @{@"member_id":!_userInfo.member_id?@"":_userInfo.member_id};
-    [WebService requestJsonModelWithParam:submitDic
-                                   action:@"insurance/service/intro"
-                               modelClass:[InsuranceHomeModel class]
-                           normalResponse:^(NSString *status, id data, JsonBaseModel *model)
-     {
-         _insuranceHomeModel = (InsuranceHomeModel*)model;
-         normalResponse();
-         return ;
-         
-     }
-                        exceptionResponse:^(NSError *error)
-    {
-        exceptionResponse();
-        return ;
-                        }];
+//    NSDictionary *submitDic = @{@"member_id":!_userInfo.member_id?@"":_userInfo.member_id};
+//    [WebService requestJsonModelWithParam:submitDic
+//                                   action:@"insurance/service/intro"
+//                               modelClass:[InsuranceHomeModel class]
+//                           normalResponse:^(NSString *status, id data, JsonBaseModel *model)
+//     {
+//         _insuranceHomeModel = (InsuranceHomeModel*)model;
+//         normalResponse();
+//         return ;
+//         
+//     }
+//                        exceptionResponse:^(NSError *error)
+//    {
+//        exceptionResponse();
+//        return ;
+//                        }];
 
 }
 

@@ -10,17 +10,25 @@
 
 @interface ADVModel : JsonBaseModel
 
-@property (strong, nonatomic) NSString *adv_id;
-
-@property (strong, nonatomic) NSString *photo_addr;
-
-@property (strong, nonatomic) NSString *city_id;
-
-@property (strong, nonatomic) NSString *title;
+//@property (strong, nonatomic) NSString *adv_id;
+//
+//@property (strong, nonatomic) NSString *photo_addr;
+//
+//@property (strong, nonatomic) NSString *city_id;
+//
+//@property (strong, nonatomic) NSString *title;
+//
+//@property (strong, nonatomic) NSString *url;
+//
+//@property (strong, nonatomic) NSString *url_type;
 
 @property (strong, nonatomic) NSString *url;
-
-@property (strong, nonatomic) NSString *url_type;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *imgUrl;
+@property (strong, nonatomic) NSString *newsId;
+@property (strong, nonatomic) NSString *createdAt;
+@property (strong, nonatomic) NSString *isRedirect;
+@property (strong, nonatomic) NSString *content;
 
 
 @end

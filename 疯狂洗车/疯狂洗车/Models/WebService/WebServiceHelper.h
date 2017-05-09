@@ -72,6 +72,13 @@
                               normalResponse:(void(^)(NSString *status, id data, NSMutableArray *array))normalResponse
                            exceptionResponse:(void(^)(NSError *error))exceptionResponse;
 
+//learnCloud
+- (void)requestJsonArrayLearnCloudOperationWithParam:(NSDictionary *)param
+                                              action:(NSString *)action
+                                          modelClass:(Class)modelClass
+                                      normalResponse:(void(^)(NSString *status, id data, NSMutableArray *array))normalResponse
+                                   exceptionResponse:(void(^)(NSError *error))exceptionResponse;
+
 
 //新的图片上传接口
 - (void)uploadImageWithParam:(NSDictionary *)param

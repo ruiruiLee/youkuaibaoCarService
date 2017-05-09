@@ -29,22 +29,11 @@
 #import "WeatherModel.h"
 #import "ButlerOrderModel.h"
 #import "OrderSuccessViewController.h"
-#import "InsuranceViewController.h"
-#import "InsuranceHomeModel.h"
-#import "MainAdvView.h"
 #import "CitySelecterViewController.h"
 #import "CrazyCarWashMapViewController.h"
 #import "FourSMapViewController.h"
-#import "InsuranceRepaierOrAVViewController.h"
 #import "HomeBulterMenuView.h"
 #import "AccidentRescueViewController.h"
-#import "InsuranceListViewController.h"
-#import "InsuranceSubmitViewController.h"
-#import "InsuranceHelper.h"
-#import "InsuranceHomeViewController.h"
-#import "InsuranceIntroductionViewController.h"
-#import "InsuranceAVOrderViewController.h"
-#import "InsuranceRepaierOrderViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 
 #import "PopView.h"
@@ -55,14 +44,9 @@
 #import "BaseAppointVC.h"
 
 
-//#import <AVFoundation/AVFoundation.h>
-
-
-@interface MainViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,MainAdvViewDelegate,HomeBulterMenuViewDelegate,AMapSearchDelegate, PopViewDelegate>
+@interface MainViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate,HomeBulterMenuViewDelegate,AMapSearchDelegate, PopViewDelegate>
 {
     UIButton                    *_leftButton;//城市选择按钮
-    
-    UIButton                    *_rightButton;//礼包按钮
     
     CycleScrollView             *_headerScrollView;//顶部banner
     
@@ -174,25 +158,6 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:_leftButton];
     [self.navigationItem setLeftBarButtonItem:leftItem];
-    
-    _rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 54, 36)];
-    [_rightButton setTitle:@"礼包" forState:UIControlStateNormal];
-    [_rightButton setImage:[UIImage imageNamed:@"img_main_gift"]
-                  forState:UIControlStateNormal];
-    [_rightButton setImageEdgeInsets:UIEdgeInsetsMake(0, -3, 0, 3)];
-    [_rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 2, 0, -2)];
-    _rightButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [_rightButton setTitleColor:[UIColor colorWithRed:235.0/255.0
-                                               green:  84.0/255.0
-                                                blue:   1.0/255.0
-                                               alpha:1.0] forState:UIControlStateNormal];
-    _rightButton.exclusiveTouch = YES;
-    
-    [_rightButton addTarget:self action:@selector(didRightButtonTouch) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
-    [self.navigationItem setRightBarButtonItem:rightItem];
-
 
     _weatherView.transform = CGAffineTransformMakeTranslation(0, -SCREEN_HEIGHT);
 
@@ -254,28 +219,7 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navi_bg"]
                                                   forBarMetrics:0];
     _viewControllerIsShow = YES;
-    if (!_advHaveShow && [[NSUserDefaults standardUserDefaults] objectForKey:kLastUserCity] && _viewControllerIsShow)
-    {
-        if (_mainAdvModel == nil)
-        {
-            [self updateMainAdvData:^{
-                [self openMainAdvOpreation];
-            } failRespone:^{
-                _advHaveShow = YES;
-                _rightButton.hidden = YES;
-            }];
-        }
-        else
-        {
-            [self openMainAdvOpreation];
-        }
-        
-    }
-    else if (!_advHaveShow)
-    {
-        
-    }
-
+    
     [super viewWillAppear:animated];
     [self.navigationController.view addSubview:_showWeatherButton];
     _showWeatherButton.hidden = NO;
@@ -287,54 +231,6 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
                      forState:UIControlStateNormal];
     }
 }
-
-//首页大礼包
-- (void)updateMainAdvData:(void(^)(void))successRespone
-              failRespone:(void(^)(void))failRescpone
-{
-    NSDictionary *submitDic = @{@"city_id":_userCityModel.CITY_ID,
-                                @"app_type":@2,
-                                @"member_id":_userInfo.member_id?_userInfo.member_id:@""};
-    [WebService requestJsonModelWithParam:submitDic
-                                   action:@"system/service/getMainAdv"
-                               modelClass:[MainAdvModel class]
-                           normalResponse:^(NSString *status, id data, JsonBaseModel *model)
-     {
-         _mainAdvModel = (MainAdvModel*)model;
-         successRespone();
-         return ;
-     }
-                        exceptionResponse:^(NSError *error) {
-                            [MBProgressHUD showError:[error domain]
-                                              toView:self.view];
-                            failRescpone();
-                            return ;
-                        }];
-
-}
-
-- (void)openMainAdvOpreation
-{
-    if (_viewControllerIsShow)
-    {
-        _advHaveShow = YES;
-        
-        if (_mainAdvModel.adv_list.count  > 0)
-        {
-            if (_mainAdvModel.is_forced.intValue > 0)
-            {
-                _rightButton.hidden = YES;
-                [MainAdvView showMainAdvViewWithTarget:self];
-            }
-        }
-        else
-        {
-            _rightButton.hidden = YES;
-        }
-    }
-}
-
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -348,15 +244,6 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     [super viewDidAppear:animated];
     [_headerScrollView resetContentOffset];
    
-//    if (_userInfo.member_id && !_activityModel && _userInfo.city_id)
-//    {
-//        [self updateActivityConfigWithCityID:_userInfo.city_id];
-//    }
-    if (self.shouldGoToMine)
-    {
-        self.shouldGoToMine = NO;
-        self.rdv_tabBarController.selectedIndex = 2;
-    }
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kLastUserCity])
     {
         CitySelecterViewController *viewController = [[CitySelecterViewController alloc] initWithNibName:@"CitySelecterViewController" bundle:nil];
@@ -494,15 +381,10 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
 
 - (void)obtainAdverInfo
 {
-        if (_userCityModel)
+        if (1)
         {
             if (_headerScrollView != nil)
             {
-                if ([_headerScrollView.advCityID isEqualToString:_userCityModel.CITY_ID])
-                {
-                    return;
-                }
-                else
                 {
                     [_headerScrollView removeFromSuperview];
                     _headerScrollView = nil;
@@ -512,17 +394,15 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
             float headerHeight = SCREEN_WIDTH/3.0;
             _headerScrollView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headerHeight)
                                                      animationDuration:3.0];
-            _headerScrollView.advCityID = _userCityModel.CITY_ID;
-            NSDictionary *submitDic = @{@"city_id":_userCityModel.CITY_ID};
+            NSDictionary *submitDic = @{@"category":@"19", @"offset":@"0", @"limit":@"4"};
             NSLog(@"%@", @"告部分的代码");
-            [WebService requestJsonArrayOperationWithParam:submitDic
-                                                    action:@"system/service/getAdv"
-                                                modelClass:[ADVModel class]
-                                            normalResponse:^(NSString *status, id data, NSMutableArray *array)
+            [WebService requestJsonArrayLearnCloudOperationWithParam:submitDic
+                                                              action:@"api/news/category/news"
+                                                          modelClass:[ADVModel class]
+                                                      normalResponse:^(NSString *status, id data, NSMutableArray *array)
              {
                  if (status.intValue > 0 && array.count > 0)
                  {
-                     
                      [_topAdvView addSubview:_headerScrollView];
                      
                      _headerModelArray = array;
@@ -540,7 +420,7 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
                              ADVModel *headerModel = tmpArr[i];
                              UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,_topAdvView.frame.size.width, _topAdvView.frame.size.height)];
                              imageView.clipsToBounds = YES;
-                             [imageView sd_setImageWithURL:[NSURL URLWithString:headerModel.photo_addr]
+                             [imageView sd_setImageWithURL:[NSURL URLWithString:headerModel.imgUrl]
                                           placeholderImage:[UIImage imageNamed:@"img_home_top_default"]
                                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
                               {
@@ -665,34 +545,10 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-#pragma mark - 展示礼包
-
-- (void)didRightButtonTouch
-{    
-    _rightButton.hidden = YES;
-    [MainAdvView showMainAdvViewWithTarget:self];
-}
-
 #pragma mark - 页面选择按钮的代码
 #pragma mark
-- (IBAction)didTopOnDobuleView:(UITapGestureRecognizer *)sender
-{
-    CGPoint touchPoint = [sender locationInView:sender.view];
-    NSLog(@"%f",touchPoint.x);
-    if (touchPoint.x < SCREEN_WIDTH/2)
-    {
-        [self checkInsuranceHomeConfig];
-    }
-}
-
-
 - (IBAction)didPageButtonTouch:(UIButton *)sender
 {
-    if (_cityServiceArray == nil || _cityServiceArray.count == 0){
-        [Constants showMessage:@"获取城市服务信息失败,清检查你的网络刷新页面！"];
-        return;
-    }
-    
     if (!_userInfo.member_id)
     {
         id viewController = [QuickLoginViewController sharedLoginByCheckCodeViewControllerWithProtocolEnable:nil];
@@ -710,19 +566,10 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
         case 0:
         {
             NSLog(@"洗车");
-            if ([_appDelegate.gpsLocationManager getTheServiceStatus:0])
             {
-
                 CrazyCarWashMapViewController *viewController = [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
                                                                                                                 bundle:nil];
                 viewController.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-            else
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%ld",(long)sender.tag];
                 [self.navigationController pushViewController:viewController animated:YES];
             }
 
@@ -731,24 +578,12 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
         case 1:
         {
             NSLog(@"保养");
-            if ([_appDelegate.gpsLocationManager getTheServiceStatus:1])
             {
-//                CrazyCarWashMapViewController *viewController = [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-//                                                                                                                bundle:nil];
-//                viewController.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
-//                [self.navigationController pushViewController:viewController animated:YES];
                 
                 BaseAppointVC *vc = [[BaseAppointVC alloc] initWithNibName:nil bundle:nil];
                 vc.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
                 [self.navigationController pushViewController:vc animated:YES];
                 
-            }
-            else
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%ld",(long)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
             }
 
         }
@@ -756,44 +591,21 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
         case 3:
         {
             NSLog(@"美容");
-            if ([_appDelegate.gpsLocationManager getTheServiceStatus:3])
             {
-//                CrazyCarWashMapViewController *viewController = [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-//                                                                                                                bundle:nil];
-//                viewController.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
-//                [self.navigationController pushViewController:viewController animated:YES];
-                
                 BaseAppointVC *vc = [[BaseAppointVC alloc] initWithNibName:nil bundle:nil];
                 vc.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
                 [self.navigationController pushViewController:vc animated:YES];
             }
-            else
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%ld",(long)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-
-
         }
             break;
         case 2:
         {
             NSLog(@"划痕");
-            if ([_appDelegate.gpsLocationManager getTheServiceStatus:2])
             {
-                CrazyCarWashMapViewController *viewController = [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-                                                                                                                bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-            else
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = [NSString stringWithFormat:@"%ld",(long)sender.tag];
-                [self.navigationController pushViewController:viewController animated:YES];
+                
+                BaseAppointVC *vc = [[BaseAppointVC alloc] initWithNibName:nil bundle:nil];
+                vc.service_type = [NSString stringWithFormat:@"%d",(int)sender.tag];
+                [self.navigationController pushViewController:vc animated:YES];
             }
         }
             break;
@@ -859,33 +671,6 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     }
 }
 
-- (void)checkInsuranceHomeConfig
-{
-    self.rdv_tabBarController.selectedIndex = 1;
-}
-
-- (void)checkMineHomeConfig
-{
-    self.rdv_tabBarController.selectedIndex = 2;
-}
-
-- (void)showTargetInsuranceController
-{
-    if (!_userInfo.member_id)
-    {
-        InsuranceIntroductionViewController *viewController = [[InsuranceIntroductionViewController alloc] init];
-        
-        [self.navigationController pushViewController:viewController animated:YES];
-        return;
-    }
-    [InsuranceHelper getDesiredInsuranceControllerResultResponse:^(id targetController)
-    {
-        [self.navigationController pushViewController:targetController
-                                             animated:YES];
-    }];
-
-}
-
 #pragma mark - 展示额外内容
 
 - (void)shouldShowAgentView:(BOOL)agentShow
@@ -908,158 +693,6 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
         [_agentHeaderImageView setImage:[UIImage imageNamed:@"img_home_agent_header"]];
         _agentMessageButton.hidden = YES;
         _agentMessageLine.hidden = YES;
-    }
-//    if (extraShow)
-//    {
-//        [_jiuyuanButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_jiuyuan_free"] forState:UIControlStateNormal];
-//        [_nianjianButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_nianjian_free"] forState:UIControlStateNormal];
-//
-//    }
-//    else
-//    {
-//        [_jiuyuanButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_jiuyuan"] forState:UIControlStateNormal];
-//        [_nianjianButton setBackgroundImage:[UIImage imageNamed:@"img_mainExtraFunction_nianjian"] forState:UIControlStateNormal];
-//    }
-}
-
-
-#pragma mark - MainExtraViewDelegate
-
-- (void)didMainExtraFunctionButtonTouched:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0 || buttonIndex == 3)
-    {
-        if(buttonIndex == 0)
-        {
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:4])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"4";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-        }
-        if(buttonIndex == 3)
-        {
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:6])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"6";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-        }
-        NSDictionary *submitDic = @{@"longitude":[NSNumber numberWithDouble:_publicUserCoordinate.longitude],
-                                    @"latitude": [NSNumber numberWithDouble:_publicUserCoordinate.latitude],
-                                    @"target_longitude":@"",
-                                    @"target_latitude":@"",
-                                    @"round":@"100",
-                                    @"service":@"1",
-                                    @"page_index":[NSNumber numberWithInteger:1],
-                                    @"page_size":[NSNumber numberWithInteger:20],
-                                    @"city_id":[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey],
-                                    @"service_type":buttonIndex == 0?@4:@6};
-        
-        [MBProgressHUD showHUDAddedTo:self.view
-                             animated:YES];
-        self.view.userInteractionEnabled = NO;
-        [WebService requestJsonArrayOperationWithParam:submitDic
-                                                action:buttonIndex == 0?@"carWash/service/list":@"carWash/service/getRescue"
-                                            modelClass:[CarNurseModel class]
-                                        normalResponse:^(NSString *status, id data, NSMutableArray *array)
-         {
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-             self.view.userInteractionEnabled = YES;
-             if (buttonIndex == 0)
-             {
-                 if (array.count > 0)
-                 {
-                     AccidentRescueViewController *viewController = [[AccidentRescueViewController alloc] initWithNibName:@"AccidentRescueViewController"
-                                                                                                                   bundle:nil];
-                     viewController.service_type = @"4";
-                     viewController.carNurse = array[0];
-                     [self.navigationController pushViewController:viewController animated:YES];
-                 }
-                 else
-                 {
-                     CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                                 bundle:nil];
-                     viewController.service_type = @"4";
-                     [self.navigationController pushViewController:viewController animated:YES];
-                     return;
-                 }
-
-             }
-             else
-             {
-                 if (array.count == 1 && [array[0] isKindOfClass:[CarNurseModel class]])
-                 {
-                     CarServiceDetailViewController  *viewController = ALLOC_WITH_CLASSNAME(@"CarServiceDetailViewController");
-                     viewController.selectedCarNurse = array[0];
-                     viewController.service_type = buttonIndex == 0?@"4":@"6";
-                     [self.navigationController pushViewController:viewController animated:YES];
-                 }
-                 else
-                 {
-                     CrazyCarWashMapViewController *viewController= [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-                                                                                                                    bundle:nil];
-                     viewController.service_type = buttonIndex == 0?@"4":@"6";
-                     [self.navigationController pushViewController:viewController
-                                                          animated:YES];
-                 }
-
-             }
-         }
-                                     exceptionResponse:^(NSError *error)
-         {
-             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-             self.view.userInteractionEnabled = YES;
-             CrazyCarWashMapViewController *viewController= [[CrazyCarWashMapViewController alloc] initWithNibName:@"CrazyCarWashMapViewController"
-                                                                                                            bundle:nil];
-             viewController.service_type = buttonIndex == 0?@"4":@"6";
-             [self.navigationController pushViewController:viewController
-                                                  animated:YES];
-         }];
-
-    }
-    else
-    {
-        if (buttonIndex == 1)
-        {
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:7])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"7";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-            else
-            {
-                InsuranceRepaierOrderViewController *viewController = [[InsuranceRepaierOrderViewController alloc] initWithNibName:@"InsuranceRepaierOrderViewController"
-                                                                                                                          bundle:nil];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-        }
-        if (buttonIndex == 2)
-        {
-            if (![_appDelegate.gpsLocationManager getTheServiceStatus:8])
-            {
-                CityNoServiceViewController *viewController = [[CityNoServiceViewController alloc] initWithNibName:@"CityNoServiceViewController"
-                                                                                                            bundle:nil];
-                viewController.service_type = @"8";
-                [self.navigationController pushViewController:viewController animated:YES];
-                return;
-            }
-            else
-            {
-
-                InsuranceAVOrderViewController *viewController = [[InsuranceAVOrderViewController alloc] initWithNibName:@"InsuranceAVOrderViewController" bundle:nil];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-        }
     }
 }
 
@@ -1143,85 +776,24 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     [self didTopAdvImageTouched:headerModel];
 }
 
-- (void)didMainAdvImageTouched:(adv_list *)model
-{
-    ADVModel *advModel = [[ADVModel alloc] init];
-    advModel.adv_id = model.main_adv_id;
-    advModel.photo_addr = model.main_adv_img;
-    advModel.title = model.main_adv_title;
-    advModel.url = model.main_adv_url;
-    advModel.url_type = model.main_adv_type;
-    [self didTopAdvImageTouched:advModel];
-}
-
 - (void)didTopAdvImageTouched:(ADVModel *)model
 {
-    if (!_userInfo.member_id && [model.url_type isEqualToString:@"2"])
-    {
-        if (!_userInfo.member_id)
-        {
-            id viewController = [QuickLoginViewController sharedLoginByCheckCodeViewControllerWithProtocolEnable:nil];
+    if([model.isRedirect boolValue]){
+        if(model.url){
+            CheXiaoBaoViewController *vc = [[CheXiaoBaoViewController alloc] initWithNibName:@"CheXiaoBaoViewController" bundle:nil];
+            vc.webUrl = model.url;
+            [self.navigationController pushViewController:vc animated:YES];
             
-            [self presentViewController:viewController animated:YES completion:^
-             {
-                 [[[UIApplication sharedApplication] keyWindow] makeToast:@"请先登录"];
-             }];
-            return;
+            [vc setTitle:model.title];
+        }else{
+            CheXiaoBaoViewController *vc = [[CheXiaoBaoViewController alloc] initWithNibName:@"CheXiaoBaoViewController" bundle:nil];
+            NSString *url = [NSString stringWithFormat:@"http://ibroker.leanapp.cn/news/view/%@", model.newsId];
+            vc.webUrl = url;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            [vc setTitle:model.title];
         }
     }
-    if ([model.url_type isEqualToString:@"3"])
-    {
-        if (!_insuranceHomeModel)
-        {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            self.view.userInteractionEnabled = NO;
-            [InsuranceHelper requestInsuranceHomeModelNormalResponse:^{
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                self.view.userInteractionEnabled = YES;
-                
-                InsuranceHomeViewController *viewController = [[InsuranceHomeViewController alloc] initWithNibName:@"InsuranceHomeViewController" bundle:nil];
-                [self.navigationController pushViewController:viewController animated:YES];
-            }
-                                                   exceptionResponse:^{
-                                                       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                       self.view.userInteractionEnabled = YES;
-                                                       [Constants showMessage:@"无法使用保险功能"];
-                                                   }];
-        }
-        else
-        {
-            InsuranceHomeViewController *viewController = [[InsuranceHomeViewController alloc] initWithNibName:@"InsuranceHomeViewController" bundle:nil];
-            [self.navigationController pushViewController:viewController animated:YES];
-        }
-        
-    }
-    else if ([model.url isEqualToString:@""] || model.url == nil)
-    {
-        
-    }
-    else
-    {
-        ActivitysController *viewController = [[ActivitysController alloc] initWithNibName:@"ActivitysController"
-                                                                                    bundle:nil];
-        if ([model.url_type isEqualToString:@"2"] || [model.url_type isEqualToString:@"3"])
-        {
-            viewController.forbidAddMark = NO;
-        }
-        else
-        {
-            viewController.forbidAddMark = YES;
-        }
-        viewController.advModel = model;
-        [self.navigationController pushViewController:viewController animated:YES];
-    }
-}
-
-
-
-
-- (void)didMainAdvImageHide
-{
-    _rightButton.hidden = NO;
 }
 
 #pragma mark - 换一换猜你喜欢
@@ -1368,18 +940,22 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
 #pragma mark - 检查城市服务开通情况
 - (void)updateDateCityService
 {
-    [MBProgressHUD showMessag:@"正在获取城市服务信息" toView:self.view];
-    [_appDelegate.gpsLocationManager getCityServiceFromService:[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey]
-                                               SuccessResponse:^{
-                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                   [self updateWeatherInfoWithCityInfo:_userCityModel];
-                                                   [self obtainAdverInfo];
-                                                   [self setUpMainScrollViewDisplayItem];
-
-                                               }
-                                                  failResponse:^{
-                                                      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                  }];
+    [self updateWeatherInfoWithCityInfo:_userCityModel];
+    [self obtainAdverInfo];
+    [self setUpMainScrollViewDisplayItem];
+    
+//    [MBProgressHUD showMessag:@"正在获取城市服务信息" toView:self.view];
+//    [_appDelegate.gpsLocationManager getCityServiceFromService:[[NSUserDefaults standardUserDefaults] objectForKey:kLocationCityIDKey]
+//                                               SuccessResponse:^{
+//                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                                                   [self updateWeatherInfoWithCityInfo:_userCityModel];
+//                                                   [self obtainAdverInfo];
+//                                                   [self setUpMainScrollViewDisplayItem];
+//
+//                                               }
+//                                                  failResponse:^{
+//                                                      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                                                  }];
 }
 
 #pragma mark - 获取和展示天气
@@ -1664,13 +1240,6 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     [_leftButton setTitle:_userCityModel.CITY_NAME forState:UIControlStateNormal];
     [self startRefreshRecommend];
     [self updateDateCityService];
-    [MainAdvView resetMainAdvView];
-    [self updateMainAdvData:^{
-        [self openMainAdvOpreation];
-    } failRespone:^{
-        _advHaveShow = YES;
-        _rightButton.hidden = YES;
-    }];
 }
 
 - (void)setUpMainScrollViewDisplayItem
@@ -1699,6 +1268,8 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     {
         showExtra = NO;
     }
+    
+//    showAgent = NO;
     
     [self shouldShowAgentView:showAgent
      andShowExtraFunctionView:showExtra
@@ -1740,7 +1311,6 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
 {
     _advHaveShow = NO;
     _mainAdvModel = nil;
-    [MainAdvView resetMainAdvView];
     [self setUpMainScrollViewDisplayItem];
 }
 
@@ -1760,14 +1330,6 @@ static NSString *recommendListCellReuse = @"RecommendListCell";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

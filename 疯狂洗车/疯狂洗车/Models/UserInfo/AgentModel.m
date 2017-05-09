@@ -10,4 +10,21 @@
 
 @implementation AgentModel
 
+- (id)initWithDictionary:(NSDictionary *)jsonDic
+{
+    self = [super initWithDictionary:jsonDic];
+    if(self){
+        self.agent_id = nil;
+        
+        self.agent_name = nil;
+        
+        self.agent_phone = nil;
+        
+        self.agent_logo = nil;
+        
+        self.agent_title = nil;
+    }
+    return self;
+}
+
 @end

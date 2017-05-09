@@ -29,6 +29,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *btnPay;
 @property (nonatomic, strong) IBOutlet UIImageView *logo;
 @property (nonatomic, strong) IBOutlet UILabel *lbAmount;
+@property (nonatomic, strong) IBOutlet UIButton *btnService;
 
 @property (assign, nonatomic) id <AppointTableViewCellDelegate> delegate;
 @property (nonatomic, assign) NSInteger indexPathRow;

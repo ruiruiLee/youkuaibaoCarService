@@ -12,6 +12,7 @@
 #import "AppointInfo.h"
 #import "AppointPayVC.h"
 #import "UIImageView+WebCache.h"
+#import "define.h"
 
 @interface MyAppointVC ()<AppointTableViewCellDelegate>
 {
@@ -57,6 +58,7 @@
                                    action:@selector(loadMoreInfo)];
     
     _listTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _listTable.backgroundColor = _COLOR(0xe3, 0xe3, 0xe3);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -188,7 +190,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 188.f;
+    return 217.f;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -232,7 +234,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 0){
+    if(buttonIndex == 1){
         NSInteger row = alertView.tag - 100;
         
         AppointInfo *model = [_dataArray objectAtIndex:row];
@@ -261,7 +263,7 @@
 #pragma AppointTableViewCellDelegate
 - (void)didAppointCanceledButtonTouched:(NSInteger) row
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"确认取消预约订单吗？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"确认取消预约订单吗？" delegate:self cancelButtonTitle:@"算了" otherButtonTitles:@"取消预约", nil];
     [alert show];
     
     alert.tag = row + 100;

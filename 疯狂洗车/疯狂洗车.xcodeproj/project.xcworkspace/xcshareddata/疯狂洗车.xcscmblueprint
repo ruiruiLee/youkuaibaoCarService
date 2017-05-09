@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "447D4322FD3E9D6B5F1FB00F6ECF219CB3F42257",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "447D4322FD3E9D6B5F1FB00F6ECF219CB3F42257" : 9223372036854775807,
+    "E8724F4E6FEA38AF4B213DB4A1D2B23ECD9398DA" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F86E84BA-CF03-4069-8638-8BACDA1DE3DF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "447D4322FD3E9D6B5F1FB00F6ECF219CB3F42257" : "youkuaibaoCarService\/",
+    "E8724F4E6FEA38AF4B213DB4A1D2B23ECD9398DA" : "CrazyCarWash"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "疯狂洗车",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "疯狂洗车\/疯狂洗车.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:ruiruiLee\/youkuaibaoCarService.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "447D4322FD3E9D6B5F1FB00F6ECF219CB3F42257"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/git.oschina.net\/darskyZhu\/CrazyCarWash.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E8724F4E6FEA38AF4B213DB4A1D2B23ECD9398DA"
+    }
+  ]
+}

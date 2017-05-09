@@ -15,6 +15,7 @@
 #import "InsuranceHomeModel.h"
 #import "StartInfoModel.h"
 #import "MainAdvModel.h"
+#import "ADVModel.h"
 
 #define kNormalTintColor [UIColor colorWithRed:235/255.0 green:84/255.0 blue:1/255.0 alpha:1.0]
 
@@ -146,7 +147,7 @@ extern NSString *const kJuheKey;
 
 UserInfo               *_userInfo;
 
-StartInfoModel         *_startInfo;
+ADVModel               *_startInfo;
 
 MainAdvModel           *_mainAdvModel;
 

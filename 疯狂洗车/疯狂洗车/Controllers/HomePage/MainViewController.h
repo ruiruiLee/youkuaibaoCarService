@@ -40,8 +40,4 @@
     IBOutlet UIView   *_agentMessageLine;
 }
 
-@property (assign, nonatomic) BOOL shouldGoToMine;
-
-- (void)checkMineHomeConfig;
-
 @end
